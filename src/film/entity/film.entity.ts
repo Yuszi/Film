@@ -5,29 +5,23 @@
 
 import {
     Column,
-    CreateDateColumn,
     Entity,
-    OneToMany,
     OneToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn,
     VersionColumn,
 } from 'typeorm';
-import { Abbildung } from './abbildung.entity.js';
 import { ApiProperty } from '@nestjs/swagger';
-import { DecimalTransformer } from './decimal-transformer.js';
 import { Schauspieler } from './schauspieler.entity.js';
-import { dbType } from '../../config/dbtype.js';
 
 /**
- * Alias-Typ für gültige Strings bei der Art eines Buches.
+ * Gültige Strings für die Art des Films.
  */
 export type FilmArt = 'ACTION' | 'DRAMA' | 'ROMANCE';
 
 /**
- * Entity-Klasse zu einem relationalen Tabelle
+ * Die Entity-Klasse zu einem relationalen Tabelle
  */
-// https://typeorm.io/entities
+
 @Entity()
 export class Film {
     @Column('int')
