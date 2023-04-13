@@ -3,6 +3,11 @@ import { type Request } from 'express';
 import { cloud } from '../../config/cloud.js';
 import { nodeConfig } from '../../config/node.js';
 
+/**
+ * Das Modul besteht aus dem Helper für Ermittlung von Basis-Uri.
+ * @packageDocumentation
+ */
+
 const port = cloud === undefined ? `:${nodeConfig.port}` : '';
 
 export const getBaseUri = (req: Request) => {

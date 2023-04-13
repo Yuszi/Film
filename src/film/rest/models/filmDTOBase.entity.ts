@@ -4,6 +4,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { FilmArt } from '../../entity/film.entity';
 
 /**
+ * Das Modul besteht aus der DTO-Klasse für Kapselung der Filmdaten für Datenübertragung zwischen der API und dem Client.
+ * @packageDocumentation
+ */
+
+/**
  * DTO-Basis für Filme.
  */
 export class FilmDTOBase {

@@ -3,6 +3,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Min } from 'class-validator';
 
 /**
+ * Das Modul besteht aus der DTO-Klasse für Kapselung der Filmdaten für Datenübertragung zwischen der API und dem Client.
+ * @packageDocumentation
+ */
+
+/**
  * DTOs für Schauspieler.
  */
 export class SchauspielerDTO {
