@@ -49,37 +49,37 @@ package express {
   Response .[hidden].> Controller
 }
 
-package buch {
+package film {
   package entity #FFFFFF {
-    class Buch <<entity>>
+    class film <<entity>>
 
-    Buch .[hidden].> Promise
-    Buch .[hidden].> Request
+    film .[hidden].> Promise
+    film .[hidden].> Request
   }
 
   package service {
-    class BuchReadService << control >>
+    class filmReadService << control >>
   }
 
   package rest #DDDDDD {
-    BuchQuery -up-|> Buch
+    filmQuery -up-|> film
 
-    class BuchGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
-      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<BuchModel | undefined>>
-      + @Get() async find(@Query() query: BuchQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
+    class filmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<filmModel | undefined>>
+      + @Get() async find(@Query() query: filmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
     }
 
-    BuchGetController o--> "1" BuchReadService : service
+    filmGetController o--> "1" filmReadService : service
 
-    BuchGetController ..> Controller
-    BuchGetController ..> Request
-    BuchGetController ..> Response
-    BuchGetController ..> Promise
-    BuchGetController .up.> BuchModel
-    BuchGetController .up.> BuchQuery
+    filmGetController ..> Controller
+    filmGetController ..> Request
+    filmGetController ..> Response
+    filmGetController ..> Promise
+    filmGetController .up.> filmModel
+    filmGetController .up.> filmQuery
 
-    BuchReadService .[hidden].> Request
-    BuchReadService .[hidden].> Promise
+    filmReadService .[hidden].> Request
+    filmReadService .[hidden].> Promise
     Response .right[hidden].> Controller
   }
 }

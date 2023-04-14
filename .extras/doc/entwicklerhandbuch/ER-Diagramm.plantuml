@@ -23,7 +23,7 @@ hide circle
 ' evtl. Prbleme mit Kraehenfuessen vermeiden
 skinparam linetype ortho
 
-entity "Buch" {
+entity "Film" {
   *id : UUID <<generated>>
   --
   *version: integer
@@ -44,11 +44,11 @@ entity "Buch" {
 entity "Schlagwort" {
   *id : UUID <<generated>>
   --
-  *buch_id : UUID <<FK>>
+  *film_id : UUID <<FK>>
   *schlagwort : text
 }
 
-Buch ||..o{ Schlagwort
+Film ||..o{ Schlagwort
 
 footer (c) Jürgen Zimmermann
 

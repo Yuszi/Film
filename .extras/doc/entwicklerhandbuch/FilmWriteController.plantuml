@@ -81,42 +81,42 @@ package security.auth {
   Roles .right.> Role
 }
 
-package buch {
+package film {
   package entity #FFFFFF {
-    class Buch <<entity>>
+    class Film <<entity>>
 
-    Buch .[hidden].> Promise
-    Buch .[hidden].> Request
+    Film .[hidden].> Promise
+    Film .[hidden].> Request
   }
 
   package service {
-    class BuchWriteService << control >>
-    class BuchReadService << control >>
+    class FilmWriteService << control >>
+    class FilmReadService << control >>
   }
 
   package rest #DDDDDD {
-    class BuchWriteController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
-      + @Post() @Roles() async create(@Body() buch: Buch, @Req() req: Request,  @Res() res: Response): Promise<Response>
-      + @Put() @Roles() async update(@Body() buch: Buch, @Param() id: string, @Headers() version: string, @Res() res: Response): Promise<Response>
+    class FilmhWriteController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Post() @Roles() async create(@Body() film: Film, @Req() req: Request,  @Res() res: Response): Promise<Response>
+      + @Put() @Roles() async update(@Body() film: Film, @Param() id: string, @Headers() version: string, @Res() res: Response): Promise<Response>
       + @Delete() @Roles() async delete(@Param() id: string, @Res() res: Response): Promise<Response>
     }
 
-    BuchWriteController o--> "1" BuchWriteService : service
-    BuchWriteController o--> "1" BuchReadService : readService
-    BuchWriteController ..up> Buch
+    FilmWriteController o--> "1" FilmWriteService : service
+    FilmWriteController o--> "1" FilmReadService : readService
+    FilmWriteController ..up> Film
 
-    BuchWriteController ..> Controller
+    FilmWriteController ..> Controller
 
-    BuchWriteController .up.> Roles
-    BuchWriteController .up.> Role
+    FilmWriteController .up.> Roles
+    FilmWriteController .up.> Role
 
-    BuchWriteController ..> Request
-    BuchWriteController ..> Response
-    BuchWriteController ..> Promise
+    FilmWriteController ..> Request
+    FilmWriteController ..> Response
+    FilmWriteController ..> Promise
 
-    Buch .up[hidden].> Roles
-    BuchWriteService .[hidden].> Request
-    BuchWriteService .[hidden].> Promise
+    Film .up[hidden].> Roles
+    FilmWriteService .[hidden].> Request
+    FilmWriteService .[hidden].> Promise
   }
 }
 
