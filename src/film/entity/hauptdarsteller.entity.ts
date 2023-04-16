@@ -8,13 +8,13 @@ import {
 import { Film } from './film.entity.js';
 
 @Entity()
-export class Schauspieler {
+export class Hauptdarsteller {
     @Column('int')
     @PrimaryGeneratedColumn()
     id: number | undefined;
 
     @Column('varchar', { unique: true, length: 30 })
-    readonly rolle: string | undefined;
+    readonly rolle!: string | undefined;
 
     @Column('varchar', { length: 16 })
     readonly vorname: string | undefined;

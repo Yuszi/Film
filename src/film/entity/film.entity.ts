@@ -11,7 +11,7 @@ import {
     VersionColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Schauspieler } from './schauspieler.entity.js';
+import { Hauptdarsteller } from './hauptdarsteller.entity';
 
 /**
  * Gültige Strings für die Art des Films.
@@ -54,10 +54,14 @@ export class Film {
     @Column('simple-array')
     readonly schlagwoerter: string[] | undefined;
 
-    @OneToOne(() => Schauspieler, (hauptdarsteller) => hauptdarsteller.film, {
-        cascade: ['insert', 'remove'],
-    })
-    readonly hauptdarsteller: Schauspieler | undefined;
+    @OneToOne(
+        () => Hauptdarsteller,
+        (hauptdarsteller) => hauptdarsteller.film,
+        {
+            cascade: ['insert', 'remove'],
+        },
+    )
+    readonly hauptdarsteller: Hauptdarsteller | undefined;
 
     readonly erzeugt: Date | undefined;
 
