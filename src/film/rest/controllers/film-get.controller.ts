@@ -213,7 +213,7 @@ export class FilmGetController {
         const filmeModel = filme.map((film) =>
             this.#toModel(film, req, false),
         );
-        this.#logger.debug('find: filmeModel=%o', filmeModel)
+        this.#logger.debug('find: filmeModel=%o', filmeModel);
 
         const result: FilmeModel = { embedded: { filme: filmeModel } };
         return res.json(result).send();
