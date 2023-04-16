@@ -1,3 +1,8 @@
+/**
+ * Das Modul besteht aus der Controller-Klasse für Lesen an der REST-Schnittstelle.
+ * @packageDocumentation
+ */
+
 /* eslint-disable max-classes-per-file */
 import {
     ApiHeader,
@@ -45,9 +50,10 @@ export interface Links {
     update?: Link;
     remove?: Link;
 }
-
+/** Typedefinition für ein Schauspieler-Objekt ohne Rückwärtsverweis zum Buch. */
 export type SchauspielerModel = Omit<Schauspieler, 'film' | 'id'>;
 
+/** Film-Objekt mit HATEOAS-Links. */
 export type FilmModel = Omit<
     Film,
     'aktualisiert' | 'erzeugt' | 'hauptdarsteller' | 'id' | 'version'
@@ -56,12 +62,17 @@ export type FilmModel = Omit<
     links: Links;
 };
 
+/** Film-Objekte mit HATEOAS-Links in einem JSON-Array. */
 export interface FilmeModel {
     embedded: {
         filme: FilmModel[];
     };
 }
 //TODO Json statt "schauspielerVorname/Nachname/Alter"
+/**
+ * Klasse für `FilmGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
+ * formulieren.
+ */
 export class FilmQuery implements Suchkriterien {
     @ApiProperty({ required: false })
     declare readonly name: string;
@@ -88,6 +99,9 @@ export class FilmQuery implements Suchkriterien {
     declare readonly hauptdarstellerAlter: number;
 }
 
+/**
+ * Die Controller-Klasse für Suchen nach den Filmen.
+ */
 @Controller(paths.rest)
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Film API')
@@ -100,6 +114,14 @@ export class FilmGetController {
         this.#service = service;
     }
 
+    /**
+     * Asynchrones Suchen nach einem Film anhand der ID.
+     * @param id Pfad-Parameter für die ID.
+     * @param req Request-Objekt von Express.
+     * @param version Versionsnummer im Request-Header bei 'If-None-Match'.
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt.
+     */
     //eslint-disable-next-line max-params
     @Get(':id')
     @ApiOperation({ summary: 'Suche mit der Film-ID', tags: ['Suchen'] })
@@ -158,6 +180,13 @@ export class FilmGetController {
         return res.json(filmModel);
     }
 
+    /**
+     * Asynchrones Suchen nach einem Film mit Query-Parametern.
+     * @param query Query-Parameter von Express.
+     * @param req Request-Objekt von Express.
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt.
+     */
     @Get()
     @ApiOperation({ summary: 'Suche mit Suchkriterien' })
     @ApiOkResponse({ description: 'Eine evtl. leere Liste mit Filmen' })
@@ -227,5 +256,4 @@ export class FilmGetController {
         return filmModel;
     }
 }
-
 /*eslint-enable max-classes-per-file */

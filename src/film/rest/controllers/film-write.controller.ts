@@ -1,3 +1,8 @@
+/**
+ * Das Modul besteht aus der Controller-Klasse für Schreiben an der REST-Schnittstelle.
+ * @packageDocumentation
+ */
+
 import {
     ApiBadRequestResponse,
     ApiBearerAuth,
@@ -33,6 +38,9 @@ import { getBaseUri } from '../getBaseUri.js';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../../config/paths.js';
 
+/**
+ * Die Controller-Klasse für Neuanlegen und Aktualisieren der Filme.
+ */
 @Controller(paths.rest)
 @UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseTimeInterceptor)
@@ -47,6 +55,13 @@ export class FilmWriteController {
         this.#service = service;
     }
 
+    /**
+     * Asynchrones Anlegen eines neuen Films.
+     * @param filmDTO JSON-Daten für einen Film im Request-Body.
+     * @param req Request-Objekt von Express.
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt.
+     */
     @Post()
     @ApiOperation({ summary: 'Ein neuer Film anlegen' })
     @ApiCreatedResponse({ description: 'Erfolgreich neu angelegt' })
@@ -69,6 +84,14 @@ export class FilmWriteController {
         return res.location(location).send();
     }
 
+    /**
+     * Asynchrones Aktualisieren des vorhandenen Films.
+     * @param filmDTO Filmdaten im Body des Request-Objekts.
+     * @param id Pfad-Parameter für die ID.
+     * @param version Versionsnummer aus dem Header _If-Match_.
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt.
+     */
     // eslint-disable-next-line max-params
     @Put(':id')
     @ApiOperation({
