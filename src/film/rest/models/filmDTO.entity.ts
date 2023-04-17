@@ -1,5 +1,5 @@
 import { FilmDTOBase } from './filmDTOBase.entity';
-import { SchauspielerDTO } from './schauspielerDTO.entity';
+import { HauptdarstellerDTO } from './hauptdarstellerDTO.entity';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 
@@ -13,6 +13,6 @@ import { ValidateNested } from 'class-validator';
  */
 export class FilmDTO extends FilmDTOBase {
     @ValidateNested()
-    @Type(() => SchauspielerDTO)
-    readonly hauptdarsteller!: SchauspielerDTO;
+    @Type(() => HauptdarstellerDTO)
+    readonly hauptdarsteller!: HauptdarstellerDTO;
 }
