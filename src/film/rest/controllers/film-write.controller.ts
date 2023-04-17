@@ -24,7 +24,6 @@ import {
     Put,
     Req,
     Res,
-    UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { FilmDTO } from '../models/filmDTO.entity';
@@ -32,17 +31,16 @@ import { type CreateError, type UpdateError } from '../../service/errors.js';
 import { Request, Response } from 'express';
 import { type Film } from '../../entity/film.entity.js';
 import { FilmWriteService } from '../../service/film-write.service.js';
+import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
 import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
-import { Schauspieler } from '../../entity/schauspieler.entity.js';
 import { getBaseUri } from '../getBaseUri.js';
-import { getLogger } from '../../logger/logger.js';
+import { getLogger } from '../../../logger/logger.js';
 import { paths } from '../../../config/paths.js';
 
 /**
  * Die Controller-Klasse für Neuanlegen und Aktualisieren der Filme.
  */
 @Controller(paths.rest)
-@UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Film API')
 @ApiBearerAuth()
@@ -51,7 +49,7 @@ export class FilmWriteController {
 
     readonly #logger = getLogger(FilmWriteController.name);
 
-    constructor(service: BuchWriteService) {
+    constructor(service: FilmWriteService) {
         this.#service = service;
     }
 
@@ -76,7 +74,7 @@ export class FilmWriteController {
         const film = this.#filmDtoToFilm(filmDTO);
         const result = await this.#service.create(film);
         if (Object.prototype.hasOwnProperty.call(result, 'type')) {
-            return this.#handleCreateError(film, res);
+            return this.#handleCreateError(result as CreateError, res);
         }
 
         const location = `${getBaseUri(req)}/${result as number}`;
@@ -146,7 +144,7 @@ export class FilmWriteController {
 
     #filmDtoToFilm(filmDTO: FilmDTO): Film {
         const hauptdarstellerDTO = filmDTO.hauptdarsteller;
-        const hauptdarsteller: Schauspieler = {
+        const hauptdarsteller: Hauptdarsteller = {
             id: undefined,
             rolle: hauptdarstellerDTO.rolle,
             vorname: hauptdarstellerDTO.vorname,
@@ -191,7 +189,7 @@ export class FilmWriteController {
     #handleCreateError(err: CreateError, res: Response) {
         switch (err.type) {
             case 'NameExists': {
-                return this.#handleNameExists(err.name, res);
+                return this.#handleNameExists(err.type, res);
             }
 
             default: {

@@ -31,8 +31,8 @@ import {
     type Suchkriterien,
 } from '../../service/film-read.service.js';
 import { Request, Response } from 'express';
-import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
-import { Schauspieler } from '../../entity/schauspieler.entity';
+import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
+import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
 import { getBaseUri } from '../getBaseUri';
 import { paths } from '../../../config/paths';
 import { getLogger } from '../../../logger/logger.js';
@@ -51,7 +51,7 @@ export interface Links {
     remove?: Link;
 }
 /** Typedefinition für ein Schauspieler-Objekt ohne Rückwärtsverweis zum Buch. */
-export type SchauspielerModel = Omit<Schauspieler, 'film' | 'id'>;
+export type SchauspielerModel = Omit<Hauptdarsteller, 'film' | 'id'>;
 
 /** Film-Objekt mit HATEOAS-Links. */
 export type FilmModel = Omit<
@@ -87,7 +87,7 @@ export class FilmQuery implements Suchkriterien {
     declare readonly rating: number;
 
     @ApiProperty({ required: false })
-    declare readonly erscheinungsjahr: string;
+    declare readonly erscheinungsjahr: Date;
 
     @ApiProperty({ required: false })
     declare readonly hauptdarstellerVorname: string;
