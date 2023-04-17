@@ -26,10 +26,10 @@ import {
     Res,
     UseInterceptors,
 } from '@nestjs/common';
-import { FilmDTO } from '../models/filmDTO.entity';
 import { type CreateError, type UpdateError } from '../../service/errors.js';
 import { Request, Response } from 'express';
 import { type Film } from '../../entity/film.entity.js';
+import { FilmDTO } from '../models/filmDTO.entity';
 import { FilmWriteService } from '../../service/film-write.service.js';
 import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
 import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';

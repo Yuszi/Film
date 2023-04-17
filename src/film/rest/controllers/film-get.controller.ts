@@ -50,15 +50,15 @@ export interface Links {
     update?: Link;
     remove?: Link;
 }
-/** Typedefinition für ein Schauspieler-Objekt ohne Rückwärtsverweis zum Buch. */
-export type SchauspielerModel = Omit<Hauptdarsteller, 'film' | 'id'>;
+/** Typedefinition für ein Hauptdarsteller-Objekt ohne Rückwärtsverweis zum Film. */
+export type HauptdarstellerModel = Omit<Hauptdarsteller, 'film' | 'id'>;
 
 /** Film-Objekt mit HATEOAS-Links. */
 export type FilmModel = Omit<
     Film,
     'aktualisiert' | 'erzeugt' | 'hauptdarsteller' | 'id' | 'version'
 > & {
-    hauptdarsteller: SchauspielerModel;
+    hauptdarsteller: HauptdarstellerModel;
     links: Links;
 };
 
@@ -210,9 +210,7 @@ export class FilmGetController {
             return res.sendStatus(HttpStatus.NOT_FOUND);
         }
 
-        const filmeModel = filme.map((film) =>
-            this.#toModel(film, req, false),
-        );
+        const filmeModel = filme.map((film) => this.#toModel(film, req, false));
         this.#logger.debug('find: filmeModel=%o', filmeModel);
 
         const result: FilmeModel = { embedded: { filme: filmeModel } };
@@ -222,34 +220,44 @@ export class FilmGetController {
     #toModel(film: Film, req: Request, all = true) {
         const baseUri = getBaseUri(req);
         this.#logger.debug('#toModel: baseUri=%s', baseUri);
-        const { id } = film;
+        const {
+            id,
+            name,
+            sprache,
+            genre,
+            rating,
+            erscheinungsjahr,
+            schlagwoerter,
+            hauptdarsteller,
+        } = film;
+
         const links = all
             ? {
-                self: { href: `${baseUri}/${id}` },
-                list: { href: `${baseUri}` },
-                add: { href: `${baseUri}` },
-                update: { href: `${baseUri}/${id}` },
-                remove: { href: `${baseUri}/${id}` },
-            }
+                  self: { href: `${baseUri}/${id}` },
+                  list: { href: `${baseUri}` },
+                  add: { href: `${baseUri}` },
+                  update: { href: `${baseUri}/${id}` },
+                  remove: { href: `${baseUri}/${id}` },
+              }
             : { self: { href: `${baseUri}/${id}` } };
-        
+
         this.#logger.debug('#toModel: film=%o, links=%o', film, links);
-        const schauspielerModel: SchauspielerModel = {
-            rolle: film.hauptdarsteller?.rolle ?? 'N/A',
-            vorname: film.hauptdarsteller?.vorname ?? 'N/A',
-            nachname: film.hauptdarsteller?.nachname ?? 'N/A',
-            alter: film.hauptdarsteller?.alter
+        const hauptdarstellerModel: HauptdarstellerModel = {
+            rolle: hauptdarsteller?.rolle ?? 'N/A',
+            vorname: hauptdarsteller?.vorname ?? 'N/A',
+            nachname: hauptdarsteller?.nachname ?? 'N/A',
+            alter: hauptdarsteller?.alter,
         };
-        
+
         const filmModel: FilmModel = {
-            name: film.name,
-            sprache: film.sprache,
-            genre: film.genre,
-            rating: film.rating,
-            erscheinungsjahr: film.erscheinungsjahr,
-            schlagwoerter: film.schlagwoerter,
-            hauptdarsteller: schauspielerModel,
-            links: links
+            name,
+            sprache,
+            genre,
+            rating,
+            erscheinungsjahr,
+            schlagwoerter,
+            hauptdarsteller: hauptdarstellerModel,
+            links,
         };
 
         this.#logger.debug('#toModel: filmModel=%o', filmModel);
