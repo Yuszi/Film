@@ -227,7 +227,7 @@ export class FilmWriteService {
         }
 
         // nullish coalescing
-        const versionDb = Db.version!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        const versionDb = filmDb.version!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
         if (version < versionDb) {
             const result: VersionOutdated = {
                 type: 'VersionOutdated',
