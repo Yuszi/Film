@@ -37,24 +37,16 @@ package typeorm {
 }
 
 package film.entity {
-  class "type FilmArt = 'KINDLE' | 'DRUCKAUSGABE'" as FilmArt
+  class "type FilmArt = 'SPIELFILM' | '3D'" as FilmArt
   hide FilmArt circle
-
-  class "type Verlag = 'FOO_VERLAG' | 'BAR_VERLAG'" as Verlag
-  hide Verlag circle
 
   class Film <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: string
-    @Column() readonly titel: string
+    @Column() readonly name: string
     @Column() readonly rating: number
-    @Column() readonly art: FilmArt
-    @Column() readonly verlag: Verlag
-    @Column() readonly preis: number
-    @Column() readonly rabatt: number
-    @Column() readonly lieferbar: boolean
-    @Column() readonly datum: Date
-    @Column() readonly isbn: string
-    @Column() readonly homepage?: string
+    @Column() readonly filmart: FilmArt
+    @Column() readonly sprache: Sprache
+    @Column() readonly erscheinungsjahr: Date
     @CreateDateColumn() readonly erzeugt: Date
     @UpdateDateColumn() readonly aktualisiert: Date
   }
@@ -68,9 +60,7 @@ package film.entity {
   Film ..> Entity
   Film *--> "*" Schlagwort : @OneToMany() schlagwoerter
   Film .up.> FilmArt
-  Film .up.> Verlag
 
-  FilmArt .[hidden].> Verlag
 }
 
 hide empty members
