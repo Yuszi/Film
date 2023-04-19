@@ -22,10 +22,10 @@
 
 import { Abbildung } from '../entity/abbildung.entity.js';
 import { Film } from '../entity/film.entity.js';
+import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { getLogger } from '../../logger/logger.js';
 import { typeOrmModuleOptions } from '../../config/db.js';
 
