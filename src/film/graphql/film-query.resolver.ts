@@ -40,7 +40,9 @@ export class FilmQueryResolver {
     }
 
     @Query()
-    async filme(@Args() hauptdarsteller: { hauptdarsteller: string } | undefined) {
+    async filme(
+        @Args() hauptdarsteller: { hauptdarsteller: string } | undefined,
+    ) {
         const hauptdarstellerStr = hauptdarsteller?.hauptdarsteller;
         this.#logger.debug('find: titel=%s', hauptdarstellerStr);
         const suchkriterium = titelStr === undefined ? {} : { titel: titelStr };
@@ -49,7 +51,7 @@ export class FilmQueryResolver {
             throw new BadUserInputError('Es wurden keine Filme gefunden.');
         }
 
-        const filmeDTO = filme.map((buch) => this.#toFilmDTO(film));
+        const filmeDTO = filme.map((film) => this.#toFilmDTO(film));
         this.#logger.debug('find: filmeDTO=%o', filmeDTO);
         return filmeDTO;
     }
@@ -64,7 +66,7 @@ export class FilmQueryResolver {
             rating: film.rating,
             erscheinungsjahr: film.erscheinungsjahr,
             schlagwoerter: film.schlagwoerter,
-            hauptdarsteller: film.hauptdarsteller, //TODO 
+            hauptdarsteller: film.hauptdarsteller, //TODO
         };
     }
 }
