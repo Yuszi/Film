@@ -1,22 +1,7 @@
-// Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 // Preview durch <Strg><Shift>v
 
-= Entwickler/innen/handbuch
-Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
+= Entwickler*innenhandbuch
+SWE Gruppe
 :doctype: book
 :toc: left
 :sectanchors:
@@ -32,16 +17,11 @@ Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
 // http://de.plantuml.com/component.html
 // https://github.com/odrotbohm/asciidoctor-plantuml
 
-IMPORTANT: Copyright (C) 2020 - present Jürgen Zimmermann, Hochschule Karlsruhe. +
-           Free use of this software is granted under the terms of the
-           GNU General Public License (GPL) v3. +
-           For the full text of the license, see the http://www.gnu.org/licenses/gpl-3.0.html[license] file.
-
 == Der Applikationsserver
 
 === Der Applikationsserver im Überblick
 
-Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt.
+Der Applikationsserver ist die Kernkomponente der Anwendung. Er stellt die zentrale Schnittstelle für die Verarbeitung von Anfragen bereit und ist für die Steuerung des Datenflusses zwischen den einzelnen Komponenten verantwortlich.
 
 .Use Cases
 [plantuml,use-cases,svg]
@@ -49,8 +29,7 @@ Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt.
 include::use-cases.plantuml[]
 ----
 
-Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor
-accumsan tincidunt.
+Die Use Cases beschreiben, welche Funktionalitäten der Applikationsserver bieten soll. Sie sind eine wichtige Grundlage für das Design und die Implementierung des Systems. Das Use Case-Diagramm gibt einen Überblick über die verschiedenen Anwendungsfälle und deren Beziehungen zueinander.
 
 .Komponentendiagramm
 [plantuml,komponenten,svg]
@@ -58,81 +37,83 @@ accumsan tincidunt.
 include::komponenten.plantuml[]
 ----
 
+Ein Komponentendiagramm ist eine Diagramm-Art, die verwendet wird, um die strukturelle Zusammensetzung einer Softwareanwendung darzustellen. Es zeigt die einzelnen Komponenten und deren Abhängigkeiten voneinander. Komponentendiagramme werden oft in der Phase der Softwarearchitektur erstellt, um eine Übersicht über die verschiedenen Elemente der Anwendung zu erhalten.
+
 === Die REST-Schnittstelle
 
-Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet
-ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit
-amet ligula.
+Die REST-Schnittstelle dient zur Bereitstellung von Lese- und Schreibzugriffen auf die Ressourcen der Anwendung. Dabei werden die Anfragen über HTTP-Protokoll an den Applikationsserver gesendet.
 
-."BuchGetController" für Lesezugriffe an der REST-Schnittstelle
-[plantuml,BuchGetController,svg]
+."FilmGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,FilmGetController,svg]
 ----
-include::BuchGetController.plantuml[]
+include::FilmGetController.plantuml[]
 ----
 
-Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec
-sollicitudin molestie malesuada.
+Der "FilmGetController" dient zur Abfrage von Filminformationen über die REST-Schnittstelle. Er verarbeitet eingehende Anfragen und gibt die entsprechenden Daten zurück.
 
-."BuchWriteController" für Schreibzugriffe an der REST-Schnittstelle
-[plantuml,BuchGetController,svg]
+."FilmWriteController" für Schreibzugriffe an der REST-Schnittstelle
+[plantuml,FilmGetController,svg]
 ----
-include::BuchWriteController.plantuml[]
+include::FilmWriteController.plantuml[]
 ----
+
+Der "FilmWriteController" ist verantwortlich für Schreibzugriffe auf die REST-Schnittstelle. Er verarbeitet die Anfragen und gibt die entsprechende Antwort zurück. Diese Komponente arbeitet eng mit der Geschäftslogik zusammen und aktualisiert die Datenbank entsprechend den Anforderungen der Anfrage.
 
 === Die GraphQL-Schnittstelle
 
-Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada.
+Die GraphQL-Schnittstelle bietet eine alternative Möglichkeit für den Zugriff auf die Ressourcen der Anwendung. Sie ermöglicht es, komplexe Abfragen auf mehrere Ressourcen in einer Anfrage zu kombinieren.
 
-.BuchQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle
-[plantuml,BuchQueryResolver,svg]
+.FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle
+[plantuml,FilmQueryResolver,svg]
 ----
-include::BuchQueryResolver.plantuml[]
-----
-
-Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a
-pellentesque nec, egestas non nisi.
-
-.BuchMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle
-[plantuml,BuchMutationResolver,svg]
-----
-include::BuchMutationResolver.plantuml[]
+include::FilmQueryResolver.plantuml[]
 ----
 
-=== Der Anwendungskern
+Der FilmQueryResolver verarbeitet Lesezugriffe auf der GraphQL-Schnittstelle und gibt die entsprechenden Daten zurück. Er nutzt das GraphQL-Query-Format, um die Abfrageparameter zu interpretieren und die passenden Ergebnisse aus der Datenbank zu ermitteln.
 
-Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada.
-
-."BuchReadService" im Anwendungskern
-[plantuml,BuchReadService,svg]
+.FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle
+[plantuml,FilmMutationResolver,svg]
 ----
-include::BuchReadService.plantuml[]
+include::FilmMutationResolver.plantuml[]
 ----
 
-Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget
-malesuada.
+Der "FilmMutationResolver" dient als Schnittstelle für Schreibzugriffe auf die GraphQL-Schnittstelle. Er empfängt GraphQL-Mutationen, validiert und verarbeitet sie, und leitet sie an den "FilmWriteService" weiter, der die Geschäftslogik für Schreibzugriffe implementiert. Der "FilmMutationResolver" gibt dann eine Antwort an den Client zurück, die den Erfolg oder Misserfolg der Anfrage widerspiegelt.
 
-."BuchWriteService" im Anwendungskern
-[plantuml,BuchWriteService,svg]
+=== Die Geschäftslogik
+
+Die Geschäftslogik ist die Ebene, auf der die eigentliche Verarbeitung der Daten stattfindet. Sie ist für die Umsetzung der Geschäftsregeln und die Transformation der Daten in das Datenmodell verantwortlich.
+
+."FilmReadService" von der Geschäftslogik
+[plantuml,FilmReadService,svg]
 ----
-include::BuchWriteService.plantuml[]
+include::FilmReadService.plantuml[]
 ----
+
+FilmReadService ist eine Komponente der Geschäftslogik, die für die Lesezugriffe auf Filmobjekte zuständig ist. Diese Komponente bietet eine Abstraktionsebene für den Zugriff auf die Datenbank und enthält die Logik für die Zusammenstellung von Daten, die für den Client relevant sind. Die Hauptaufgabe von FilmReadService besteht darin, die Daten aus der Datenbank zu laden und in einem für den Client lesbaren Format bereitzustellen. Außerdem implementiert diese Komponente auch verschiedene Funktionen zur Filterung und Sortierung von Filmdaten.
+
+."FilmWriteService" von der Geschäftslogik
+[plantuml,FilmWriteService,svg]
+----
+include::FilmWriteService.plantuml[]
+----
+
+Der "FilmWriteService" ist ein Teil der Geschäftslogik und ist für das Schreiben von Daten in die Datenbank zuständig. Dieser Service nimmt Anfragen vom "FilmWriteController" entgegen und validiert die Daten, bevor sie in die Datenbank geschrieben werden.
 
 === Klasse für Entities
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat,
-accumsan id imperdiet et, porttitor at sem.
+Die Klasse für Entities definiert das Datenmodell, das in der Anwendung verwendet wird. Sie enthält die Eigenschaften und Methoden, die für die Verarbeitung der Daten notwendig sind.
 
 .Entity
-[plantuml,Buch,svg]
+[plantuml,Film,svg]
 ----
-include::Buch.plantuml[]
+include::Film.plantuml[]
 ----
+
+Die Entity repräsentiert eine Tabelle oder Sicht in der Datenbank und bildet das Datenmodell für die Anwendung ab. Sie besteht aus Attributen, die die Eigenschaften der Entität beschreiben, sowie Beziehungen zu anderen Entitäten. Die Entitäten werden von den Repository-Klassen abgerufen und an die Anwendung zurückgegeben. Änderungen an den Entitäten werden ebenfalls durch die Repository-Klassen vorgenommen und in der Datenbank gespeichert.
 
 === ER-Diagramm
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Das ER-Diagramm gibt einen Überblick über die Datenbankstruktur der Anwendung. Es zeigt die Beziehungen zwischen den einzelnen Entitäten und gibt Auskunft über die Kardinalität der Beziehungen.
 
 .ER-Diagramm
 [plantuml,ER-Diagramm,svg]
@@ -140,13 +121,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 include::ER-Diagramm.plantuml[]
 ----
 
+Ein ER-Diagramm ist ein visuelles Modell, das die Beziehungen zwischen Entitäten in einer Datenbank darstellt. Es besteht aus Entitäten, Attributen und Beziehungen, die die Struktur der Datenbank beschreiben. Die Entitäten werden durch Rechtecke dargestellt, während Attribute durch Ovale und Beziehungen durch Linien dargestellt werden. ER-Diagramme werden verwendet, um Datenbanken zu entwerfen und zu dokumentieren, sowie um Datenintegrität und -konsistenz sicherzustellen.
+
 == Programmierrichtlinien für TypeScript und JavaScript
 
 Für die Programmierung mit *TypeScript* und *JavaScript* sind folgende
 Styleguides empfehlenswert:
 
 [horizontal]
-_Microsoft_:: https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
-_Angular_:: https://angular.io/docs/ts/latest/guide/style-guide.html
-_Google_:: https://google.github.io/styleguide/tsguide.html
-_React_:: https://github.com/airbnb/javascript/tree/master/react
+Microsoft:: https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
+Angular:: https://angular.io/docs/ts/latest/guide/style-guide.html
+Google:: https://google.github.io/styleguide/tsguide.html
+React:: https://github.com/airbnb/javascript/tree/master/react
