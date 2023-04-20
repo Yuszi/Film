@@ -33,30 +33,30 @@ package @nestjs/typeorm {
   hide InjectRepository circle
 }
 
-package film {
+package buch {
   package entity {
-    class Film
+    class Buch
   }
 
   package service #DDDDDD {
     class QueryBuilder
 
-    class FilmReadService << control >> <<@Injectable()>> {
-      + async findById(id: string): Promise<Film | undefined>
-      + async find(suchkriterien?: Record<string, any>): Promise<Film[]>
+    class BuchReadService << control >> <<@Injectable()>> {
+      + async findById(id: string): Promise<Buch | undefined>
+      + async find(suchkriterien?: Record<string, any>): Promise<Buch[]>
     }
 
-    FilmReadService o--> "1" QueryBuilder: queryBuilder
-    FilmReadService o--> "1" Repository: @InjectRepository repo
+    BuchReadService o--> "1" QueryBuilder: queryBuilder
+    BuchReadService o--> "1" Repository: @InjectRepository repo
 
-    FilmReadService .up.> Injectable
-    FilmReadService .up.> InjectRepository
+    BuchReadService .up.> Injectable
+    BuchReadService .up.> InjectRepository
 
-    FilmReadService .up.> Promise
-    FilmReadService ..> Film
+    BuchReadService .up.> Promise
+    BuchReadService ..> Buch
 
     QueryBuilder .[hidden].> Repository
-    QueryBuilder .[hidden].> Film
+    QueryBuilder .[hidden].> Buch
   }
 }
 

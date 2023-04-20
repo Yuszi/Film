@@ -5,21 +5,19 @@
  */
 
 import {
-    type FilmNotExists,
     type CreateError,
+    type FilmNotExists,
     type UpdateError,
     type VersionInvalid,
     type VersionOutdated,
 } from './errors.js';
 import { type DeleteResult, Repository } from 'typeorm';
-import { Abbildung } from '../entity/abbildung.entity.js';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { MailService } from '../../mail/mail.service.js';
 import RE2 from 're2';
-import { Hauptdarsteller } from '../entity/Hauptdarsteller.entity.js';
+import { Schauspieler } from '../entity/schauspieler.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren eines Films mit `update`. */
@@ -44,18 +42,14 @@ export class FilmWriteService {
 
     readonly #readService: FilmReadService;
 
-    readonly #mailService: MailService;
-
     readonly #logger = getLogger(FilmWriteService.name);
 
     constructor(
         @InjectRepository(Film) repo: Repository<Film>,
         readService: FilmReadService,
-        mailService: MailService,
     ) {
         this.#repo = repo;
         this.#readService = readService;
-        this.#mailService = mailService;
     }
 
     /**
@@ -73,8 +67,6 @@ export class FilmWriteService {
 
         const filmDb = await this.#repo.save(film); // implizite Transaktion
         this.#logger.debug('create: filmDb=%o', filmDb);
-
-        await this.#sendmail(filmDb);
 
         return filmDb.id!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
     }
@@ -142,11 +134,7 @@ export class FilmWriteService {
             // TODO "cascade" funktioniert nicht beim Loeschen
             const hauptdarstellerId = film.hauptdarsteller?.id;
             if (hauptdarstellerId !== undefined) {
-                await transactionalMgr.delete(Hauptdarsteller, hauptdarstellerId);
-            }
-            const abbildungen = film.abbildungen ?? [];
-            for (const abbildung of abbildungen) {
-                await transactionalMgr.delete(Abbildung, abbildung.id);
+                await transactionalMgr.delete(Schauspieler, hauptdarstellerId);
             }
 
             deleteResult = await transactionalMgr.delete(Film, id);
@@ -164,20 +152,13 @@ export class FilmWriteService {
         this.#logger.debug('#validateCreate: film=%o', film);
 
         const { name } = film;
-        const buecher = await this.#readService.find({ name: name }); // eslint-disable-line object-shorthand
-        if (buecher.length > 0) {
+        const filme = await this.#readService.find({ name }); // eslint-disable-line object-shorthand
+        if (filme.length > 0) {
             return { type: 'NameExists', name };
         }
 
         this.#logger.debug('#validateCreate: ok');
         return undefined;
-    }
-
-    async #sendmail(film: Film) {
-        const subject = `Neuer Film ${film.id}`;
-        const hauptdarsteller = film.hauptdarsteller?.hauptdarsteller ?? 'N/A';
-        const body = `Der Film mit dem Hauptdarsteller <strong>${hauptdarsteller}</strong> ist angelegt`;
-        await this.#mailService.sendmail({ subject, body });
     }
 
     async #validateUpdate(
