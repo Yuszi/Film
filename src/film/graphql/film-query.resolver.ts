@@ -29,7 +29,6 @@ export class FilmQueryResolver {
 
         const film = await this.#service.findById({ id });
         if (film === undefined) {
-            // https://www.apollographql.com/docs/apollo-server/data/errors
             throw new BadUserInputError(
                 `Es wurde kein Film mit der ID ${id} gefunden.`,
             );
@@ -44,8 +43,11 @@ export class FilmQueryResolver {
         @Args() hauptdarsteller: { hauptdarsteller: string } | undefined,
     ) {
         const hauptdarstellerStr = hauptdarsteller?.hauptdarsteller;
-        this.#logger.debug('find: titel=%s', hauptdarstellerStr);
-        const suchkriterium = titelStr === undefined ? {} : { titel: titelStr };
+        this.#logger.debug('find: rolle=%s', hauptdarstellerStr);
+        const suchkriterium =
+            hauptdarstellerStr === undefined
+                ? {}
+                : { hauptdarsteller: hauptdarstellerStr };
         const filme = await this.#service.find(suchkriterium);
         if (filme.length === 0) {
             throw new BadUserInputError('Es wurden keine Filme gefunden.');
@@ -56,7 +58,7 @@ export class FilmQueryResolver {
         return filmeDTO;
     }
 
-    #toFilmDTO(film: Film): Film {
+    #toFilmDTO(film: Film): FilmDTO {
         return {
             id: film.id,
             version: film.id,
@@ -66,7 +68,7 @@ export class FilmQueryResolver {
             rating: film.rating,
             erscheinungsjahr: film.erscheinungsjahr,
             schlagwoerter: film.schlagwoerter,
-            hauptdarsteller: film.hauptdarsteller, //TODO
+            hauptdarsteller: film.hauptdarsteller,
         };
     }
 }
