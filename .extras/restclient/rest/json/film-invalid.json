@@ -1,0 +1,16 @@
+{
+    "name": "Disaster Movie",
+    "sprache": "englisch",
+    "genre": "ACTION_DRAMA_SCIENCE_FICTION_TRASH",
+    "rating": -1,
+    "erscheinungsjahr": "2008-99-29",
+    "schlagwoerter": [
+        "TRASH", "PARODIE"
+    ],
+    "hauptdarsteller": {
+        "rolle": "Hanna Montana",
+        "vorname": "Crista",
+        "nachname": "Flanagan",
+        "alter": 46
+    }
+}

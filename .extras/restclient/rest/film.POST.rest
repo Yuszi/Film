@@ -1,0 +1,10 @@
+### Einen neuen Film anlegen
+POST {{restUrl}}
+Content-Type: application/json
+< ./json/film-neu.json
+
+### Einen neuen Film mit ungültigen Daten anlegen 
+POST {{restUrl}}
+Content-Type: application/json
+< ./json/film-invalid.json
+

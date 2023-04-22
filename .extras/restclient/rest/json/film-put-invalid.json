@@ -1,0 +1,16 @@
+{
+    "name": "Inception",
+    "sprache": "deutsch",
+    "genre": "ACTION",
+    "rating": 99,
+    "erscheinungsjahr": "2010-07-29",
+    "schlagwoerter": [
+        "TRAUM", "REALITÄT"
+    ],
+    "hauptdarsteller": {
+        "rolle": "Cobb",
+        "vorname": "Leonardo",
+        "nachname": "DiCaprio",
+        "alter": 48
+    }
+}

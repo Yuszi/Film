@@ -1,0 +1,20 @@
+### Einen vorhandenen Film aktualisieren
+PUT {{restUrl}}/2
+Content-Type: application/json
+If-Match: "0"
+
+< ./json/film-put.json 
+
+### Einen nicht vorhandenen Film aktualisieren
+PUT {{restUrl}}/9999
+Content-Type: application/json
+If-Match: "0"
+
+< ./json/film-put.json
+
+### Einen vorhandenen Film mit ungültigen Daten aktualisieren
+PUT {{restUrl}}/3
+Content-Type: application/json
+If-Match: "0"
+
+< ./json/film-put-invalid.json
