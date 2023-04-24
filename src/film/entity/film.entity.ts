@@ -56,7 +56,7 @@ export class Film {
 
     @OneToOne(
         () => Hauptdarsteller,
-        (hauptdarsteller) => hauptdarsteller.film,
+        (hauptdarsteller: { film: any; }) => hauptdarsteller.film,
         {
             cascade: ['insert', 'remove'],
         },
