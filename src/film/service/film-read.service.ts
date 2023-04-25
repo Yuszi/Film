@@ -4,10 +4,10 @@
  */
 
 import { Film, type FilmArt } from './../entity/film.entity.js';
-import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { Injectable } from '@nestjs/common';
 import { QueryBuilder } from './query-builder.js';
 import RE2 from 're2';
+import { Schauspieler } from '../entity/schauspieler.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 /**
@@ -27,7 +27,7 @@ export interface Suchkriterien {
     readonly rating?: number;
     readonly erscheinungsjahr?: Date;
     readonly schlagwoerter?: string[];
-    readonly hauptdarsteller?: string;
+    readonly hauptdarsteller?: Schauspieler;
 }
 
 /**
