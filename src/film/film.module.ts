@@ -1,5 +1,5 @@
 import { AuthModule } from '../security/auth/auth.module.js';
-import { FilmGetController } from './rest/controllers/film-get.controller.js';
+import { FilmGetController } from './rest/film-get.controller.js';
 import { FilmMutationResolver } from './graphql/film-mutation.resolver.js';
 import { FilmQueryResolver } from './graphql/film-query.resolver.js';
 import { FilmReadService } from './service/film-read.service.js';
