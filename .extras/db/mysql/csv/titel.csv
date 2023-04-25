@@ -1,4 +1,4 @@
-id;titel;untertitel;film_id
+id;hauptdarsteller;nebendarsteller;film_id
 1;Alpha;alpha;1
 20;Beta;null;20
 30;Gamma;gamma;30

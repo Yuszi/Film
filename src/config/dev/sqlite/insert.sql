@@ -20,30 +20,30 @@
 -- "Maschinelle Lernverfahren zur Behandlung von Bonitätsrisiken im Mobilfunkgeschäft"
 -- "Software Pioneers"
 
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (1,0,'978-3-897-22583-1',4,'DRUCKAUSGABE',11.1,0.011,true,'2022-02-01','https://acme.at','JAVASCRIPT','2022-02-01 00:00:00','2022-02-01 00:00:00');
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (20,0,'978-3-827-31552-6',2,'KINDLE',22.2,0.022,true,'2022-02-02','https://acme.biz','TYPESCRIPT','2022-02-02 00:00:00','2022-02-02 00:00:00');
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (30,0,'978-0-201-63361-0',3,'DRUCKAUSGABE',33.3,0.033,true,'2022-02-03','https://acme.com','JAVASCRIPT,TYPESCRIPT','2022-02-03 00:00:00','2022-02-03 00:00:00');
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (40,0,'978-0-007-09732-6',4,'DRUCKAUSGABE',44.4,0.044,true,'2022-02-04','https://acme.de',null,'2022-02-04 00:00:00','2022-02-04 00:00:00');
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (50,0,'978-3-824-40481-0',2,'KINDLE',55.5,0.055,true,'2022-02-05','https://acme.es','TYPESCRIPT','2022-02-05 00:00:00','2022-02-05 00:00:00');
-INSERT INTO film(id, version, isbn, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
+INSERT INTO film(id, version, name, rating, art, preis, rabatt, lieferbar, datum, homepage, schlagwoerter, erzeugt, aktualisiert) VALUES
     (60,0,'978-3-540-43081-0',1,'KINDLE',66.6,0.066,true,'2022-02-06','https://acme.fi','TYPESCRIPT','2022-02-06 00:00:00','2022-02-06 00:00:00');
 
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (1,'Alpha','alpha',1);
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (20,'Beta',null,20);
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (30,'Gamma','gamma',30);
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (40,'Delta','delta',40);
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (50,'Epsilon','epsilon',50);
-INSERT INTO titel(id, titel, untertitel, film_id) VALUES
+INSERT INTO hauptdarsteller(id, hauptdarsteller, nebendarsteller, film_id) VALUES
     (60,'Phi','phi',60);
 
 INSERT INTO abbildung(id, beschriftung, content_type, film_id) VALUES

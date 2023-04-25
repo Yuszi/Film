@@ -28,7 +28,7 @@
 CREATE TABLE IF NOT EXISTS film (
     id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     version       INT NOT NULL DEFAULT 0,
-    isbn          CHAR(17) UNIQUE NOT NULL,
+    name          CHAR(17) UNIQUE NOT NULL,
     rating        INT NOT NULL CHECK (rating >= 0 AND rating <= 5),
     art           ENUM('DRUCKAUSGABE', 'KINDLE'),
     preis         DECIMAL(8,2) NOT NULL,
@@ -42,13 +42,13 @@ CREATE TABLE IF NOT EXISTS film (
 ) TABLESPACE filmspace ROW_FORMAT=COMPACT;
 ALTER TABLE film AUTO_INCREMENT=1000;
 
-CREATE TABLE IF NOT EXISTS titel (
+CREATE TABLE IF NOT EXISTS hauptdarsteller (
     id          INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    titel       VARCHAR(40) NOT NULL,
-    untertitel  VARCHAR(40),
+    hauptdarsteller       VARCHAR(40) NOT NULL,
+    nebendarsteller  VARCHAR(40),
     film_id     CHAR(36) UNIQUE NOT NULL references film(id)
 ) TABLESPACE filmspace ROW_FORMAT=COMPACT;
-ALTER TABLE titel AUTO_INCREMENT=1000;
+ALTER TABLE hauptdarsteller AUTO_INCREMENT=1000;
 
 CREATE TABLE IF NOT EXISTS abbildung (
     id              INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

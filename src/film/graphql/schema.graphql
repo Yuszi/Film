@@ -47,10 +47,10 @@ enum FilmArt {
   ROMANCE
 }
 
-"Daten zum Titel eines neuen Filmes"
-input TitelInput {
-  titel: String!
-  untertitel: String
+"Daten zum Hauptdarsteller eines neuen Filmes"
+input HauptdarstellerInput {
+  hauptdarsteller: String!
+  nebendarsteller: String
 }
 
 "Daten für einen neuen Film"

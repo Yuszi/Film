@@ -16,5 +16,5 @@
 -- https://dev.mysql.com/doc/refman/8.0/en/drop-table.html
 
 DROP TABLE IF EXISTS abbildung;
-DROP TABLE IF EXISTS titel;
+DROP TABLE IF EXISTS hauptdarsteller;
 DROP TABLE IF EXISTS film;

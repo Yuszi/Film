@@ -39,7 +39,7 @@ const neuerFilm: FilmDTO = {
     erscheinungjahr: '2022-02-28',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     name: {
-        name: 'Titelpost',
+        name: 'Hauptdarstellerpost',
         untername: 'unternamepos',
     },
     abbildungen: [
@@ -50,7 +50,7 @@ const neuerFilm: FilmDTO = {
     ],
 };
 const neuerFilmInvalid: Record<string, unknown> = {
-    isbn: 'falsche-ISBN',
+    name: 'falsche-NAME',
     rating: -1,
     art: 'UNSICHTBAR',
     preis: -1,
@@ -129,7 +129,7 @@ describe('POST /rest', () => {
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^name /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^art /u),
             expect.stringMatching(/^datum /u),
