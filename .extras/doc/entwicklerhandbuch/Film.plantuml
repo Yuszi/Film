@@ -43,7 +43,7 @@ package buch.entity {
   class "type Verlag = 'FOO_VERLAG' | 'BAR_VERLAG'" as Verlag
   hide Verlag circle
 
-  class Buch <<entity>> <<@Entity>> {
+  class Film <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: string
     @Column() readonly titel: string
     @Column() readonly rating: number
