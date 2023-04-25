@@ -14,10 +14,10 @@ import {
 import { type DeleteResult, Repository } from 'typeorm';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
+import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import RE2 from 're2';
-import { Schauspieler } from '../entity/schauspieler.entity.js';
 import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren eines Films mit `update`. */
@@ -131,10 +131,12 @@ export class FilmWriteService {
         await this.#repo.manager.transaction(async (transactionalMgr) => {
             // Der Film zur gegebenen ID mit dem Hauptdarsteller und Abb. asynchron loeschen
 
-            // TODO "cascade" funktioniert nicht beim Loeschen
             const hauptdarstellerId = film.hauptdarsteller?.id;
             if (hauptdarstellerId !== undefined) {
-                await transactionalMgr.delete(Schauspieler, hauptdarstellerId);
+                await transactionalMgr.delete(
+                    Hauptdarsteller,
+                    hauptdarstellerId,
+                );
             }
 
             deleteResult = await transactionalMgr.delete(Film, id);
@@ -149,11 +151,11 @@ export class FilmWriteService {
     }
 
     async #validateCreate(film: Film): Promise<CreateError | undefined> {
-        this.#logger.debug('#validateCreate: film=%o', film);
+        this.#logger.debug('#validateCreate: buch=%o', film);
 
         const { name } = film;
-        const filme = await this.#readService.find({ name }); // eslint-disable-line object-shorthand
-        if (filme.length > 0) {
+        const buecher = await this.#readService.find({ name: name }); // eslint-disable-line object-shorthand
+        if (buecher.length > 0) {
             return { type: 'NameExists', name };
         }
 
