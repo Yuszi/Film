@@ -1,11 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { ArrayUnique, IsOptional, Max, MaxLength, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-<<<<<<< HEAD:src/film/rest/models/filmDTOBase.entity.ts
-import { FilmArt } from '../../entity/film.entity.js';
-=======
-import { FilmArt } from '../entity/film.entity';
->>>>>>> bc3d687660673fd73e0f50b367f91afab9a708ed:src/film/rest/filmDTOBase.entity.ts
+import { FilmArt } from '../entity/film.entity.js';
 
 /**
  * Das Modul besteht aus der DTO-Klasse für Kapselung der Filmdaten für Datenübertragung zwischen der API und dem Client.
