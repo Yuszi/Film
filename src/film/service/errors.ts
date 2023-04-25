@@ -22,7 +22,7 @@
  */
 
 /**
- * Klasse für eine bereits existierende ISBN-Nummer.
+ * Klasse für eine bereits existierende NAME-Nummer.
  */
 export interface NameExists {
     readonly type: 'NameExists';

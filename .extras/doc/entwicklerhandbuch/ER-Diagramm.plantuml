@@ -27,7 +27,7 @@ entity "Film" {
   *id : UUID <<generated>>
   --
   *version: integer
-  *titel : text
+  *hauptdarsteller : text
   *rating: number
   *art: text
   *verlag: text
@@ -35,7 +35,7 @@ entity "Film" {
   *rabatt: number
   *lieferbar: boolean
   datum: date
-  *isbn: text
+  *name: text
   homepage: text
   *erzeugt: timestamp
   *aktualisiert: timestamp

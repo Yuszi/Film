@@ -60,12 +60,12 @@ const geaenderterFilmInvalid: Record<string, unknown> = {
     rabatt: 2,
     lieferbar: true,
     datum: '12345-123-123',
-    titel: '?!',
+    hauptdarsteller: '?!',
     homepage: 'anyHomepage',
 };
 
 const veralterFilm: FilmDtoOhneRef = {
-    isbn: '978-0-007-09732-6',
+    name: '978-0-007-09732-6',
     rating: 1,
     art: 'DRUCKAUSGABE',
     preis: 44.4,
@@ -154,7 +154,7 @@ describe('PUT /rest/:id', () => {
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^isbn /u),
+            expect.stringMatching(/^name /u),
             expect.stringMatching(/^rating /u),
             expect.stringMatching(/^art /u),
             expect.stringMatching(/^preis /u),

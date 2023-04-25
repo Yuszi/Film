@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS film (
     version       integer NOT NULL DEFAULT 0,
                   -- impliziter Index als B-Baum durch UNIQUE
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-UNIQUE-CONSTRAINTS
-    isbn          varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
+    name          varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
                   -- https://www.postgresql.org/docs/current/ddl-constraints.html#DDL-CONSTRAINTS-CHECK-CONSTRAINTS
                   -- https://www.postgresql.org/docs/current/functions-matching.html#FUNCTIONS-POSIX-REGEXP
     rating        integer NOT NULL CHECK (rating >= 0 AND rating <= 5),
@@ -59,10 +59,10 @@ CREATE TABLE IF NOT EXISTS film (
     aktualisiert  timestamp NOT NULL DEFAULT NOW()
 ) TABLESPACE filmspace;
 
-CREATE TABLE IF NOT EXISTS titel (
+CREATE TABLE IF NOT EXISTS hauptdarsteller (
     id          integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
-    titel       varchar(40) NOT NULL,
-    untertitel  varchar(40),
+    hauptdarsteller       varchar(40) NOT NULL,
+    nebendarsteller  varchar(40),
     film_id     integer NOT NULL UNIQUE USING INDEX TABLESPACE filmspace REFERENCES film
 ) TABLESPACE filmspace;
 
