@@ -33,7 +33,7 @@ export class Film {
 
     @Column('varchar', { unique: true, length: 32 })
     @ApiProperty({ example: 'Good Doctor', type: String })
-    readonly name!: string | undefined;
+    readonly name!: string;
 
     @Column('varchar', { length: 32 })
     @ApiProperty({ example: 'deutsch', type: String })
