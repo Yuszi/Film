@@ -27,19 +27,19 @@ import {
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { type CreateError, type UpdateError } from '../../service/errors.js';
+import { type CreateError, type UpdateError } from '../service/errors.js';
 import { Request, Response } from 'express';
-import { type Film } from '../../entity/film.entity.js';
-import { FilmDTO } from '../models/filmDTO.entity';
-import { FilmWriteService } from '../../service/film-write.service.js';
-import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
-import { JwtAuthGuard } from '../../../security/auth/jwt/jwt-auth.guard.js';
-import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
-import { RolesAllowed } from '../../../security/auth/roles/roles-allowed.decorator.js';
-import { RolesGuard } from '../../../security/auth/roles/roles.guard.js';
-import { getBaseUri } from '../getBaseUri.js';
-import { getLogger } from '../../../logger/logger.js';
-import { paths } from '../../../config/paths.js';
+import { type Film } from './../entity/film.entity.js';
+import { FilmDTO } from './filmDTO.entity';
+import { FilmWriteService } from '../service/film-write.service.js';
+import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
+import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
+import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
+import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
+import { RolesGuard } from '../../security/auth/roles/roles.guard.js';
+import { getBaseUri } from './getBaseUri.js';
+import { getLogger } from '../../logger/logger.js';
+import { paths } from '../../config/paths.js';
 
 /**
  * Die Controller-Klasse für Neuanlegen und Aktualisieren der Filme.

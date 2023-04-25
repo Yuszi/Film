@@ -24,7 +24,7 @@ import { AuthModule } from './security/auth/auth.module.js';
 import { DevModule } from './config/dev/dev.module.js';
 import { FilmGetController } from './film/rest/film-get.controller.js';
 import { FilmModule } from './film/film.module.js';
-import { FilmWriteController } from './film/rest/controllers/film-write.controller.js';
+import { FilmWriteController } from './film/rest/film-write.controller.js';
 import { GraphQLModule } from '@nestjs/graphql';
 import { HealthModule } from './health/health.module.js';
 import { LoggerModule } from './logger/logger.module.js';
