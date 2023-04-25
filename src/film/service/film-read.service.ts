@@ -98,15 +98,15 @@ export class FilmReadService {
 
         // Keine Suchkriterien?
         if (suchkriterien === undefined) {
-            const buecher = await this.#queryBuilder.build({}).getMany();
-            return buecher;
+            const filme = await this.#queryBuilder.build({}).getMany();
+            return filme;
         }
         const keys = Object.keys(suchkriterien);
         if (keys.length === 0) {
-            const buecher = await this.#queryBuilder
+            const filme = await this.#queryBuilder
                 .build(suchkriterien)
                 .getMany();
-            return buecher;
+            return filme;
         }
 
         // Falsche Namen fuer Suchkriterien?
@@ -117,10 +117,10 @@ export class FilmReadService {
         // QueryBuilder https://typeorm.io/select-query-builder
         // Das Resultat ist eine leere Liste, falls nichts gefunden
         // Lesen: Keine Transaktion erforderlich
-        const buecher = await this.#queryBuilder.build(suchkriterien).getMany();
-        this.#logger.debug('find: buecher=%o', buecher);
+        const filme = await this.#queryBuilder.build(suchkriterien).getMany();
+        this.#logger.debug('find: filme=%o', filme);
 
-        return buecher;
+        return filme;
     }
 
     #checkKeys(keys: string[]) {
