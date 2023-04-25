@@ -14,7 +14,6 @@ import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.
 import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
 import { RolesGraphQlGuard } from '../../security/auth/roles/roles-graphql.guard.js';
 import { getLogger } from '../../logger/logger.js';
-import { type HauptdarstellerDTO } from '../rest/models/hauptdarstellerDTO.entity.js';
 
 export class FilmUpdateDTO extends FilmDTO {
     @IsNumberString()
