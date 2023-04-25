@@ -34,8 +34,8 @@ import { Request, Response } from 'express';
 import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
 import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
 import { getBaseUri } from '../getBaseUri';
-import { paths } from '../../../config/paths';
 import { getLogger } from '../../../logger/logger.js';
+import { paths } from '../../../config/paths';
 
 /** href-Link für HATEOAS */
 export interface Link {
