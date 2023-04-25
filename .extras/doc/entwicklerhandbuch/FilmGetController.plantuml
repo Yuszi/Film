@@ -51,35 +51,47 @@ package express {
 
 package film {
   package entity #FFFFFF {
-    class film <<entity>>
+    class Film <<entity>>
 
-    film .[hidden].> Promise
-    film .[hidden].> Request
+    Film .[hidden].> Promise
+    Film .[hidden].> Request
   }
 
   package service {
-    class filmReadService << control >>
+    class FilmReadService << control >>
   }
 
   package rest #DDDDDD {
-    filmQuery -up-|> film
+    FilmQuery -up-|> Film
 
+<<<<<<< HEAD
+    class FilmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<FilmModel | undefined>>
+      + @Get() async find(@Query() query: FilmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
+=======
+<<<<<<< HEAD
     class filmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
       + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<filmModel | undefined>>
-      + @Get() async find(@Query() query: filmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
+      + @Get() async find(@Query() query: filmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<FilmeModel | undefined>>
+=======
+    class FilmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<FilmModel | undefined>>
+      + @Get() async find(@Query() query: FilmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<FilmeModel | undefined>>
+>>>>>>> f6a6b7979cfbe4c3f2368516e2ce9d0f892a9ffe
+>>>>>>> 62cae4ebf9a3015e089b49a2ca786e6dfadff464
     }
 
-    filmGetController o--> "1" filmReadService : service
+    FilmGetController o--> "1" FilmReadService : service
 
-    filmGetController ..> Controller
-    filmGetController ..> Request
-    filmGetController ..> Response
-    filmGetController ..> Promise
-    filmGetController .up.> filmModel
-    filmGetController .up.> filmQuery
+    FilmGetController ..> Controller
+    FilmGetController ..> Request
+    FilmGetController ..> Response
+    FilmGetController ..> Promise
+    FilmGetController .up.> FilmModel
+    FilmGetController .up.> FilmQuery
 
-    filmReadService .[hidden].> Request
-    filmReadService .[hidden].> Promise
+    FilmReadService .[hidden].> Request
+    FilmReadService .[hidden].> Promise
     Response .right[hidden].> Controller
   }
 }

@@ -22,7 +22,7 @@
 --     cd <Verzeichnis-mit-docker-compose.yaml>
 --     docker compose exec postgres bash
 --         chown postgres:postgres /var/lib/postgresql/tablespace
---         chown postgres:postgres /var/lib/postgresql/tablespace/buch
+--         chown postgres:postgres /var/lib/postgresql/tablespace/film
 --         exit
 --     docker compose down
 -- (3) in docker-compose.yaml den User "postgres" wieder aktivieren, d.h. Kommentar entfernen
@@ -30,17 +30,17 @@
 --     docker compose up
 -- (5) 2. PowerShell:
 --     docker compose exec postgres bash
---        psql --dbname=postgres --username=postgres --file=/sql/create-db-buch.sql
+--        psql --dbname=postgres --username=postgres --file=/sql/create-db-film.sql
 --        exit
 --     docker compose down
 
 -- https://www.postgresql.org/docs/current/sql-createrole.html
-CREATE ROLE buch LOGIN PASSWORD 'p';
+CREATE ROLE film LOGIN PASSWORD 'p';
 
 -- https://www.postgresql.org/docs/current/sql-createdatabase.html
-CREATE DATABASE buch;
+CREATE DATABASE film;
 
-GRANT ALL ON DATABASE buch TO buch;
+GRANT ALL ON DATABASE film TO film;
 
 -- https://www.postgresql.org/docs/10/sql-createtablespace.html
-CREATE TABLESPACE buchspace OWNER buch LOCATION '/var/lib/postgresql/tablespace/buch';
+CREATE TABLESPACE filmspace OWNER film LOCATION '/var/lib/postgresql/tablespace/film';

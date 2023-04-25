@@ -1,0 +1,122 @@
+// Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+//
+// N e t z w e r k   -   V e r b i n d u n g   n o t w e n d i g
+//
+
+// siehe auch https://studio.apollographql.com/sandbox/explorer
+
+### Suche id, version und hauptdarsteller von allen Filme
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+{
+  filme {
+    id
+    version
+    art
+    hauptdarsteller {
+      hauptdarsteller
+    }
+  }
+}
+
+### Suche name, version, art und hauptdarsteller von einem Film mit vorhandener Film-ID
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query ($id: ID! = "1") {
+  film(id: $id) {
+    name
+    version
+    art
+    hauptdarsteller {
+      hauptdarsteller
+    }
+  }
+}
+
+{
+  "id": "1"
+}
+
+### Suche hauptdarsteller von einem Film mit nicht-vorhandener Film-ID
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query ($id: ID! = "999999") {
+  film(id: $id) {
+    hauptdarsteller {
+      hauptdarsteller
+    }
+  }
+}
+
+{
+  "id": "999999"
+}
+
+### Suche art von Filme mit vorhandenem Hauptdarsteller
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query ($titel: String = "Alpha") {
+  filme(hauptdarsteller: $titel) {
+    art
+  }
+}
+
+{
+  "hauptdarsteller": "Alpha"
+}
+
+### Suche art, schlagwoerter und hauptdarsteller von Filme mit vorhandenem Hauptdarsteller
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query ($titel: String = "a") {
+  filme(hauptdarsteller: $titel) {
+    art
+    schlagwoerter
+    hauptdarsteller {
+      hauptdarsteller
+    }
+  }
+}
+
+{
+  "name": "a"
+}
+
+### Suche art von Filme mit NICHT-vorhandenem Name
+POST {{graphQlUrl}}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query ($name: String = "Nichtvorhanden") {
+  filme(name: $name) {
+    art
+  }
+}
+
+{
+  "name": "Nichtvorhanden"
+}

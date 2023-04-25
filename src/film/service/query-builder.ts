@@ -20,12 +20,11 @@
  * @packageDocumentation
  */
 
-import { Abbildung } from '../entity/abbildung.entity.js';
 import { Film } from '../entity/film.entity.js';
+import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { getLogger } from '../../logger/logger.js';
 import { typeOrmModuleOptions } from '../../config/db.js';
 
@@ -50,10 +49,6 @@ export class QueryBuilder {
         .charAt(0)
         .toLowerCase()}${Hauptdarsteller.name.slice(1)}`;
 
-    readonly #abbildungAlias = `${Abbildung.name
-        .charAt(0)
-        .toLowerCase()}${Abbildung.name.slice(1)}`;
-
     readonly #repo: Repository<Film>;
 
     readonly #logger = getLogger(QueryBuilder.name);
@@ -67,18 +62,12 @@ export class QueryBuilder {
      * @param id ID des gesuchten Films
      * @returns QueryBuilder
      */
-    buildId({ id, mitAbbildungen = false }: BuildIdParams) {
+    buildId({ id }: BuildIdParams) {
         const queryBuilder = this.#repo.createQueryBuilder(this.#filmAlias);
         queryBuilder.innerJoinAndSelect(
             `${this.#filmAlias}.hauptdarsteller`,
             this.#hauptdarstellerAlias,
         );
-        if (mitAbbildungen) {
-            queryBuilder.leftJoinAndSelect(
-                `${this.#filmAlias}.abbildungen`,
-                this.#abbildungAlias,
-            );
-        }
         queryBuilder.where(`${this.#filmAlias}.id = :id`, { id: id }); // eslint-disable-line object-shorthand
         return queryBuilder;
     }

@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker buildx build --tag juergenzimmermann/buch:2023.1.0 .
+# Aufruf:   docker buildx build --tag juergenzimmermann/film:2023.1.0 .
 #           ggf. --no-cache
 #           Get-Content Dockerfile | docker run --rm --interactive hadolint/hadolint:2.12.1-beta-debian
 #           docker network ls
@@ -56,7 +56,7 @@ COPY --from=builder /app/package.json /app/.env /app/.npmrc /app/nest-cli.json .
 ARG NODE_ENV=production
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/src/buch/graphql/schema.graphql ./dist/buch/graphql/
+COPY --from=builder /app/src/film/graphql/schema.graphql ./dist/film/graphql/
 COPY --from=builder /app/src/security/auth/login.graphql ./dist/security/auth/
 COPY --from=builder /app/src/config/dev/mysql ./dist/config/dev/mysql
 COPY --from=builder /app/src/config/dev/postgres ./dist/config/dev/postgres

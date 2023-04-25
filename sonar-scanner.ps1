@@ -25,7 +25,7 @@ if ($versionMinimum -gt $versionCurrent) {
     throw "PowerShell $versionMinimum statt $versionCurrent erforderlich"
 }
 
-# Titel setzen
+# Hauptdarsteller setzen
 $host.ui.RawUI.WindowTitle = 'sonar-scanner'
 
 $password = 'p'

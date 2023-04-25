@@ -27,15 +27,12 @@ entity "Film" {
   *id : UUID <<generated>>
   --
   *version: integer
-  *titel : text
+  *hauptdarsteller : text
   *rating: number
-  *art: text
+  *Filmart: text
   *verlag: text
-  *preis: number
-  *rabatt: number
-  *lieferbar: boolean
   datum: date
-  *isbn: text
+  *name: text
   homepage: text
   *erzeugt: timestamp
   *aktualisiert: timestamp

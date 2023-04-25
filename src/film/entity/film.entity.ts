@@ -11,7 +11,7 @@ import {
     VersionColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Hauptdarsteller } from './hauptdarsteller.entity';
+import { Hauptdarsteller } from './hauptdarsteller.entity.js';
 
 /**
  * Gültige Strings für die Art des Films.
@@ -33,7 +33,7 @@ export class Film {
 
     @Column('varchar', { unique: true, length: 32 })
     @ApiProperty({ example: 'Good Doctor', type: String })
-    readonly name!: string | undefined;
+    readonly name!: string;
 
     @Column('varchar', { length: 32 })
     @ApiProperty({ example: 'deutsch', type: String })
@@ -56,7 +56,7 @@ export class Film {
 
     @OneToOne(
         () => Hauptdarsteller,
-        (hauptdarsteller) => hauptdarsteller.film,
+        (hauptdarsteller: { film: any }) => hauptdarsteller.film,
         {
             cascade: ['insert', 'remove'],
         },
