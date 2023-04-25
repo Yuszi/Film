@@ -29,13 +29,8 @@ import {
 } from '@nestjs/common';
 import { type CreateError, type UpdateError } from '../service/errors.js';
 import { Request, Response } from 'express';
-<<<<<<< HEAD
 import { type Film } from '../entity/film.entity.js';
 import { FilmDTO } from './filmDTO.entity.js';
-=======
-import { type Film } from './../entity/film.entity.js';
-import { FilmDTO } from './filmDTO.entity';
->>>>>>> 08c42af200a59925b79f10c9d4115b84e81793e1
 import { FilmWriteService } from '../service/film-write.service.js';
 import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { JwtAuthGuard } from '../../security/auth/jwt/jwt-auth.guard.js';
