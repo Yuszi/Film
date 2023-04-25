@@ -56,6 +56,6 @@ CREATE TABLE IF NOT EXISTS abbildung (
     content_type    VARCHAR(16) NOT NULL,
     film_id         CHAR(36) NOT NULL references film(id),
 
-    INDEX abbildung_buch_id_idx(film_id)
+    INDEX abbildung_film_id_idx(film_id)
 ) TABLESPACE filmspace ROW_FORMAT=COMPACT;
 ALTER TABLE abbildung AUTO_INCREMENT=1000;

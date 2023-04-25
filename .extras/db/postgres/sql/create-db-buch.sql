@@ -22,7 +22,7 @@
 --     cd <Verzeichnis-mit-docker-compose.yaml>
 --     docker compose exec postgres bash
 --         chown postgres:postgres /var/lib/postgresql/tablespace
---         chown postgres:postgres /var/lib/postgresql/tablespace/buch
+--         chown postgres:postgres /var/lib/postgresql/tablespace/film
 --         exit
 --     docker compose down
 -- (3) in docker-compose.yaml den User "postgres" wieder aktivieren, d.h. Kommentar entfernen
@@ -40,7 +40,7 @@ CREATE ROLE film LOGIN PASSWORD 'p';
 -- https://www.postgresql.org/docs/current/sql-createdatabase.html
 CREATE DATABASE film;
 
-GRANT ALL ON DATABASE buch TO film;
+GRANT ALL ON DATABASE film TO film;
 
 -- https://www.postgresql.org/docs/10/sql-createtablespace.html
 CREATE TABLESPACE filmspace OWNER film LOCATION '/var/lib/postgresql/tablespace/film';

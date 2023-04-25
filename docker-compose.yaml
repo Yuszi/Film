@@ -259,7 +259,7 @@ services:
         target: 3000
     volumes:
       - type: bind
-        source: C:\Zimmermann\volumes\buch
+        source: C:\Zimmermann\volumes\film
         target: /opt/app/log
     env_file: [ "docker-compose.env" ]
     environment:

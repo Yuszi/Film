@@ -77,7 +77,7 @@ pipeline {
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git url: 'https://github.com/juergenzimmermann/buch', branch: 'main', poll: true
+                git url: 'https://github.com/juergenzimmermann/film', branch: 'main', poll: true
             }
         }
 
@@ -171,10 +171,10 @@ pipeline {
                   echo 'TODO: Links fuer Coverage und TypeDoc'
 
                   publishHTML (target : [
-                    reportDir: 'extras/doc/entwicklerhandbuch/html',
-                    reportFiles: 'entwicklerhandbuch.html',
-                    reportName: 'Entwicklerhandbuch',
-                    reportTitles: 'Entwicklerhandbuch'
+                    reportDir: 'extras/doc/entwicklerhandfilm/html',
+                    reportFiles: 'entwicklerhandfilm.html',
+                    reportName: 'Entwicklerhandfilm',
+                    reportTitles: 'Entwicklerhandfilm'
                   ])
 
                   publishHTML target : [
@@ -202,7 +202,7 @@ pipeline {
                 success {
                     script {
                         if (fileExists("${env.WORKSPACE}/film.zip")) {
-                            sh 'rm buch.zip'
+                            sh 'rm film.zip'
                         }
                     }
                     // https://www.jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#zip-create-zip-file

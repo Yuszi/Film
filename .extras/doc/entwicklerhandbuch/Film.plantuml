@@ -36,9 +36,9 @@ package typeorm {
   hide UpdateDateColumn circle
 }
 
-package buch.entity {
-  class "type BuchArt = 'KINDLE' | 'DRUCKAUSGABE'" as BuchArt
-  hide BuchArt circle
+package film.entity {
+  class "type FilmArt = 'KINDLE' | 'DRUCKAUSGABE'" as FilmArt
+  hide FilmArt circle
 
   class "type Verlag = 'FOO_VERLAG' | 'BAR_VERLAG'" as Verlag
   hide Verlag circle
@@ -47,7 +47,7 @@ package buch.entity {
     @Column() @PrimaryColumn() readonly id: string
     @Column() readonly titel: string
     @Column() readonly rating: number
-    @Column() readonly art: BuchArt
+    @Column() readonly art: FilmArt
     @Column() readonly verlag: Verlag
     @Column() readonly preis: number
     @Column() readonly rabatt: number
@@ -62,15 +62,15 @@ package buch.entity {
   class Schlagwort <<entity>> <<@Entity>> {
     @Column() @PrimaryColumn() readonly id: string
     @Column() readonly schlagwort: string
-    @ManyToOne() readonly buch: Buch
+    @ManyToOne() readonly film: Film
   }
 
-  Buch ..> Entity
-  Buch *--> "*" Schlagwort : @OneToMany() schlagwoerter
-  Buch .up.> BuchArt
-  Buch .up.> Verlag
+  Film ..> Entity
+  Film *--> "*" Schlagwort : @OneToMany() schlagwoerter
+  Film .up.> FilmArt
+  Film .up.> Verlag
 
-  BuchArt .[hidden].> Verlag
+  FilmArt .[hidden].> Verlag
 }
 
 hide empty members

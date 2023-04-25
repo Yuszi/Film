@@ -20,18 +20,18 @@
 ### Suche alle Filme
 GET {{restUrl}}
 
-### Suche mit vorhandener Buch-ID
+### Suche mit vorhandener Film-ID
 GET {{restUrl}}/1
 
-### Suche mit vorhandener Buch-ID und Versionsnummer
+### Suche mit vorhandener Film-ID und Versionsnummer
 GET {{restUrl}}/1
 If-None-Match: "0"
 
-### Suche mit vorhandener Buch-ID und falscher Versionsnummer
+### Suche mit vorhandener Film-ID und falscher Versionsnummer
 GET {{restUrl}}/1
 If-None-Match: 0
 
-### Suche mit nicht-vorhandener Buch-ID
+### Suche mit nicht-vorhandener Film-ID
 GET {{restUrl}}/999999
 
 ### Suche mit vorhandenem Titel
@@ -55,7 +55,7 @@ GET {{restUrl}}?javascript=true&typescript=true
 ### Suche mit nicht-vorhandener Property
 GET {{restUrl}}?php=true
 
-### Suche mit gueltiger Buchart
+### Suche mit gueltiger Filmart
 GET {{restUrl}}?art=KINDLE
 
 ### Suche mit gueltigem Rating

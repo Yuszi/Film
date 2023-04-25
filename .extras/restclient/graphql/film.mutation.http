@@ -57,7 +57,7 @@ mutation {
   login(username: "admin", password: "FALSCH") { token expiresIn roles }
 }
 
-### Neues Buch anlegen
+### Neues Film anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -87,7 +87,7 @@ mutation {
   )
 }
 
-### Neues Buch mit ungueltigen Daten anlegen
+### Neues Film mit ungueltigen Daten anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -113,7 +113,7 @@ mutation {
   )
 }
 
-### Vorhandenes Buch aktualisieren
+### Vorhandenes Film aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -137,7 +137,7 @@ mutation {
   )
 }
 
-### Vorhandenes Buch mit ungueltigen Werten aktualisieren
+### Vorhandenes Film mit ungueltigen Werten aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -160,7 +160,7 @@ mutation {
   )
 }
 
-### Nicht-Vorhandenes Buch aktualisieren
+### Nicht-Vorhandenes Film aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -184,7 +184,7 @@ mutation {
   )
 }
 
-### Vorhandenes Buch loeschen
+### Vorhandenes Film loeschen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
