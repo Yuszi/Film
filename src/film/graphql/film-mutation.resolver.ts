@@ -5,15 +5,16 @@ import { IsInt, IsNumberString, Min } from 'class-validator';
 import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { BadUserInputError } from './errors.js';
 import { Film } from '../entity/film.entity.js';
-import { type FilmArt } from '../entity/film.entity.js';
 import { FilmDTO } from '../rest/models/filmDTO.entity.js';
 import { FilmWriteService } from '../service/film-write.service.js';
+import { type Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { type IdInput } from './film-query.resolver.js';
 import { JwtAuthGraphQlGuard } from '../../security/auth/jwt/jwt-auth-graphql.guard.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
 import { RolesGraphQlGuard } from '../../security/auth/roles/roles-graphql.guard.js';
 import { getLogger } from '../../logger/logger.js';
+import { type HauptdarstellerDTO } from '../rest/models/hauptdarstellerDTO.entity.js';
 
 export class FilmUpdateDTO extends FilmDTO {
     @IsNumberString()
@@ -84,11 +85,13 @@ export class FilmMutationResolver {
     }
 
     #filmDtoToFilm(filmDTO: FilmDTO): Film {
-        const titelDTO = filmDTO.titel;
-        const titel: Titel = {
+        const hauptdarstellerDTO = filmDTO.hauptdarsteller;
+        const hauptdarsteller: Hauptdarsteller = {
             id: undefined,
-            titel: titelDTO.titel,
-            untertitel: titelDTO.untertitel,
+            rolle: hauptdarstellerDTO.rolle,
+            vorname: hauptdarstellerDTO.vorname,
+            nachname: hauptdarstellerDTO.nachname,
+            alter: hauptdarstellerDTO.alter,
             film: undefined,
         };
 
@@ -101,13 +104,13 @@ export class FilmMutationResolver {
             rating: filmDTO.rating,
             erscheinungsjahr: filmDTO.erscheinungsjahr,
             schlagwoerter: filmDTO.schlagwoerter,
-            hauptdarsteller: filmDTO.hauptdarsteller, //TODO 
+            hauptdarsteller, //TODO
             erzeugt: undefined,
             aktualisiert: undefined,
         };
 
         // Rueckwaertsverweis
-        film.hauptdarsteller.film = hauptdarsteller;
+        film.hauptdarsteller.film = film;
         return film;
     }
 
@@ -121,7 +124,7 @@ export class FilmMutationResolver {
             rating: filmDTO.rating,
             erscheinungsjahr: filmDTO.erscheinungsjahr,
             schlagwoerter: filmDTO.schlagwoerter,
-            hauptdarsteller: filmDTO.hauptdarsteller, //TODO 
+            hauptdarsteller: undefined, //TODO
             erzeugt: undefined,
             aktualisiert: undefined,
         };

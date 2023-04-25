@@ -27,7 +27,7 @@ export interface Suchkriterien {
     readonly rating?: number;
     readonly erscheinungsjahr?: Date;
     readonly schlagwoerter?: string[];
-    readonly hauptdarsteller?: Hauptdarsteller;
+    readonly hauptdarsteller?: string;
 }
 
 /**
