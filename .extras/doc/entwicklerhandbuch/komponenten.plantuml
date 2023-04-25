@@ -25,12 +25,12 @@ actor GraphQLClient
 node "Nest" {
   [RequestLoggerMiddleware]
 
-  [BuchController]
-  [BuchResolver]
+  [FilmController]
+  [FilmResolver]
 
-  [BuchService]
+  [FilmService]
 
-  [Repository<Buch>]
+  [Repository<Film>]
 
   [MailService]
 }
@@ -44,8 +44,8 @@ cloud {
     [nodemailer]
 }
 
-database "DB buch" {
-    [Tabelle buch]
+database "DB film" {
+    [Tabelle film]
     [Tabelle schlagwort]
 }
 
@@ -56,18 +56,18 @@ node {
 RESTClient ~~> [RequestLoggerMiddleware]
 GraphQLClient ~~> [RequestLoggerMiddleware]
 
-[RequestLoggerMiddleware] ~~> [BuchController]
-[RequestLoggerMiddleware] ~~> [BuchResolver]
+[RequestLoggerMiddleware] ~~> [FilmController]
+[RequestLoggerMiddleware] ~~> [FilmResolver]
 
-[BuchController] ..> [BuchService]
-[BuchResolver] ..> [BuchService]
-[BuchService] ..> [Repository<Buch>]
+[FilmController] ..> [FilmService]
+[FilmResolver] ..> [FilmService]
+[FilmService] ..> [Repository<Film>]
 
-[Repository<Buch>] ~~> [TypeORM]
-[TypeORM] ~~> [Tabelle buch]
+[Repository<Film>] ~~> [TypeORM]
+[TypeORM] ~~> [Tabelle film]
 [TypeORM] ~~> [Tabelle schlagwort]
 
-[BuchService] ..> [MailService]
+[FilmService] ..> [MailService]
 [MailService] ~~> [nodemailer]
 [nodemailer] ~~> [Mailserver]
 

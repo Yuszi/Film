@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+>>>>>>> 79330016a329408916977f9baed93259ab324324
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe

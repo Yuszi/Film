@@ -13,7 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Default values for buch.
+# Default values for film.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -34,7 +34,7 @@ servicePort: 3000
 # -- Konfigurationsmodus für Node
 nodeConfig: production
 
-# -- Loglevel für buch
+# -- Loglevel für film
 loglevel: info
 
 # -- Ausgabemodus bei Pino
@@ -44,7 +44,7 @@ logPretty: "false"
 logHealthyPretty: "false"
 
 # -- Benutzername für die DB
-dbUser: buch
+dbUser: film
 
 # -- Passwort für die DB
 dbPassword: "Change Me!!!"
@@ -65,7 +65,7 @@ image:
   # -- Repository als Präfix beim Image-Namen
   repository: juergenzimmermann
     # -- Name des Image
-  name: buch
+  name: film
   # -- Image-Tag
   tag: 1.0.0
 
