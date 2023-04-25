@@ -25,29 +25,17 @@ import {
     Res,
     UseInterceptors,
 } from '@nestjs/common';
-<<<<<<< HEAD:src/film/rest/controllers/film-get.controller.ts
-import { type Film, type FilmArt } from '../../entity/film.entity.js';
-=======
 import { type Film, type FilmArt } from '../entity/film.entity';
->>>>>>> bc3d687660673fd73e0f50b367f91afab9a708ed:src/film/rest/film-get.controller.ts
 import {
     FilmReadService,
     type Suchkriterien,
 } from '../service/film-read.service.js';
 import { Request, Response } from 'express';
-<<<<<<< HEAD:src/film/rest/controllers/film-get.controller.ts
-import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
-import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
-import { getBaseUri } from '../getBaseUri.js';
-import { getLogger } from '../../../logger/logger.js';
-import { paths } from '../../../config/paths.js';
-=======
 import { Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { getBaseUri } from './getBaseUri';
 import { getLogger } from '../../logger/logger.js';
 import { paths } from '../../config/paths';
->>>>>>> bc3d687660673fd73e0f50b367f91afab9a708ed:src/film/rest/film-get.controller.ts
 
 /** href-Link für HATEOAS */
 export interface Link {
