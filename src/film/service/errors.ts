@@ -26,7 +26,7 @@
  */
 export interface NameExists {
     readonly type: 'NameExists';
-    readonly isbn: string | null | undefined;
+    readonly name: string | null | undefined;
     readonly id?: number;
 }
 
