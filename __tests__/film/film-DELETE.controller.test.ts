@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
@@ -23,7 +25,7 @@ import {
     port,
     shutdownServer,
     startServer,
-} from '../testserver.js';
+} from './testserver.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
 
