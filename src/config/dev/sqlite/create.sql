@@ -27,7 +27,7 @@
 CREATE TABLE IF NOT EXISTS film (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     version        INTEGER NOT NULL DEFAULT 0,
-    isbn           TEXT NOT NULL UNIQUE,
+    name           TEXT NOT NULL UNIQUE,
     rating         INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
     art            TEXT,
     preis          REAL,
@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS film (
     erzeugt        TEXT NOT NULL,
     aktualisiert   TEXT NOT NULL
 );
-CREATE INDEX IF NOT EXISTS film_isbn_idx ON film(isbn);
+CREATE INDEX IF NOT EXISTS film_name_idx ON film(name);
 
-CREATE TABLE IF NOT EXISTS titel (
+CREATE TABLE IF NOT EXISTS hauptdarsteller (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    titel       TEXT NOT NULL,
-    untertitel  TEXT,
+    hauptdarsteller       TEXT NOT NULL,
+    nebendarsteller  TEXT,
     film_id     INTEGER NOT NULL UNIQUE REFERENCES film
 );
 

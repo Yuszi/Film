@@ -19,7 +19,7 @@
 
 // siehe auch https://studio.apollographql.com/sandbox/explorer
 
-### Suche id, version und titel von allen Filme
+### Suche id, version und hauptdarsteller von allen Filme
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -29,24 +29,24 @@ X-REQUEST-TYPE: GraphQL
     id
     version
     art
-    titel {
-      titel
+    hauptdarsteller {
+      hauptdarsteller
     }
   }
 }
 
-### Suche isbn, version, art und titel von einem Film mit vorhandener Film-ID
+### Suche name, version, art und hauptdarsteller von einem Film mit vorhandener Film-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($id: ID! = "1") {
   film(id: $id) {
-    isbn
+    name
     version
     art
-    titel {
-      titel
+    hauptdarsteller {
+      hauptdarsteller
     }
   }
 }
@@ -55,15 +55,15 @@ query ($id: ID! = "1") {
   "id": "1"
 }
 
-### Suche titel von einem Film mit nicht-vorhandener Film-ID
+### Suche hauptdarsteller von einem Film mit nicht-vorhandener Film-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($id: ID! = "999999") {
   film(id: $id) {
-    titel {
-      titel
+    hauptdarsteller {
+      hauptdarsteller
     }
   }
 }
@@ -72,32 +72,32 @@ query ($id: ID! = "999999") {
   "id": "999999"
 }
 
-### Suche art von Filme mit vorhandenem Titel
+### Suche art von Filme mit vorhandenem Hauptdarsteller
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($titel: String = "Alpha") {
-  filme(titel: $titel) {
+  filme(hauptdarsteller: $titel) {
     art
   }
 }
 
 {
-  "titel": "Alpha"
+  "hauptdarsteller": "Alpha"
 }
 
-### Suche art, schlagwoerter und titel von Filme mit vorhandenem Titel
+### Suche art, schlagwoerter und hauptdarsteller von Filme mit vorhandenem Hauptdarsteller
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($titel: String = "a") {
-  filme(titel: $titel) {
+  filme(hauptdarsteller: $titel) {
     art
     schlagwoerter
-    titel {
-      titel
+    hauptdarsteller {
+      hauptdarsteller
     }
   }
 }

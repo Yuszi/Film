@@ -23,7 +23,7 @@ if ($versionMinimum -gt $versionCurrent) {
     throw "PowerShell $versionMinimum statt $versionCurrent erforderlich"
 }
 
-# Titel setzen
+# Hauptdarsteller setzen
 $host.ui.RawUI.WindowTitle = 'mysql delete pvc'
 
 $namespace = 'acme'

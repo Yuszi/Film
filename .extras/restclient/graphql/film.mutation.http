@@ -66,7 +66,7 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      isbn: "978-0-321-19368-1",
+      name: "978-0-321-19368-1",
       rating: 1,
       art: KINDLE,
       preis: 99.99,
@@ -75,9 +75,9 @@ mutation {
       datum: "2022-01-31",
       homepage: "https://create.mutation",
       schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
-      titel: {
-        titel: "Titelcreatemutation",
-        untertitel: "untertitelcreatemutation"
+      hauptdarsteller: {
+        hauptdarsteller: "Hauptdarstellercreatemutation",
+        nebendarsteller: "nebendarstellercreatemutation"
       },
       abbildungen: [{
         beschriftung: "Abb. 1",
@@ -96,7 +96,7 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      isbn: "falsche-isbn",
+      name: "falsche-name",
       rating: 999,
       art: DRUCKAUSGABE,
       preis: -1,
@@ -105,9 +105,9 @@ mutation {
       datum: "12345-123-123",
       homepage: "anyHomepage",
       schlagwoerter: ["JAVASCRIPT"],
-      titel: {
-        titel: "?!"
-        untertitel: "mutationinvalid"
+      hauptdarsteller: {
+        hauptdarsteller: "?!"
+        nebendarsteller: "mutationinvalid"
       }
     }
   )
@@ -124,7 +124,7 @@ mutation {
     input: {
       id: "40",
       version: 0,
-      isbn: "978-0-007-09732-6",
+      name: "978-0-007-09732-6",
       rating: 5,
       art: KINDLE,
       preis: 444.44,
@@ -148,7 +148,7 @@ mutation {
     input: {
       id: 40,
       version: 0,
-      isbn: "falsche-ISBN",
+      name: "falsche-NAME",
       rating: -1,
       art: KINDLE,
       preis: -1,
@@ -171,7 +171,7 @@ mutation {
     input: {
       id: "999999",
       version: 0,
-      isbn: "978-0-007-09732-6",
+      name: "978-0-007-09732-6",
       rating: 5,
       art: DRUCKAUSGABE,
       preis: 99.99,
