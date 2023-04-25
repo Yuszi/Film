@@ -24,6 +24,7 @@ import {
     Put,
     Req,
     Res,
+    UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { type CreateError, type UpdateError } from '../../service/errors.js';
@@ -32,7 +33,10 @@ import { type Film } from '../../entity/film.entity.js';
 import { FilmDTO } from '../models/filmDTO.entity';
 import { FilmWriteService } from '../../service/film-write.service.js';
 import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
+import { JwtAuthGuard } from '../../../security/auth/jwt/jwt-auth.guard.js';
 import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
+import { RolesAllowed } from '../../../security/auth/roles/roles-allowed.decorator.js';
+import { RolesGuard } from '../../../security/auth/roles/roles.guard.js';
 import { getBaseUri } from '../getBaseUri.js';
 import { getLogger } from '../../../logger/logger.js';
 import { paths } from '../../../config/paths.js';
@@ -41,6 +45,7 @@ import { paths } from '../../../config/paths.js';
  * Die Controller-Klasse für Neuanlegen und Aktualisieren der Filme.
  */
 @Controller(paths.rest)
+@UseGuards(JwtAuthGuard, RolesGuard)
 @UseInterceptors(ResponseTimeInterceptor)
 @ApiTags('Film API')
 @ApiBearerAuth()
@@ -61,6 +66,7 @@ export class FilmWriteController {
      * @returns Leeres Promise-Objekt.
      */
     @Post()
+    @RolesAllowed('admin', 'mitarbeiter')
     @ApiOperation({ summary: 'Ein neuer Film anlegen' })
     @ApiCreatedResponse({ description: 'Erfolgreich neu angelegt' })
     @ApiBadRequestResponse({ description: 'Fehlerhafte Filmdaten' })
@@ -92,6 +98,7 @@ export class FilmWriteController {
      */
     // eslint-disable-next-line max-params
     @Put(':id')
+    @RolesAllowed('admin', 'mitarbeiter')
     @ApiOperation({
         summary: 'Ein vorhandener Film aktualisieren',
         tags: ['Aktualisieren'],
