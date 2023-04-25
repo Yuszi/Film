@@ -133,7 +133,7 @@ export class FilmMutationResolver {
     #errorMsgCreateFilm(err: CreateError) {
         switch (err.type) {
             case 'NameExists': {
-                return `Der Name ${err.name} existiert bereits`;
+                return `Der Name ${err.type} existiert bereits`;
             }
             default: {
                 return 'Unbekannter Fehler';
