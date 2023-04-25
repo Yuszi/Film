@@ -31,10 +31,7 @@ entity "Film" {
   *rating: number
   *art: text
   *verlag: text
-  *preis: number
-  *rabatt: number
-  *lieferbar: boolean
-  datum: date
+  erscheinungsjahr: date
   *isbn: text
   homepage: text
   *erzeugt: timestamp
