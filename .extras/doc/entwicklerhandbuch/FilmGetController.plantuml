@@ -64,9 +64,15 @@ package buch {
   package rest #DDDDDD {
     BuchQuery -up-|> Buch
 
+<<<<<<< HEAD
+    class filmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<filmModel | undefined>>
+      + @Get() async find(@Query() query: filmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<FilmeModel | undefined>>
+=======
     class BuchGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
       + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<BuchModel | undefined>>
       + @Get() async find(@Query() query: BuchQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
+>>>>>>> f6a6b7979cfbe4c3f2368516e2ce9d0f892a9ffe
     }
 
     BuchGetController o--> "1" BuchReadService : service

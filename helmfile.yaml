@@ -18,8 +18,8 @@
 #           helmfile destroy
 
 releases:
-  - name: buch
+  - name: film
     namespace: acme
-    chart: .extras/kubernetes/buch
-    values: [.extras/kubernetes/buch/dev.yaml]
+    chart: .extras/kubernetes/film
+    values: [.extras/kubernetes/film/dev.yaml]
     #wait: true

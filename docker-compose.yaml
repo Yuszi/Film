@@ -13,10 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker compose up postgres pgadmin fakesmtp buch
+# Aufruf:   docker compose up postgres pgadmin fakesmtp film
 #           docker compose down
 
-# Netzwerk "buch_default" für die Container durch den Verzeichnisnamen
+# Netzwerk "film_default" für die Container durch den Verzeichnisnamen
 ---
 # https://docs.docker.com/compose/compose-file
 # https://docs.docker.com/compose/compose-file/compose-file-v3
@@ -42,7 +42,7 @@ services:
         source: C:/Zimmermann/volumes/postgres/tablespace
         target: /var/lib/postgresql/tablespace
       - type: bind
-        source: C:/Zimmermann/volumes/postgres/csv/buch
+        source: C:/Zimmermann/volumes/postgres/csv/film
         target: /csv
         read_only: true
       - type: bind
@@ -135,7 +135,7 @@ services:
         source: C:/Zimmermann/volumes/mysql/tmp
         target: /tmp
       - type: bind
-        source: C:/Zimmermann/volumes/mysql/csv/buch
+        source: C:/Zimmermann/volumes/mysql/csv/film
         # https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_secure_file_priv
         # SHOW VARIABLES LIKE "secure_file_priv";
         target: /var/lib/mysql-files
@@ -252,8 +252,8 @@ services:
   # ------------------------------------------------------------------------------------
   # b u c h
   # ------------------------------------------------------------------------------------
-  buch:
-    image: juergenzimmermann/buch:2023.1.0
+  film:
+    image: Gruppe4_SWE2023
     ports:
       - published: 3000
         target: 3000
@@ -265,8 +265,8 @@ services:
     environment:
       # https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
       USER_PASSWORD_ENCODED: "$$argon2i$$v=19$$m=4096,t=3,p=1$$aaxA2v/9rRSPGkwYN+NQog$$27Huii1XtD3iEd62fog+04G26LRPZMHoYCI6AGKTL8M"
-    container_name: buch
-    hostname: buch
+    container_name: film
+    hostname: film
     deploy:
       resources:
         limits:

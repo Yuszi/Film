@@ -221,12 +221,12 @@ describe('GraphQL Queries', () => {
         expect(data.errors).toBeUndefined();
         expect(data.data).toBeDefined();
 
-        const { buecher } = data.data!;
+        const { filme } = data.data!;
 
-        expect(buecher).not.toHaveLength(0);
+        expect(filme).not.toHaveLength(0);
 
-        const buecherArray: FilmDTO[] = buecher;
-        buecherArray
+        const filmeArray: FilmDTO[] = filme;
+        filmeArray
             .map((film) => film.name)
             .forEach((name) =>
                 expect(name?.name.toLowerCase()).toEqual(
@@ -272,7 +272,7 @@ describe('GraphQL Queries', () => {
 
         expect(message).toBe('Es wurden keine Filme gefunden.');
         expect(path).toBeDefined();
-        expect(path!![0]).toBe('buecher');
+        expect(path!![0]).toBe('filme');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
     });

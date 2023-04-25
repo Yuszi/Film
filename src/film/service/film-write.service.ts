@@ -154,8 +154,8 @@ export class FilmWriteService {
         this.#logger.debug('#validateCreate: buch=%o', film);
 
         const { name } = film;
-        const buecher = await this.#readService.find({ name: name }); // eslint-disable-line object-shorthand
-        if (buecher.length > 0) {
+        const filme = await this.#readService.find({ name: name }); // eslint-disable-line object-shorthand
+        if (filme.length > 0) {
             return { type: 'NameExists', name };
         }
 
