@@ -11,7 +11,7 @@ import {
     VersionColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { Hauptdarsteller } from './hauptdarsteller.entity';
+import { Hauptdarsteller } from './hauptdarsteller.entity.js';
 
 /**
  * Gültige Strings für die Art des Films.
@@ -56,7 +56,7 @@ export class Film {
 
     @OneToOne(
         () => Hauptdarsteller,
-        (hauptdarsteller: { film: any; }) => hauptdarsteller.film,
+        (hauptdarsteller: { film: any }) => hauptdarsteller.film,
         {
             cascade: ['insert', 'remove'],
         },

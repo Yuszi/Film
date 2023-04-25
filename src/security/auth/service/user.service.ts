@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/require-await*/
 import { Injectable } from '@nestjs/common';
-import { type Role } from './role';
-import { getLogger } from '../../../logger/logger';
-import { users } from '../../../config/dev/users';
+import { type Role } from './role.js';
+import { getLogger } from '../../../logger/logger.js';
+import { users } from '../../../config/dev/users.js';
 
 export interface User {
     userId: number;

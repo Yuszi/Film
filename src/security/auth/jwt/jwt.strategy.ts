@@ -1,9 +1,9 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { type User } from '../service/user.service';
-import { getLogger } from '../../../logger/logger';
-import { jwtConfig } from '../../../config/jwt';
+import { type User } from '../service/user.service.js';
+import { getLogger } from '../../../logger/logger.js';
+import { jwtConfig } from '../../../config/jwt.js';
 
 const { algorithm, publicKey } = jwtConfig;
 

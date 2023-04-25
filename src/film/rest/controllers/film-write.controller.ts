@@ -30,7 +30,7 @@ import {
 import { type CreateError, type UpdateError } from '../../service/errors.js';
 import { Request, Response } from 'express';
 import { type Film } from '../../entity/film.entity.js';
-import { FilmDTO } from '../models/filmDTO.entity';
+import { FilmDTO } from '../models/filmDTO.entity.js';
 import { FilmWriteService } from '../../service/film-write.service.js';
 import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
 import { JwtAuthGuard } from '../../../security/auth/jwt/jwt-auth.guard.js';

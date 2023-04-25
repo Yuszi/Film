@@ -1,8 +1,8 @@
 import { type ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { type BasicUser } from './jwt.strategy';
+import { type BasicUser } from './jwt.strategy.js';
 import { type Request } from 'express';
-import { getLogger } from '../../../logger/logger';
+import { getLogger } from '../../../logger/logger.js';
 
 export type RequestWithUser = Request & { user?: BasicUser };
 

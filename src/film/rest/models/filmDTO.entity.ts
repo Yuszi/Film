@@ -1,5 +1,5 @@
-import { FilmDTOBase } from './filmDTOBase.entity';
-import { HauptdarstellerDTO } from './hauptdarstellerDTO.entity';
+import { FilmDTOBase } from './filmDTOBase.entity.js';
+import { HauptdarstellerDTO } from './hauptdarstellerDTO.entity.js';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 

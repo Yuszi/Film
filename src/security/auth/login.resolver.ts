@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { AuthService } from './service/auth.service';
-import { BadUserInputError } from '../../film/graphql/errors';
-import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor';
+import { AuthService } from './service/auth.service.js';
+import { BadUserInputError } from '../../film/graphql/errors.js';
+import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { UseInterceptors } from '@nestjs/common';
-import { getLogger } from '../../logger/logger';
+import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinition für Login-Daten bei GraphQL */
 export interface LoginInput {

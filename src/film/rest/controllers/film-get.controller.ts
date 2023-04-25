@@ -25,7 +25,7 @@ import {
     Res,
     UseInterceptors,
 } from '@nestjs/common';
-import { type Film, type FilmArt } from '../../entity/film.entity';
+import { type Film, type FilmArt } from '../../entity/film.entity.js';
 import {
     FilmReadService,
     type Suchkriterien,
@@ -33,9 +33,9 @@ import {
 import { Request, Response } from 'express';
 import { Hauptdarsteller } from '../../entity/hauptdarsteller.entity.js';
 import { ResponseTimeInterceptor } from '../../../logger/response-time.interceptor.js';
-import { getBaseUri } from '../getBaseUri';
+import { getBaseUri } from '../getBaseUri.js';
 import { getLogger } from '../../../logger/logger.js';
-import { paths } from '../../../config/paths';
+import { paths } from '../../../config/paths.js';
 
 /** href-Link für HATEOAS */
 export interface Link {
