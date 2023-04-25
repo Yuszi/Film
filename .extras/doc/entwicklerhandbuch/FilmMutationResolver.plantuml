@@ -46,37 +46,37 @@ package security.auth {
   Roles .right.> Role
 }
 
-package buch #DDDDDD {
+package film #DDDDDD {
   package entity #FFFFFF {
-    class Buch <<entity>>
+    class Film <<entity>>
   }
 
   package service #FFFFFF {
-    class BuchWriteService << control >>
+    class FilmWriteService << control >>
   }
 
-  class "type BuchDTO = Omit<Buch, 'aktualisiert' | 'erzeugt' | 'schlagwoerter'> & { schlagwoerter: string[] }" as BuchDTO
-  hide BuchDTO circle
+  class "type FilmDTO = Omit<Film, 'aktualisiert' | 'erzeugt' | 'schlagwoerter'> & { schlagwoerter: string[] }" as FilmDTO
+  hide FilmDTO circle
 
-  class BuchMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
-    + @Mutation() @Roles() async create(@Args() buch: Buch): Promise<string>
-    + @Mutation() @Roles() async update(@Args() buch: BuchDTO): Promise<number>
+  class FilmMutationResolver << control >> << @Resolver() >> << @UseGuards() >> << @UseInterceptors() >> {
+    + @Mutation() @Roles() async create(@Args() film: Film): Promise<string>
+    + @Mutation() @Roles() async update(@Args() film: FilmDTO): Promise<number>
     + @Mutation() @Roles() async delete(@Args() id: string): Promise<boolean>
   }
 
-  BuchMutationResolver o-down-> "1" BuchWriteService : service
+  FilmMutationResolver o-down-> "1" FilmWriteService : service
 
-  BuchMutationResolver ..> Buch
-  BuchMutationResolver ..> BuchDTO
-  BuchDTO .up.> Buch
-  BuchMutationResolver ..> Promise
-  BuchMutationResolver ..> Resolver
+  FilmMutationResolver ..> Film
+  FilmMutationResolver ..> FilmDTO
+  FilmDTO .up.> Film
+  FilmMutationResolver ..> Promise
+  FilmMutationResolver ..> Resolver
 
-  BuchMutationResolver .up.> Roles
-  BuchMutationResolver .up.> Role
+  FilmMutationResolver .up.> Roles
+  FilmMutationResolver .up.> Role
 
-  BuchDTO .[hidden].> Promise
-  BuchDTO .[hidden].> Resolver
+  FilmDTO .[hidden].> Promise
+  FilmDTO .[hidden].> Resolver
 }
 
 hide empty members

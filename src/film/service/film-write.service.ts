@@ -151,7 +151,7 @@ export class FilmWriteService {
     }
 
     async #validateCreate(film: Film): Promise<CreateError | undefined> {
-        this.#logger.debug('#validateCreate: buch=%o', film);
+        this.#logger.debug('#validateCreate: film=%o', film);
 
         const { name } = film;
         const buecher = await this.#readService.find({ name: name }); // eslint-disable-line object-shorthand
