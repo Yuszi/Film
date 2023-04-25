@@ -19,13 +19,13 @@
 
 // siehe auch https://studio.apollographql.com/sandbox/explorer
 
-### Suche id, version und titel von allen Buechern
+### Suche id, version und titel von allen Filme
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher {
+  filme {
     id
     version
     art
@@ -72,13 +72,13 @@ query ($id: ID! = "999999") {
   "id": "999999"
 }
 
-### Suche art von Buechern mit vorhandenem Titel
+### Suche art von Filme mit vorhandenem Titel
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($titel: String = "Alpha") {
-  buecher(titel: $titel) {
+  filme(titel: $titel) {
     art
   }
 }
@@ -87,13 +87,13 @@ query ($titel: String = "Alpha") {
   "titel": "Alpha"
 }
 
-### Suche art, schlagwoerter und titel von Buechern mit vorhandenem Titel
+### Suche art, schlagwoerter und titel von Filme mit vorhandenem Titel
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 query ($titel: String = "a") {
-  buecher(titel: $titel) {
+  filme(titel: $titel) {
     art
     schlagwoerter
     titel {
@@ -103,20 +103,20 @@ query ($titel: String = "a") {
 }
 
 {
-  "titel": "a"
+  "name": "a"
 }
 
-### Suche art von Buechern mit NICHT-vorhandenem Titel
+### Suche art von Filme mit NICHT-vorhandenem Name
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-query ($titel: String = "Nichtvorhanden") {
-  buecher(titel: $titel) {
+query ($name: String = "Nichtvorhanden") {
+  filme(name: $name) {
     art
   }
 }
 
 {
-  "titel": "Nichtvorhanden"
+  "name": "Nichtvorhanden"
 }
