@@ -29,18 +29,10 @@ entity "Film" {
   *version: integer
   *hauptdarsteller : text
   *rating: number
-  *art: text
+  *Filmart: text
   *verlag: text
-<<<<<<< HEAD
-  erscheinungsjahr: date
-  *isbn: text
-=======
-  *preis: number
-  *rabatt: number
-  *lieferbar: boolean
   datum: date
   *name: text
->>>>>>> e533ff5c05a47cf93aac6400c9117d2493027f9c
   homepage: text
   *erzeugt: timestamp
   *aktualisiert: timestamp
