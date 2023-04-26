@@ -77,7 +77,7 @@ pipeline {
 
                 // https://www.jenkins.io/doc/pipeline/steps/git
                 // "named arguments" statt Funktionsaufruf mit Klammern
-                git url: 'https://github.com/juergenzimmermann/film', branch: 'main', poll: true
+                git url: 'https://github.com/Yuszi/Film', branch: 'main', poll: true
             }
         }
 
