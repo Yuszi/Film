@@ -26,27 +26,31 @@ skinparam linetype ortho
 entity "Film" {
   *id : UUID <<generated>>
   --
-  *version: integer
-  *hauptdarsteller : text
+  *version: number
+  *name: string
+  *sprache: string
+  *genre: Filmart
   *rating: number
-  *Filmart: text
-  *verlag: text
-  datum: date
-  *name: text
-  homepage: text
-  *erzeugt: timestamp
-  *aktualisiert: timestamp
+  *erscheinungsjahr: date
+  *schlagwoerter: string[]
+  *hauptdarsteller: Hauptdarsteller
+  *erzeugt: date
+  *aktualisiert: date
+  
 }
 
-entity "Schlagwort" {
+entity "Hauptdarsteller" {
   *id : UUID <<generated>>
   --
-  *film_id : UUID <<FK>>
-  *schlagwort : text
+  *rolle : string
+  *vorname : string
+  *nachname: string 
+  *alter: number 
+  *film_id: number <<FK>>
 }
 
-Film ||..o{ Schlagwort
+Film ||..|| Hauptdarsteller
 
-footer (c) Jürgen Zimmermann
+footer (c) Chiara Scheurer, Luca Burghardt
 
 @enduml

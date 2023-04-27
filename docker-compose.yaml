@@ -56,7 +56,7 @@ services:
       #PGDATA: /var/lib/postgresql/data
       # https://www.postgresql.org/docs/current/auth-trust.html
       #POSTGRES_HOST_AUTH_METHOD: trust
-    user: "postgres:postgres"
+    #user: "postgres:postgres"
     security_opt:
       - label:user:postgres
       - no-new-privileges:true
