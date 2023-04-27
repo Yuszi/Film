@@ -1,20 +1,3 @@
-' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
-'
-' This program is free software: you can redistribute it and/or modify
-' it under the terms of the GNU General Public License as published by
-' the Free Software Foundation, either version 3 of the License, or
-' (at your option) any later version.
-'
-' This program is distributed in the hope that it will be useful,
-' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-' GNU General Public License for more details.
-'
-' You should have received a copy of the GNU General Public License
-' along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-' Preview durch <Alt>d
-
 @startuml Controller-Klasse
 
 interface Promise<T>
@@ -58,27 +41,15 @@ package film {
   }
 
   package service {
-    class FilmReadService << control >>
+    class FilmReadService <<control>>
   }
 
   package rest #DDDDDD {
     FilmQuery -up-|> Film
 
-<<<<<<< HEAD
-    class FilmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
-      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<FilmModel | undefined>>
-      + @Get() async find(@Query() query: FilmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<BuecherModel | undefined>>
-=======
-<<<<<<< HEAD
-    class filmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
-      + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<filmModel | undefined>>
-      + @Get() async find(@Query() query: filmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<FilmeModel | undefined>>
-=======
-    class FilmGetController << control >> << @Controller() >> << @UseGuards() >> << @UseInterceptors() >> {
+    class FilmGetController <<control>> <<@Controller()>> <<@UseGuards()>> <<@UseInterceptors()>> {
       + @Get() async findById(@Param() id: string, @Req() req: Request, @Headers() version: string, @Res() res: Response): Promise<Response<FilmModel | undefined>>
       + @Get() async find(@Query() query: FilmQuery, @Req() req: Request,  @Res() res: Response): Promise<Response<FilmeModel | undefined>>
->>>>>>> f6a6b7979cfbe4c3f2368516e2ce9d0f892a9ffe
->>>>>>> 62cae4ebf9a3015e089b49a2ca786e6dfadff464
     }
 
     FilmGetController o--> "1" FilmReadService : service
@@ -98,6 +69,6 @@ package film {
 
 hide empty members
 
-footer (c) Juergen Zimmermann
+footer (c) Chiara Scheurer
 
 @enduml
