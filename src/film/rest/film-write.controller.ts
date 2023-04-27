@@ -17,6 +17,7 @@ import {
 import {
     Body,
     Controller,
+    Delete,
     Headers,
     HttpStatus,
     Param,
@@ -147,6 +148,39 @@ export class FilmWriteController {
 
         this.#logger.debug('update: version=%d', result);
         return res.set('ETag', `"${result}"`).sendStatus(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * Asynchrones Löschen eines Films anhand seiner ID.
+     * @param id Pfad-Parameter für die ID.
+     * @param res Leeres Response-Objekt von Express.
+     * @returns Leeres Promise-Objekt
+     */
+    @Delete()
+    @RolesAllowed('admin')
+    @ApiOperation({ summary: 'Einen Film mit der ID löschen.' })
+    @ApiHeader({
+        name: 'Authorization',
+        description: 'Header für JWT',
+        required: true,
+    })
+    @ApiNoContentResponse({
+        description: 'Der Film wurde gelöscht oder war nicht vorhanden.',
+    })
+    async delete(
+        @Param('id') id: number,
+        @Res() res: Response,
+    ): Promise<Response<undefined>> {
+        this.#logger.debug('delete: id=%s', id);
+
+        try {
+            await this.#service.delete(id);
+        } catch (err) {
+            this.#logger.error('delete: error=%o', err);
+            return res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return res.sendStatus(HttpStatus.NO_CONTENT);
     }
 
     #filmDtoToFilm(filmDTO: FilmDTO): Film {
