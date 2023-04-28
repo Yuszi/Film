@@ -34,13 +34,10 @@
 --        exit
 --     docker compose down
 
--- https://www.postgresql.org/docs/current/sql-createrole.html
-CREATE ROLE film LOGIN PASSWORD 'p';
+DROP ROLE IF EXISTS film; 
 
--- https://www.postgresql.org/docs/current/sql-createdatabase.html
+CREATE ROLE film LOGIN PASSWORD 'p';
 CREATE DATABASE film;
 
 GRANT ALL ON DATABASE film TO film;
-
--- https://www.postgresql.org/docs/10/sql-createtablespace.html
 CREATE TABLESPACE filmspace OWNER film LOCATION '/var/lib/postgresql/tablespace/film';
