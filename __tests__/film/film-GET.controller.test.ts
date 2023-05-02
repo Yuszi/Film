@@ -1,22 +1,4 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable no-underscore-dangle */
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
@@ -33,10 +15,10 @@ import { HttpStatus } from '@nestjs/common';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const nameVorhanden = 'a';
-const nameNichtVorhanden = 'xx';
-const schlagwortVorhanden = 'javascript';
-const schlagwortNichtVorhanden = 'csharp';
+const nameVorhanden = 'Sp';
+const nameNichtVorhanden = 'ae';
+const schlagwortVorhanden = 'hero';
+const schlagwortNichtVorhanden = 'suspect';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -74,10 +56,10 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu);
         expect(data).toBeDefined();
 
-        const { filme } = data._embedded;
+        const { filme } = data.embedded;
 
         filme
-            .map((film) => film._links.self.href)
+            .map((film) => film.links.self.href)
             .forEach((selfLink) => {
                 // eslint-disable-next-line security/detect-non-literal-regexp, security-node/non-literal-reg-expr
                 expect(selfLink).toMatch(new RegExp(`^${baseURL}`, 'u'));
@@ -100,13 +82,13 @@ describe('GET /rest', () => {
         expect(headers['content-type']).toMatch(/json/iu);
         expect(data).toBeDefined();
 
-        const { filme } = data._embedded;
+        const { filme } = data.embedded;
 
-        // Jeder Film hat einen Namen mit dem Teilstring 'a'
+        // Jeder Film hat einen Namen mit dem Teilstring 'Sp'
         filme
             .map((film) => film.name)
             .forEach((name) =>
-                expect(name.name.toLowerCase()).toEqual(
+                expect(name.toLowerCase()).toEqual(
                     expect.stringContaining(nameVorhanden),
                 ),
             );
@@ -145,7 +127,7 @@ describe('GET /rest', () => {
         // JSON-Array mit mind. 1 JSON-Objekt
         expect(data).toBeDefined();
 
-        const { filme } = data._embedded;
+        const { filme } = data.embedded;
 
         // Jedes Film hat im Array der Schlagwoerter z.B. "javascript"
         filme
@@ -189,4 +171,3 @@ describe('GET /rest', () => {
         expect(data).toMatch(/^not found$/iu);
     });
 });
-/* eslint-enable no-underscore-dangle */

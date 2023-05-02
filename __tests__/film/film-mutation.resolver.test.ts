@@ -1,20 +1,4 @@
 /* eslint-disable max-lines, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-extra-non-null-assertion */
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
 
 import {
     type GraphQLQuery,
@@ -36,7 +20,7 @@ import { loginGraphQL } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const idLoeschen = '60';
+const idLoeschen = '6';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -71,23 +55,18 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "978-0-321-19368-1",
-                            rating: 1,
-                            art: KINDLE,
-                            preis: 99.99,
-                            rabatt: 0.123,
-                            lieferbar: true,
-                            datum: "2022-02-28",
-                            homepage: "https://create.mutation",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+                            name: "Inception",
+                            sprache: "englisch",
+                            genre: "ACTION",
+                            rating: 9,
+                            erscheinungsjahr: "2010-07-29",
+                            schlagwoerter: ["REALITY", "DREAM"],
                             hauptdarsteller: {
-                                hauptdarsteller: "Hauptdarstellercreatemutation",
-                                nebendarsteller: "nebendarstellercreatemutation"
-                            },
-                            abbildungen: [{
-                                beschriftung: "Abb. 1",
-                                contentType: "img/png"
-                            }]
+                                rolle: "Cobb",
+                                vorname: "Leonardo",
+                                nachname: "DiCaprio",
+                                alter: 48
+                            }
                         }
                     )
                 }
@@ -127,15 +106,15 @@ describe('GraphQL Mutations', () => {
                     create(
                         input: {
                             name: "falsche-NAME",
-                            rating: -1,
-                            art: KINDLE,
-                            preis: -1,
-                            rabatt: 2,
-                            lieferbar: false,
-                            datum: "12345-123-123",
-                            homepage: "anyHomepage",
+                            sprache: "en-EN",
+                            genre: "FICTION",
+                            rating: -50,
+                            erscheinungsjahr: "yyyy-mm-dd",                    
                             hauptdarsteller: {
-                                hauptdarsteller: "?!"
+                                rolle: "?!"
+                                vorname: "Fal",
+                                nachname: "sch",
+                                alter: -20
                             }
                         }
                     )
@@ -144,11 +123,11 @@ describe('GraphQL Mutations', () => {
         };
         const expectedMsg = [
             expect.stringMatching(/^name /u),
+            expect.stringMatching(/^sprache /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
+            expect.stringMatching(/^erscheinungsjahr /u),
+            expect.stringMatching(/^schlagwoerter /u),
             expect.stringMatching(/^hauptdarsteller.hauptdarsteller /u),
         ];
 
@@ -181,6 +160,7 @@ describe('GraphQL Mutations', () => {
         expect(messages).toHaveLength(expectedMsg.length);
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
+    // TODO This
 
     // -------------------------------------------------------------------------
     test('Neuer Film nur als "admin"/"mitarbeiter"', async () => {
@@ -192,18 +172,17 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "978-3-663-08746-5",
-                            rating: 1,
-                            art: KINDLE,
-                            preis: 11.1,
-                            rabatt: 0.011,
-                            lieferbar: true,
-                            datum: "2021-01-31",
-                            homepage: "http://acme.com",
-                            schlagwoerter: ["JAVASCRIPT"]
+                            name: "Inception",
+                            sprache: "englisch",
+                            genre: "ACTION",
+                            rating: 9,
+                            erscheinungsjahr: "2010-07-29",
+                            schlagwoerter: ["REALITY", "DREAM"],
                             hauptdarsteller: {
-                                hauptdarsteller: "Hauptdarstellercreatemutation",
-                                nebendarsteller: "nebendarstellercreatemutation"
+                                rolle: "Cobb",
+                                vorname: "Leonardo",
+                                nachname: "DiCaprio",
+                                alter: 48
                             }
                         }
                     )
@@ -284,7 +263,6 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);

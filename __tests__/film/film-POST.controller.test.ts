@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
@@ -35,32 +34,31 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neuerFilm: FilmDTO = {
-    filmart: 'ACTION',
-    erscheinungjahr: '2022-02-28',
+    name: 'Good Doctor',
+    sprache: 'en-EN',
+    genre: 'ACTION',
+    rating: 8,
+    erscheinungsjahr: '2022-02-28',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    name: {
-        name: 'Hauptdarstellerpost',
-        untername: 'unternamepos',
+    hauptdarsteller: {
+        rolle: 'Hauptrolle',
+        vorname: 'Freddy',
+        nachname: 'Highmore',
+        alter: 31,
     },
-    abbildungen: [
-        {
-            beschriftung: 'Abb. 1',
-            contentType: 'img/png',
-        },
-    ],
 };
 const neuerFilmInvalid: Record<string, unknown> = {
     name: 'falsche-NAME',
+    sprache: 'ungueltigeSprache',
+    genre: 'ROMANCE',
     rating: -1,
-    art: 'UNSICHTBAR',
-    preis: -1,
-    rabatt: 2,
-    lieferbar: true,
-    datum: '12345-123-123',
-    homepage: 'anyHomepage',
-    name: {
-        name: '?!',
-        untername: 'Unternameinvalid',
+    erscheinungsjahr: '2023-01-01',
+    schlagwoerter: ['Schlag', 'Wort'],
+    hauptdarsteller: {
+        rolle: 'Rolle',
+        vorname: 'Max',
+        namespace: 'Peterschmidt',
+        alter: -1,
     },
 };
 
@@ -192,5 +190,4 @@ describe('POST /rest', () => {
     test.todo('Abgelaufener Token');
 });
 
-/* eslint-enable @typescript-eslint/restrict-template-expressions */
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */

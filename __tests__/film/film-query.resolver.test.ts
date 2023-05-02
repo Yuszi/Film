@@ -102,7 +102,7 @@ describe('GraphQL Queries', () => {
         const { film } = data.data!;
         const result: FilmDTO = film;
 
-        expect(result.name?.name).toMatch(/^\w/u);
+        expect(result.name).toMatch(/^\w/u);
         expect(result.version).toBeGreaterThan(-1);
         expect(result.id).toBeUndefined();
     });
@@ -189,7 +189,7 @@ describe('GraphQL Queries', () => {
 
         const [film] = filmeArray;
 
-        expect(film!.name?.name).toBe(nameVorhanden);
+        expect(film!.name).toBe(nameVorhanden);
     });
 
     test('Film zu vorhandenem Teil-Name', async () => {
@@ -229,7 +229,7 @@ describe('GraphQL Queries', () => {
         filmeArray
             .map((film) => film.name)
             .forEach((name) =>
-                expect(name?.name.toLowerCase()).toEqual(
+                expect(name.toLowerCase()).toEqual(
                     expect.stringContaining(teilNameVorhanden),
                 ),
             );

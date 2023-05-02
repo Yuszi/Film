@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -30,7 +13,7 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const id = '50';
+const id = '5';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -47,7 +30,8 @@ describe('DELETE /rest/filme', () => {
         client = axios.create({
             baseURL,
             httpsAgent,
-            validateStatus: (status) => status < 500, // eslint-disable-line @typescript-eslint/no-magic-numbers
+            validateStatus: (status) =>
+                status < HttpStatus.INTERNAL_SERVER_ERROR,
         });
     });
 
@@ -55,7 +39,7 @@ describe('DELETE /rest/filme', () => {
         await shutdownServer();
     });
 
-    test('Vorhandenes Film loeschen', async () => {
+    test('Vorhandenen Film loeschen', async () => {
         // given
         const url = `/rest/${id}`;
         const token = await loginRest(client);
