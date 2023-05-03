@@ -1,0 +1,3 @@
+id;version;name;sprache;genre;rating;lieferbar;erscheinungsjahr;schlagwoerter;erzeugt;aktualisiert
+1000;0;"The Godfather";"Englisch";"DRUCKAUSGABE";5;true;1972-03-15;"Mafia, Drama";2023-05-03 00:00:00;2023-05-03 00:00:00
+1001;0;"Forrest Gump";"Englisch";"DRUCKAUSGABE";4;true;1994-07-06;"Drama, Komödie";2023-05-04 00:00:00;2023-05-04 00:00:00

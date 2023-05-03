@@ -2,7 +2,7 @@
 GET {{restUrl}}
 
 ### Suche nach dem Film anhand der ID
-GET {{restUrl}}/1
+GET {{restUrl}}/1000
 
 ### Suche nach dem Film anhand der ID und Versionsnummer
 GET {{restUrl}}/1

@@ -28,9 +28,8 @@ X-REQUEST-TYPE: GraphQL
   filme {
     id
     version
-    art
     hauptdarsteller {
-      hauptdarsteller
+      rolle
     }
   }
 }
