@@ -129,7 +129,7 @@ describe('GET /rest', () => {
 
         const { filme } = data.embedded;
 
-        // Jedes Film hat im Array der Schlagwoerter z.B. "javascript"
+        // Jedes Film hat im Array der Schlagwoerter z.B. "ACTION"
         filme
             .map((film) => film.schlagwoerter)
             .forEach((schlagwoerter) =>
