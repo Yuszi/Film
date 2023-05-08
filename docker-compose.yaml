@@ -253,7 +253,7 @@ services:
   # b u c h
   # ------------------------------------------------------------------------------------
   film:
-    image: Gruppe4_SWE2023
+    image: yusufuzun/film
     ports:
       - published: 3000
         target: 3000

@@ -63,7 +63,7 @@ input FilmInput {
   rating: Int
   erscheinungsjahr: String
   schlagwoerter: [String]
-  hauptdarsteller: Hauptdarsteller
+  hauptdarsteller: HauptdarstellerInput
 }
 
 "Daten für ein zu ändernden Film"
@@ -76,5 +76,5 @@ input FilmUpdateInput {
   rating: Int
   erscheinungsjahr: String
   schlagwoerter: [String]
-  hauptdarsteller: Hauptdarsteller
+  hauptdarsteller: HauptdarstellerInput
 }

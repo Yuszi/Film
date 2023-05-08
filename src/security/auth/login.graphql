@@ -5,5 +5,5 @@ login(username: String!, password: String!): LoginResult
 type LoginResult {
     token: String!,
     expiresIn: String!,
-    roles [String]!
+    roles: [String]!
 }

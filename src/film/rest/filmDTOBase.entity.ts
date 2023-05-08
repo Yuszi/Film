@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import { ArrayUnique, IsOptional, Max, MaxLength, Min } from 'class-validator';
+import {
+    ArrayUnique,
+    IsOptional,
+    Matches,
+    Max,
+    MaxLength,
+    Min,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { FilmArt } from '../entity/film.entity.js';
 
@@ -15,10 +22,13 @@ export class FilmDTOBase {
     @ApiProperty({ example: 'Good Doctor', type: String })
     readonly name!: string;
 
+    @MaxLength(5)
+    @Matches(/^([a-z]{2})-([A-Z]{2})/u)
     @ApiProperty({ example: 'de-DE', type: String })
     readonly sprache: string | undefined;
 
     @MaxLength(10)
+    @Matches(/^ACTION$|^DRAMA$|^ROMANCE/u)
     @ApiProperty({ example: 'ACTION', type: String })
     readonly genre: FilmArt | undefined;
 
