@@ -148,12 +148,10 @@ describe('PUT /rest/:id', () => {
         headers['If-Match'] = '"0"';
         const expectedMsg = [
             expect.stringMatching(/^name /u),
+            expect.stringMatching(/^sprache /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
+            expect.stringMatching(/^erscheinungsjahr /u),
         ];
 
         // when

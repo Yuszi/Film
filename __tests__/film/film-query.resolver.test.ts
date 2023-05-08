@@ -39,9 +39,9 @@ export type GraphQLResponseBody = Pick<GraphQLResponse, 'data' | 'errors'>;
 // -----------------------------------------------------------------------------
 const idVorhanden = '1';
 
-const nameVorhanden = 'Alpha';
+const nameVorhanden = 'Inception';
 
-const teilNameVorhanden = 'a';
+const teilNameVorhanden = 'e';
 
 const teilNameNichtVorhanden = 'abc';
 
@@ -142,7 +142,7 @@ describe('GraphQL Queries', () => {
         const [error] = errors!;
         const { message, path, extensions } = error!;
 
-        expect(message).toBe(`Es wurde kein Film mit der ID ${id} gefunden.`);
+        expect(message).toBe(`Es wurde keinen Film mit der ID ${id} gefunden.`);
         expect(path).toBeDefined();
         expect(path!![0]).toBe('film');
         expect(extensions).toBeDefined();

@@ -46,7 +46,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Neuer Film', async () => {
+    test('Neuer Film anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -56,7 +56,7 @@ describe('GraphQL Mutations', () => {
                     create(
                         input: {
                             name: "Inception",
-                            sprache: "englisch",
+                            sprache: "en-EN",
                             genre: "ACTION",
                             rating: 9,
                             erscheinungsjahr: "2010-07-29",
@@ -106,7 +106,7 @@ describe('GraphQL Mutations', () => {
                     create(
                         input: {
                             name: "falsche-NAME",
-                            sprache: "en-EN",
+                            sprache: "es-ES",
                             genre: "FICTION",
                             rating: -50,
                             erscheinungsjahr: "yyyy-mm-dd",                    
@@ -160,7 +160,6 @@ describe('GraphQL Mutations', () => {
         expect(messages).toHaveLength(expectedMsg.length);
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
-    // TODO This
 
     // -------------------------------------------------------------------------
     test('Neuer Film nur als "admin"/"mitarbeiter"', async () => {
@@ -172,17 +171,17 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "Inception",
-                            sprache: "englisch",
-                            genre: "ACTION",
+                            name: "TestFilm",
+                            sprache: "en-EN",
+                            genre: "DRAMA",
                             rating: 9,
-                            erscheinungsjahr: "2010-07-29",
-                            schlagwoerter: ["REALITY", "DREAM"],
+                            erscheinungsjahr: "2019-07-29",
+                            schlagwoerter: ["TEST"],
                             hauptdarsteller: {
-                                rolle: "Cobb",
-                                vorname: "Leonardo",
-                                nachname: "DiCaprio",
-                                alter: 48
+                                rolle: "Rolle",
+                                vorname: "Max",
+                                nachname: "Mustermann",
+                                alter: 42
                             }
                         }
                     )
@@ -225,17 +224,19 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: "40",
-                            version: 0,
-                            name: "978-0-007-09732-6",
-                            rating: 5,
-                            art: KINDLE,
-                            preis: 444.44,
-                            rabatt: 0.099,
-                            lieferbar: false,
-                            datum: "2021-04-04",
-                            homepage: "https://update.mutation"
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+                            id: 1002,
+                            name: "TestFilm",
+                            sprache: "es-ES",
+                            genre: "DRAMA",
+                            rating: 9,
+                            erscheinungsjahr: "2019-07-29",
+                            schlagwoerter: ["TEST", "FILM"],
+                            hauptdarsteller: {
+                                rolle: "Rolle",
+                                vorname: "Max",
+                                nachname: "Mustermann",
+                                alter: 43
+                            }
                         }
                     )
                 }
@@ -267,27 +268,28 @@ describe('GraphQL Mutations', () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
-        const id = '40';
+        const id = '1002';
         const body: GraphQLQuery = {
             query: `
                 mutation {
                     update(
                         input: {
-                            id: "${id}",
+                            id: ${id},
                             version: 0,
-                            rating: -1,
-                            art: DRAMA,
-                            erscheinungsjahr: "12345-123-123",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+                            name: "TestFilm",
+                            sprache: "esp-ESp",
+                            genre: "DRAMA",
+                            rating: -9,
                         }
                     )
                 }
             `,
         };
         const expectedMsg = [
+            expect.stringMatching(/^name /u),
+            expect.stringMatching(/^sprache /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^erscheinungsjahr /u),
-            expect.stringMatching(/^homepage /u),
         ];
 
         // when
@@ -321,7 +323,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Nicht-vorhandenes Film aktualisieren', async () => {
+    test('Nicht-vorhandenen Film aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -331,17 +333,19 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: "${id}",
-                            version: 0,
-                            name: "978-0-007-09732-6",
-                            rating: 5,
-                            art: DRUCKAUSGABE,
-                            preis: 99.99,
-                            rabatt: 0.099,
-                            lieferbar: false,
-                            datum: "2021-01-02",
-                            homepage: "https://acme.com",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+                            id: 1002,
+                            name: "TestFilm",
+                            sprache: "es-ES",
+                            genre: "DRAMA",
+                            rating: 9,
+                            erscheinungsjahr: "2019-07-29",
+                            schlagwoerter: ["TEST", "FILM"],
+                            hauptdarsteller: {
+                                rolle: "Rolle",
+                                vorname: "Max",
+                                nachname: "Mustermann",
+                                alter: 43
+                            }
                         }
                     )
                 }
@@ -370,7 +374,7 @@ describe('GraphQL Mutations', () => {
         const { message, path, extensions } = error!;
 
         expect(message).toBe(
-            `Es gibt kein Film mit der ID ${id.toLowerCase()}`,
+            `Es gibt keinen Film mit der ID ${id.toLowerCase()}`,
         );
         expect(path).toBeDefined();
         expect(path!![0]).toBe('update');

@@ -122,17 +122,17 @@ describe('POST /rest', () => {
         expect(data).toBe('');
     });
 
-    test('NeuerSS Film mit ungueltigen Daten', async () => {
+    test('Neuer Film mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
             expect.stringMatching(/^name /u),
+            expect.stringMatching(/^sprache /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
-            expect.stringMatching(/^name.name /u),
+            expect.stringMatching(/^erscheinungsdatum /u),
+            expect.stringMatching(/^hauptdarsteller.hauptdarsteller /u),
         ];
 
         // when
@@ -168,7 +168,7 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neues Film, aber mit falschem Token', async () => {
+    test('Neuer Film, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         headers.Authorization = `Bearer ${token}`;
