@@ -232,7 +232,7 @@ services:
   # f i l m
   # ------------------------------------------------------------------------------------
   film:
-    image: swe/film
+    image: swe/film:2023.1.0
     ports:
       - published: 3000
         target: 3000
