@@ -83,7 +83,7 @@ EOF
 
 COPY --from=builder --chown=app:app /app/package.json /app/.env /app/.npmrc /app/nest-cli.json ./
 COPY --from=builder --chown=app:app /app/dist ./dist
-COPY --from=builder --chown=app:app /app/src/buch/graphql/schema.graphql ./dist/buch/graphql/
+COPY --from=builder --chown=app:app /app/src/film/graphql/schema.graphql ./dist/film/graphql/
 COPY --from=builder --chown=app:app /app/src/security/auth/login.graphql ./dist/security/auth/
 COPY --from=builder --chown=app:app /app/src/config/dev/mysql ./dist/config/dev/mysql
 COPY --from=builder --chown=app:app /app/src/config/dev/postgres ./dist/config/dev/postgres
