@@ -8,7 +8,7 @@ import { Min } from 'class-validator';
  */
 
 /**
- * DTOs für Schauspieler.
+ * DTOs für Hauptdarsteller.
  */
 export class HauptdarstellerDTO {
     @ApiProperty({ example: 'Chuck Noland', type: String })
