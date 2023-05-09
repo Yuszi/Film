@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -31,7 +14,7 @@ import { loginRest } from '../login.js';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesFilm: FilmDtoOhneRef = {
+const geaenderterFilm: FilmDtoOhneRef = {
     rating: 5,
     name: 'HANGOVER',
     genre: 'ACTION',
@@ -64,7 +47,7 @@ const geaenderterFilmInvalid: Record<string, unknown> = {
     homepage: 'anyHomepage',
 };
 
-const veralterFilm: FilmDtoOhneRef = {
+const veralteterFilm: FilmDtoOhneRef = {
     name: '978-0-007-09732-6',
     rating: 1,
     art: 'DRUCKAUSGABE',
@@ -234,7 +217,7 @@ describe('PUT /rest/:id', () => {
         // when
         const response: AxiosResponse<Record<string, any>> = await client.put(
             url,
-            geaendertesFilm,
+            geaenderterFilm,
             { headers },
         );
 

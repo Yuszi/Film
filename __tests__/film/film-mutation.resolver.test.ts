@@ -1,21 +1,3 @@
-/* eslint-disable max-lines, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-extra-non-null-assertion */
-/*
- * Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 import {
     type GraphQLQuery,
     type GraphQLResponseBody,
@@ -164,7 +146,7 @@ describe('GraphQL Mutations', () => {
 
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.create).toBeNull();
+        expect(data.data?.create).toBeNull();
 
         const { errors } = data;
 
@@ -233,7 +215,7 @@ describe('GraphQL Mutations', () => {
 
         expect(message).toBe('Forbidden resource');
         expect(extensions).toBeDefined();
-        expect(extensions!.code).toBe('FORBIDDEN');
+        expect(extensions?.code).toBe('FORBIDDEN');
     });
 
     // -------------------------------------------------------------------------
@@ -283,8 +265,6 @@ describe('GraphQL Mutations', () => {
         expect(update).toBe(1);
     });
 
-    // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
