@@ -48,14 +48,13 @@ mutation {
   create(
     input: {
       name: "978-0-321-19368-1",
-      sprache: "deutsch",
+      sprache: "ger-GER",
       rating: 1,
       genre: ACTION,
       erscheinungsjahr: "2022-01-31",
       schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
       hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation",
-        nebendarsteller: "nebendarstellercreatemutation"
+        hauptdarsteller: "Hauptdarstellercreatemutation"
       }
     }
   )
