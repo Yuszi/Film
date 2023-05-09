@@ -43,7 +43,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         this.#logger.debug('validate: username=%s, password=*****', username);
         const user = await this.#authService.validate({
             username,
-            password,
+            pass: password,
         });
         if (user === undefined) {
             this.#logger.debug('validate: user=undefined');
