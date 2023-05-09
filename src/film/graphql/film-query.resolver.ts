@@ -39,10 +39,8 @@ export class FilmQueryResolver {
     }
 
     @Query()
-    async filme(
-        @Args() hauptdarsteller: { hauptdarsteller: string } | undefined,
-    ) {
-        const hauptdarstellerStr = hauptdarsteller?.hauptdarsteller;
+    async filme(@Args() hauptdarsteller: { rolle: string } | undefined) {
+        const hauptdarstellerStr = hauptdarsteller?.rolle;
         this.#logger.debug('find: rolle=%s', hauptdarstellerStr);
         const suchkriterium =
             hauptdarstellerStr === undefined
