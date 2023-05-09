@@ -1,9 +1,9 @@
 type Mutation {
-login(username: String!, password: String!): LoginResult
+  login(username: String!, password: String!): LoginResult
 }
 
 type LoginResult {
-    token: String!,
-    expiresIn: String!,
-    roles: [String]!
+  token: String!
+  expiresIn: String!
+  roles: [String]!
 }
