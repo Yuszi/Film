@@ -13,12 +13,12 @@ X-REQUEST-TYPE: GraphQL
   }
 }
 
-### Suche name, version, art und hauptdarsteller von einem Film mit vorhandener Film-ID
+### Suche Name, Version, Art und Hauptdarsteller von einem Film mit vorhandener Film-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
-query ($id: ID! = "1000") {
+query ($id: ID! = "1010") {
   film(id: $id) {
     name
     version
@@ -31,10 +31,10 @@ query ($id: ID! = "1000") {
 }
 
 {
-  "id": "1"
+  "id": "1010"
 }
 
-### Suche hauptdarsteller von einem Film mit nicht-vorhandener Film-ID
+### Suche Hauptdarsteller von einem Film mit nicht-vorhandener Film-ID
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -52,7 +52,7 @@ query ($id: ID! = "999999") {
   "id": "999999"
 }
 
-### Suche art von Filme mit vorhandenem Hauptdarsteller
+### Suche Art von Filme mit vorhandenem Hauptdarsteller
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -67,7 +67,7 @@ query ($titel: String = "Alpha") {
   "hauptdarsteller": "Alpha"
 }
 
-### Suche art, schlagwoerter und hauptdarsteller von Filme mit vorhandenem Hauptdarsteller
+### Suche Art, Schlagwoerter und Hauptdarsteller von Filme mit vorhandenem Hauptdarsteller
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -86,7 +86,7 @@ query ($titel: String = "a") {
   "name": "a"
 }
 
-### Suche art von Filme mit NICHT-vorhandenem Name
+### Suche Art von Filme mit NICHT-vorhandenem Name
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL

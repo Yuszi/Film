@@ -38,7 +38,7 @@ mutation {
   login(username: "admin", password: "FALSCH") { token expiresIn roles }
 }
 
-### Neues Film anlegen
+### Neuen Film anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -47,7 +47,7 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "GraphQL The Movie",
+      name: "Tres Bien",
       sprache: "de-DE",
       rating: 8,
       genre: DRAMA,
@@ -63,7 +63,7 @@ mutation {
   )
 }
 
-### Neues Film mit ungueltigen Daten anlegen
+### Neuen Film mit ungueltigen Daten anlegen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -88,7 +88,7 @@ mutation {
   )
 }
 
-### Vorhandenes Film aktualisieren
+### Vorhandenen Film aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -99,7 +99,7 @@ mutation {
     input: {
       id: 1010,
       version: 0,
-      name: "GraphQL The Movie",
+      name: "Tres Biens",
       sprache: "en-EN",
       rating: 9,
       genre: DRAMA,
@@ -115,7 +115,7 @@ mutation {
   )
 }
 
-### Vorhandenes Film mit ungueltigen Werten aktualisieren
+### Vorhandenen Film mit ungueltigen Werten aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -134,7 +134,7 @@ mutation {
   )
 }
 
-### Nicht-Vorhandenes Film aktualisieren
+### Nicht-Vorhandenen Film aktualisieren
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
@@ -161,7 +161,7 @@ mutation {
   )
 }
 
-### Vorhandenes Film loeschen
+### Vorhandenen Film loeschen
 POST {{graphQlUrl}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.data.login.token}}
