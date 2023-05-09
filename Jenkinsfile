@@ -217,7 +217,7 @@ pipeline {
             steps {
               echo 'TODO: Docker-Image bauen: dockerd starten, pack installieren'
               // Docker-Installation und laufender Docker-Daemon erforderlich
-              // sh 'docker build --tag juergenzimmermann/film:1.0.0 .'
+              // sh 'docker build --tag swe/film:1.0.0 .'
             }
         }
 
