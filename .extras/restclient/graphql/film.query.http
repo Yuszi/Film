@@ -31,7 +31,7 @@ query ($id: ID! = "1000") {
 }
 
 {
-  "id": "1"
+  "id": "1010"
 }
 
 ### Suche hauptdarsteller von einem Film mit nicht-vorhandener Film-ID
@@ -64,7 +64,7 @@ query ($titel: String = "Alpha") {
 }
 
 {
-  "hauptdarsteller": "Alpha"
+  "hauptdarsteller": "Al Pacino"
 }
 
 ### Suche art, schlagwoerter und hauptdarsteller von Filme mit vorhandenem Hauptdarsteller
