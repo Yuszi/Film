@@ -3,7 +3,7 @@ schema {
   mutation: Mutation
 }
 
-"Funktionen, um Filmedaten zu lesen"
+"Funktionen, um Filmdaten zu lesen"
 type Query {
   filme(hauptdarsteller: String): [Film!]
 
