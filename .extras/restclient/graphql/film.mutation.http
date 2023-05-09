@@ -48,14 +48,13 @@ mutation {
   create(
     input: {
       name: "978-0-321-19368-1",
-      sprache: "deutsch",
+      sprache: "ger-GER",
       rating: 1,
       genre: ACTION,
       erscheinungsjahr: "2022-01-31",
       schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
       hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation",
-        nebendarsteller: "nebendarstellercreatemutation"
+        hauptdarsteller: "Hauptdarstellercreatemutation"
       }
     }
   )
@@ -70,18 +69,14 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "falsche-name",
-      rating: 999,
-      art: DRUCKAUSGABE,
-      preis: -1,
-      rabatt: 0,
-      lieferbar: true,
-      datum: "12345-123-123",
-      homepage: "anyHomepage",
-      schlagwoerter: ["JAVASCRIPT"],
+      name: "978-0-321-19368-1",
+      sprache: deutsch,
+      rating: 1,
+      genre: "ACTION",
+      erscheinungsjahr: "2022-01-31",
+      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
       hauptdarsteller: {
-        hauptdarsteller: "?!"
-        nebendarsteller: "mutationinvalid"
+        hauptdarsteller: "Hauptdarstellercreatemutation"
       }
     }
   )
@@ -96,17 +91,15 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      id: "40",
-      version: 0,
-      name: "978-0-007-09732-6",
-      rating: 5,
-      art: KINDLE,
-      preis: 444.44,
-      rabatt: 0.099,
-      lieferbar: false,
-      datum: "2022-04-04",
-      homepage: "https://update.mutation",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+      name: "978-0-321-19368-1",
+      sprache: "deutsch",
+      rating: 1,
+      genre: ACTION,
+      erscheinungsjahr: "2022-01-31",
+      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+      hauptdarsteller: {
+        hauptdarsteller: "Hauptdarstellercreatemutation"
+      }
     }
   )
 }
@@ -124,12 +117,8 @@ mutation {
       version: 0,
       name: "falsche-NAME",
       rating: -1,
-      art: KINDLE,
-      preis: -1,
-      rabatt: 2,
-      lieferbar: false,
-      datum: "12345-123-123",
-      homepage: "anyHomepage"
+      genre: Unbekannt,
+      erscheinungsjahr: "12345-123-123",
     }
   )
 }
