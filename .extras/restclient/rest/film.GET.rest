@@ -9,10 +9,10 @@ GET {{restUrl}}/1000
 If-None-Match: "0"
 
 ### Suche nach dem Film anhand des Namens
-GET {{restUrl}}/?name=Inception
+GET {{restUrl}}/?name=The Godfather
 
 ### Suche mit gültigem Rating
-GET {{restUrl}}?rating=9
+GET {{restUrl}}?rating=5
 
 ### Suche mit gültiger Filmart
-GET {{restUrl}}?art=ACTION
+GET {{restUrl}}?genre=DRAMA
