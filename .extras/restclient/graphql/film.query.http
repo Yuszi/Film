@@ -64,7 +64,7 @@ query ($titel: String = "Alpha") {
 }
 
 {
-  "hauptdarsteller": "Alpha"
+  "hauptdarsteller": "Al Pacino"
 }
 
 ### Suche Art, Schlagwoerter und Hauptdarsteller von Filme mit vorhandenem Hauptdarsteller

@@ -51,7 +51,7 @@ enum FilmArt {
 input HauptdarstellerInput {
   rolle: String!
   vorname: String!
-  nachname: String
+  nachname: String!
   alter: Int
 }
 
