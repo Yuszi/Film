@@ -9,10 +9,10 @@ GET {{restUrl}}/1011
 If-None-Match: "0"
 
 ### Suche nach dem Film anhand des Namens
-GET {{restUrl}}/?name=The Godfather
+GET {{restUrl}}/?name=Matrix The Ones
 
 ### Suche mit gültigem Rating
-GET {{restUrl}}?rating=5
+GET {{restUrl}}?rating=9
 
 ### Suche mit gültiger Filmart
 GET {{restUrl}}?genre=DRAMA
