@@ -1,4 +1,4 @@
-### Suche id, version und hauptdarsteller von allen Filme
+### Suche ID, Version und Hauptdarsteller von allen Filme
 POST {{graphQlUrl}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
