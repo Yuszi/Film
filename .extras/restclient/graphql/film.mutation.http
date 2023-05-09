@@ -47,14 +47,17 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "978-0-321-19368-1",
-      sprache: "ger-GER",
-      rating: 1,
-      genre: ACTION,
+      name: "GraphQL The Movie",
+      sprache: "de-DE",
+      rating: 8,
+      genre: DRAMA,
       erscheinungsjahr: "2022-01-31",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+      schlagwoerter: ["Client", "GraphQL"],
       hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation"
+        rolle: "Oen",
+        vorname: "Reanu",
+        nachname: "Keeves",
+        alter: 45
       }
     }
   )
@@ -69,14 +72,17 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "978-0-321-19368-1",
-      sprache: deutsch,
-      rating: 1,
-      genre: "ACTION",
+      name: "Ungueltig",
+      sprache: "de-DE",
+      rating: -1,
+      genre: ACTION,
       erscheinungsjahr: "2022-01-31",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+      schlagwoerter: ["JAVA", "SCRIPT"],
       hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation"
+        rolle: "Hauptrolle",
+        vorname: "Max",
+        nachname: "Mustermann",
+        alter: 54
       }
     }
   )
@@ -91,14 +97,19 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      name: "978-0-321-19368-1",
-      sprache: "deutsch",
-      rating: 1,
-      genre: ACTION,
+      id: 1010,
+      version: 0,
+      name: "GraphQL The Movie",
+      sprache: "en-EN",
+      rating: 9,
+      genre: DRAMA,
       erscheinungsjahr: "2022-01-31",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+      schlagwoerter: ["Client", "GraphQL"],
       hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation"
+        rolle: "Tory Stank",
+        vorname: "Melon",
+        nachname: "Eask",
+        alter: 52
       }
     }
   )
@@ -113,11 +124,11 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      id: 40,
+      id: 1010,
       version: 0,
       name: "falsche-NAME",
       rating: -1,
-      genre: Unbekannt,
+      genre: ACTION,
       erscheinungsjahr: "12345-123-123",
     }
   )
@@ -132,17 +143,20 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      id: "999999",
+      id: 999999,
       version: 0,
-      name: "978-0-007-09732-6",
-      rating: 5,
-      art: DRUCKAUSGABE,
-      preis: 99.99,
-      rabatt: 0.099,
-      lieferbar: false,
-      datum: "2022-02-01",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
-      homepage: "https://nicht.vorhanden.de/"
+      name: "Not-Found The Movie",
+      sprache: "en-EN",
+      rating: 6,
+      genre: DRAMA,
+      erscheinungsjahr: "2022-01-31",
+      schlagwoerter: ["Client", "GraphQL"],
+      hauptdarsteller: {
+        rolle: "FourOFour",
+        vorname: "Melon",
+        nachname: "Eask",
+        alter: 52
+      }
     }
   )
 }
@@ -154,5 +168,5 @@ Authorization: Bearer {{login.response.body.$.data.login.token}}
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  delete(id: "60")
+  delete(id: "1010")
 }
