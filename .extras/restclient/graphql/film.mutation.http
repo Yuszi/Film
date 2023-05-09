@@ -47,7 +47,7 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "Tres Bien",
+      name: "Matrix The One",
       sprache: "de-DE",
       rating: 8,
       genre: DRAMA,
@@ -99,7 +99,7 @@ mutation {
     input: {
       id: 1010,
       version: 0,
-      name: "Tres Biens",
+      name: "Matrix The Ones",
       sprache: "en-EN",
       rating: 9,
       genre: DRAMA,
@@ -168,5 +168,5 @@ Authorization: Bearer {{login.response.body.$.data.login.token}}
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  delete(id: "1010")
+  delete(id: "1004")
 }
