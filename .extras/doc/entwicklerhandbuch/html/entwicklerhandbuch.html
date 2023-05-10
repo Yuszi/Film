@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="author" content="Jürgen Zimmermann">
-<title>Entwickler/innen/handfilm</title>
+<meta name="author" content="SWE Gruppe">
+<title>Entwicklerhandbuch</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,10 +14,9 @@
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Entwickler/innen/handfilm</h1>
+<h1>Entwicklerhandbuch</h1>
 <div class="details">
-<span id="author" class="author">Jürgen Zimmermann</span><br>
-<span id="email" class="email"><a href="mailto:Juergen.Zimmermann@h-ka.de">Juergen.Zimmermann@h-ka.de</a></span><br>
+<span id="author" class="author">SWE Gruppe 3</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -27,7 +26,7 @@
 <li><a href="#_der_applikationsserver_im_überblick">1.1. Der Applikationsserver im Überblick</a></li>
 <li><a href="#_die_rest_schnittstelle">1.2. Die REST-Schnittstelle</a></li>
 <li><a href="#_die_graphql_schnittstelle">1.3. Die GraphQL-Schnittstelle</a></li>
-<li><a href="#_der_anwendungskern">1.4. Der Anwendungskern</a></li>
+<li><a href="#_die_geschäftslogik">1.4. Die Geschäftslogik</a></li>
 <li><a href="#_klasse_für_entities">1.5. Klasse für Entities</a></li>
 <li><a href="#_er_diagramm">1.6. ER-Diagramm</a></li>
 </ul>
@@ -37,143 +36,133 @@
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Copyright &#169; 2020 - present Jürgen Zimmermann, Hochschule Karlsruhe.<br>
-           Free use of this software is granted under the terms of the
-           GNU General Public License (GPL) v3.<br>
-           For the full text of the license, see the <a href="http://www.gnu.org/licenses/gpl-3.0.html">license</a> file.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_der_applikationsserver"><a class="anchor" href="#_der_applikationsserver"></a><a class="link" href="#_der_applikationsserver">1. Der Applikationsserver</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_der_applikationsserver_im_überblick"><a class="anchor" href="#_der_applikationsserver_im_überblick"></a><a class="link" href="#_der_applikationsserver_im_überblick">1.1. Der Applikationsserver im Überblick</a></h3>
 <div class="paragraph">
-<p>Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt.</p>
+<p>Der Applikationsserver ist die Kernkomponente der Anwendung. Er stellt die zentrale Schnittstelle für die Verarbeitung von Anfragen bereit und ist für die Steuerung des Datenflusses zwischen den einzelnen Komponenten verantwortlich.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqNk89u2kAQxu9-iu8WkAj0z6lphOSgkJCkgIxRRG-LPfautN5Fu2sQqvo2eYaeesuLdezQoqKmrQ_WemfnN9-3Mz7DyG72TpUyoDPq4t2btx9wjo0jTybgriZXksFnVVXkKmFMD7c2kz6TtSbcC6e9qyVFZ9EZUqk8Z9rSiQq8LBwRvC3CTji6wN7WyISBo1z54NS6DgQVIEw-sA6VzVWxZwxv1SYnhyAJgat62KL9uJkucUOGnNCY12utMjyojIwnCK7c7HhJOdYNpkkYNwoWBwUYW-aKoCybIMVxhy05z994_7PEgdeDdczoiNDIdrCbJq3LWvfQIhwz-390fjSYQ5kWLO2G3UgGsr-d0hprQu2pqHWPCXwWj5P0drZMEU9XeIyTJJ6mq498NkjLUdrSC0lVG60YzJ6cMGHP0hnw6ToZ3XJGfDV5mKQr1o_xJJ1eLxYYzxLEmMdJOhktH-IE82Uyny2u-8CCGlHcvr_dbdF2hy8wpyCU9i-eV9xOz8p0Dim2xG3NSG1Zl0DGI_XvnjFDaGvK1iGfPV4hC5sUMDb04FngpQxh4y8Gg91u1y9N3beuHOgXiB8M-xGT5o62inbIa5dJXMY6DPMoEllg7TfCh8MyzitlDuv7ZsqiiHUHYUqe5nXNqV8i8NOk4Px8iM5Vs-n5RabbhlrEf8aE0VS-Fnx-aqb8laB-_uaP3FbqKzVPY7_VPA3-qvk1igprm0HuZF3cPX8_-c2jH5zOVl8=" alt="Use Cases">
+<img src="https://kroki.io/plantuml/svg/eNqNk01u2zAQhfc6xdvZBvzTn1XTwIBqxImT1DFkGYG7o6WRSIAiDZKyYRS9Tc_QVXe5WEeyW6NB01Yrko_zzRvOqIOJ3R6cKmVAd9LDm1ev32GArSNPJuC2JleSwSdVVeQqYUwfNzaTPpO1JtwJp72rJUWdqINUKs-RtnSiAi8LRwRvi7AXji5wsDUyYeAoVz44takDQQUIk4-sQ2VzVRwYw0e1yckhSELgrB62aDfX8xWuyZATGot6o1WGe5WR8QTBmZsTLynHpsE0AdPGwfLkAFPLXBGU5SJIse6wI-d5j7c_U5x4fVjHjK4IjW0Hu23Ceuz1AC3COXL4x8rPBeZQpgVLu-VqJAO5vr3SGhtC7amodZ8JfBePs_TmYZUinq_xGCdJPE_X7_lukJZV2tGRpKqtVgzmmpww4cDWGfDxKpnccET8YXY_S9fsH9NZOr9aLjF9SBBjESfpbLK6jxMsVsniYXk1BJbUmOL2_e1ti7Y7_IA5BaG0P9a85nZ6dqZzSLEjbmtGase-BDIeqX_3jBlCW1O2FfLd8xOysVkBY0Mfng1eyhC2_mI02u_3w9LUQ-vKkT5C_Gg8jJi0cLRTtEdeu0ziMtZhnEeRyAJ7vxY-nJZxXilzWt81UxZF7DsIU_I0F0pX-ByBvyYEg8EY3Wlz6OtMkum1Uov4T00YTeVL4tPXZspfEPXTN3_mtlZfyPlc-y3nc_FXzi9RVFjbDHI36-H26fuz3zz6Ab4fVpU=" alt="Use Cases">
 </div>
 <div class="title">Figure 1. Use Cases</div>
 </div>
 <div class="paragraph">
-<p>Quisque velit nisi, pretium ut lacinia in, elementum id enim. Nulla porttitor
-accumsan tincidunt.</p>
+<p>Die Use Cases beschreiben, welche Funktionalitäten der Applikationsserver bieten soll. Sie sind eine wichtige Grundlage für das Design und die Implementierung des Systems. Das Use Case-Diagramm gibt einen Überblick über die verschiedenen Anwendungsfälle und deren Beziehungen zueinander.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqNVdtu2kAQffdXjHhJIlHo5alphORQSEi51RhFtMrDYo_tlZZdd3cNQlXzZX3rj3XW5t5c-sacmTl7Zs4AZ9BW-VrzNLNw3r6A92_ffYQ3kGs0KC3cFahTlPCNLxaoF0zKOtyqKDNRVgiEL0wLo4sMvTPvDMKMG-pUqWYLoI-JRgSjErtiGi9hrQqImASNMTdW83lhEbgFJuOm0rBQMU_WRENQIWPUYDMES68aUEkZ3AyncIMSNRMwLuaCR9DnEUqDwOhlh5gMY5g7GtfQdQomGwXQVcTLLFc0BHLKa1iiNhTDh-0TG746KE0c58w62RpU7touSOsaBLP7zsaTk-8HjIHLkjhTOU2TESHNt-JCwByhMJgUok4MVAv3vfB2NA3BH87g3g8CfxjOPlGtzRRlcYkVE1_kghMxzaSZtGuSTgSDTtC-pQ7_utfvhTPSD91eOOxMJtAdBeDD2A_CXnva9wMYT4PxaNJpAEzQiSL7XtptUrpDC4zRMi5MNfOM7DSkTMSQsSWSrRHyJeliENFJve4ZcTChZFpOSLX7FZKwXgJS2ToYEniVWZuby2ZztVo1Ulk0lE6boiIxzVbDI6axxiXHFcSFjjK48oVtxZ4nMLFgFVT3HXPS6Hz0PBZZGiroTMI27VLaDXCjWZ597W8wT6oYoTZEY2vw0wP4HuCPgqK-SlPUAx7HAt1lPXgueV1EWVtJq5UQqB-2UIBGiaUDtsgE9ZLUV0CAuTKcHl9fuVyrQge0513ZL8_zIqGKuBRB2XCd4ygYlJmjhBO8oFb3GuXo2NmckYO1z9d0YVFW2zGwOZLKEnw4huirLVi6UtqWHOUONl1OlSFVG_r9-uDxsfXCdo7W-kqt92yqajzd8n-UHzhw2g6NRuvElOOW5wq2UZV_wsR_sUrQzrvdpw1-5MgzyUNvntJxdDZHUcVzeB-HQZU9tNdLlHI_c-fRBdz9-X3yJ-D9BQTYHbs=" alt="Komponentendiagramm">
+<img src="https://kroki.io/plantuml/svg/eNqNVdtu2kAQfd-vGPGSRKLQy1PTCMmhkJByqzGKaJWHxR7bKy277u4ahKrmy_rWH-vY5t5c-sacmTl7Zs4AZ9DW2dqIJHVw3r6A92_ffYQ3kBm0qBzc5WgSVPBNLBZoFlypOtzqMLVhmkuEL9xIa_IU2Rk7gyAVljp1YvgC6GNsEMHq2K24wUtY6xxCrsBgJKwzYp47BOGAq6ipDSx0JOI10RCUqwgNuBTB0asWdFwGN8Mp3KBCwyWM87kUIfRFiMoicHq5QGyKEcwLmqKhWyiYbBRAVxMvd0LTECgob2CJxlIMH7ZPbPjqoA1xnHNXyDags6LtgrSuQXK372w8Ofl-wAiEKolTndE0KRHSfCshJcwRcotxLuvEQLVw3wtuR9MAvOEM7j3f94bB7BPVulRTFpdYMYlFJgUR00yGK7cm6UQw6PjtW-rwrnv9XjAj_dDtBcPOZALdkQ8ejD0_6LWnfc-H8dQfjyadBsAEC1Fk30u7jUt3aIEROi6krWaekZ2WlMkIUr5EsjVEsSRdHEI6qdc9Iw4utUrKCal2v0IS1otBaVcHSwKvUucye9lsrlarRqLyhjZJU1YkttlqMGIaG1wKXEGUmzCFK0-6VsSYxNiB01DddyRIY-EjYzx0NJTfmQRt2qVyG-DG8Cz92t9gTOkIoTZE62rwkwF89_FHTlFfJwmagYgiicVlPbAi2RVy0dbKGS0lmoct5KPVclkAW2SCZknqK8DHTFtBj6-vilyrQge0513ZL8ZYKHUelSIoG6wzHPmDMnOUKAQvqLV4jXJ07HzOycHa52uIib22Y-BzJJUl-HAM0Vdb8mSljSs5yh1sugpVllRt6Pfrg8fH1gvbOVrrK7Xs2VTVeLrl_yg_cOC0HRqN1okpxy3PFWyjKv-Eif9ilaCdd7tPG_zIkWeSh948pePobI6iiufwPg6DKntoL4u1Ln7mzsMLuPvz--RPgP0FpkUeIQ==" alt="Komponentendiagramm">
 </div>
 <div class="title">Figure 2. Komponentendiagramm</div>
+</div>
+<div class="paragraph">
+<p>Ein Komponentendiagramm ist eine Diagramm-Art, die verwendet wird, um die strukturelle Zusammensetzung einer Softwareanwendung darzustellen. Es zeigt die einzelnen Komponenten und deren Abhängigkeiten voneinander. Komponentendiagramme werden oft in der Phase der Softwarearchitektur erstellt, um eine Übersicht über die verschiedenen Elemente der Anwendung zu erhalten.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_die_rest_schnittstelle"><a class="anchor" href="#_die_rest_schnittstelle"></a><a class="link" href="#_die_rest_schnittstelle">1.2. Die REST-Schnittstelle</a></h3>
 <div class="paragraph">
-<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet
-ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit
-amet ligula.</p>
+<p>Die REST-Schnittstelle dient zur Bereitstellung von Lese- und Schreibzugriffen auf die Ressourcen der Anwendung. Dabei werden die Anfragen über HTTP-Protokoll an den Applikationsserver gesendet.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqVVtty2zYQfedX7DgPlqe6NO1TVY0msmrZSh1b1WUybqcPELEU0ZIADYBSNIn_vQtQNCmFSqZ6IbE4e_Z2AOoSxirba7GJLbTGV_DTj29_gQ5kGg1KC-9z1BuU8KdIU9Qpk7INdyqMTRjnCcLvTCdG5zEGl8ElLGNhyFNtNEuBXiONCEZFdsc09mGvcgiZBI1cGKvFOrcIwgKTvKc0pIqLaE80ZMolRw02RrAU1YCK_OL2YQW3KFGzBGb5OhEh3IsQpUFgFNlZTIwc1o7GOUxcBotDBjBRxMusUFQECtrXsEVtaA0_lyEOfG1QmjhazLq0NajMuV1RrntImK08u42VVwVyENITxyqjamIipPp2IklgjZAbjPKkTQyEhY_T5d3jagmjhyf4OJrPRw_Lp18Ja2NFu7jFgkmkWSKImGrSTNo9pU4EH27m4zvyGF1P76fLJ8ofJtPlw81iAZPHOYxgNpovp-PV_WgOs9V89ri46QIs0CVF4_tWbyM_HWogR8tEYoqan2ichjJLOMRsizTWEMWW8mIQkqS-PzPiYImSG18hYasWUmLTCKSybTCU4CC2NjP9Xm-323U3Mu8qveklBYnpDbsBMc00bgXugOc6jGEwSuyQB4GQNKqIhUj7KhUGB8thEGQs_JdtEN5JNPYf0wtVmpIGPgcAYcKMgYt3YyWtVkmC-sJJq1oSJhYcaxYIhQ4TDGret2i9Gz1LPL02AOf47IH0LIH02gg0B6CpgKYBOGPUPw_1byXYLxrgf9D53nu4fyvhftEAXxmcupaGmFmli5RObCXFibkke6naj5_cLWNqfafacxpJbW0y5ZRClvIdun8RP0f5d3dYn0uNeJ2TBBzrayRpBZ2TNxP_81tliGuHHQwKxHAY-C1vrMc5qKd5s8r6JagFNai3pNGvos2R8cVhbzCgs-JLAIp9QkDNsfDmN_87sDj_YjadPOt8GXpDcBKApFZT51EIt6ppu3VV2mhatznT3ByZ6gMsNoo0AH4AJ3KyMbOXIURC8uv9lLcK_ZFd8D64O1Bu2uBkTiaNz_2yWWS8oz6g5z1cpUcOxjuY_uvcr_qvZ7g0DVy1HxTHBL74Twalgdw38kyOrULwZHt2z37V0DNZ_o9UMKQPyrlsXiphHY9HdTpDuHh78ZU0-qWAznl2j_V_HlTp8zzicM7OQ05PwAkiz7qFGH0DvosqLptXWL3u5pP1bVw9ueqe8H9qmi8LNxAaib-oMM3obkgxXZMMgyBSyn3eW-FVw5-f4D_-wwCH" alt="&quot;FilmGetController&quot; für Lesezugriffe an der REST-Schnittstelle">
+<img src="https://kroki.io/plantuml/svg/eNqNVtty2zYQfedX7DgPlqe6NO1TVY0msmrZSh1b1WUybqcPELkU0YIADYBSNIn_vQtQNCmFSqoXEouzZ89eAOoSxirba75JLLTGV_DTj29_gQ5kGg1KC-9z1BuU8CdPU9Qpk7INdypMTJjkAuF3poXReYLBZXAJy4Qb8lQbzVKg11gjglGx3TGNfdirHEImQWPEjdV8nVsEboHJqKc0pCri8Z5oyJTLCDXYBMFSVAMq9ovbhxXcokTNBMzyteAh3PMQpUFgFNlZTIIRrB2Nc5g4BYuDApgo4mWWK0oCOe1r2KI2tIafyxAHvjYoTRwtZp1sDSpzblekdQ-C2cqz25h5lWAEXHriRGWUTUKElN-OCwFrhNxgnIs2MRAWPk6Xd4-rJYwenuDjaD4fPSyffiWsTRTt4hYLJp5mghMx5aSZtHuSTgQfbubjO_IYXU_vp8sn0g-T6fLhZrGAyeMcRjAbzZfT8ep-NIfZaj57XNx0ARboRFH7vlXb2HeHChihZVyYIucnaqchZSKChG2R2hoi35IuBiGN1Pd7RhxMKLnxGRK2KiEJm8YglW2DIYGDxNrM9Hu93W7X3ci8q_SmJwoS0xt2A2Kaadxy3EGU6zCBwUjYYRQEXFKrYhYi7auUGxwsh0GQsfBftkF4J9HYf0wvVGlKM_A5AAgFMwYu3o2VtFoJgfrCjVa1JEzCI6xZIOQ6FBjUvG_Rejd6lnh6bQDO8dkD6VkC6bURaA5AUwFNA3DGqH4e6t9KsF80wP-g8733cP9Wwv2iAb4yOHUlDTGzSheSTmwlxYm5JHupyo-f3C1janWn3HNqSW1tMuUmhSzlO3T_Iv4I5d_dYb0vNeKYi9SzvkaSltM5eTPxP79Vhpg47GBQIIbDwG95Yz3OYXqaNyvVL0EtqEG9pRn9KtocWbQ47A0GdFZ8CkCxTwioOBbe_OZ_BxbnX_Smk2edL0NvCIKTCDRrtfE8iuFWteFuXZU2atdtznRkjkz1DhYbhQ6AH8BNOdmY2cuQSi6j6_00ahUDSHYe9cFdgnLTBjfnZNL43C-rRcY7KgR63sNdeuRgvIPpvzb-qv96iEvTwGX7QUUo4Iv_ZpAMjHwlz2hsFRNPtmf37FcVPaPyf0u5zjGkL8o5NS_VZB23R3U6Q7h4e_HVbPTLCTrn2T0-AOdB1YCeRxwO2nnI6RE4QeRZt5hGX4Dvoorb5hVWz7v5aH0bVxdXXRT-X03zbeEaQi3xNxWmGV0OKaZrGsMgiJVy3_dWeNXw7yf4DydeARU=" alt="&quot;FilmGetController&quot; für Lesezugriffe an der REST-Schnittstelle">
 </div>
 <div class="title">Figure 3. "FilmGetController" für Lesezugriffe an der REST-Schnittstelle</div>
 </div>
 <div class="paragraph">
-<p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec
-sollicitudin molestie malesuada.</p>
+<p>Der "FilmGetController" dient zur Abfrage von Filminformationen über die REST-Schnittstelle. Er verarbeitet eingehende Anfragen und gibt die entsprechenden Daten zurück.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqVV0tz4kYQvutXdHkP2BUM2eQUQqjFNl6za2OKR7mcVA6D1KBJJI12HhAq8X9Pz0iCYZHxLhdPd3_97umRG3At8q3kq1jD-fUF_PTj-1_gEnKJCjMNnwzKFWbwO09TlCnLsibciTBWYWwShM9MJkqaGING0IBZzBVpipVkKdBxKRFBiaXeMIkd2AoDIctAYsSVlnxhNALXwLKoLSSkIuLLLZkhlskilKBjBE1eFYilIz6O5vARM5QsgbFZJDyEex5iphAYebYcFWMEC2vGKtzaCKZlBHAryC7TXFASyEkuYY1SEQ0_Vy5Ke00QkmycM23DliByq3ZBsW4hYXqv2arNfJ9gBDxzhmORUzYxGaT8NjxJYIFgFC5N0iQLhIWn4ezucT6D_ugZnvqTSX80e_6VsDoWJMU1FpZ4miecDFNOkmV6S6GTgYfB5PqONPpXw_vh7Jnih9vhbDSYTuH2cQJ9GPcns-H1_L4_gfF8Mn6cDloAU7RBUftO1XbpukMFjFAznqgi52dqp6LIkghitkZqa4h8TXExCGmk3u4Z2WCJyFYuQ8LuS0iBDZeQCd0ERQF2Y61z1Wm3N5tNa5WZlpCrdlIYUe1eKyBLY4lrjhuIjAxj6PYT3YuCgGfUqiULkeQi5Qq7s14Q5Cz8m60QPmSo9F-qHYo0pRn4NwAIE6YUnH24FpmWIklQntnR2pOEiXmEHgdCLsMEA097rvCjYTJSTnlHVbo7Rr3q0AYdYq6F3BnweZ4Zn11jbCyUdhbsoVKz5zqsKaFmjzR1wBtMUKPDFscKXlA1GhP84uD0t8LSsRaoSqDaA2sTYzQlRbj2tAvYEjXwKxFtHdoeKrA912DvkNHuKeIoz5VGSXpKX7eg9QcBI8z-bPWqmp-EmLcQZYUJ5drmi4pq1rBVHbuq05GgLMkRv8r9ZX9f8B_7LCjvolAMBl2aFa1yYa82caoztNzr4pn2bpNnXWFoJNfbFjO0DrzLqLe0OSeCnpvfoNG_eRiOGvAfNB6Gs_7kajCcDSaO_jwf3QwaxfwQeDdAVrFm1IitdmDlo_0GF3SRgS2uNezFvDBhEequRJmmFODdrfs5UeXzymK73QLR6wVO5JgHfSr2VL1wX-6XwHOqUK5pGx55e6Jy4rQUdru0ll3dgZwfAifU69dwB56o_Rre3bhfvTtvLx5YspS3Vc8vKt5uGR6w_AtRCApvAD-AW2vELHpIB6a2WQihRHqYz91lJ6ZtTcfF1QS7gYgl8UunqmETLFc5rurshvWis3spKlbPc2xq_Jo8etWvu3XE5FEH7BdBtiJmebOIXX5DeLLvDqlYEMdRRQW_PoLv8fKyH9SvGywuL3tw9v7seNg61Ux-m64_fx2Ka0e9qt5qmbznJMEJzMGqeR1n8vJqq2_AnPa3v6GnMOWSPAWq9oC3CEzur4LjcKsK1m-MN4D7vfNiF5xbhpjmtMtSTBf2IQiWQtgP3_PwoubfguB_UGX8Pg==" alt="&quot;FilmWriteController&quot; für Schreibzugriffe an der REST-Schnittstelle">
+<img src="https://kroki.io/plantuml/svg/eNqVV0tz4kYQvutXdHkP2BUM2eQUQqjFNqzZtTHFo1xOKoex1KBJJI12HhAq8X9Pz0iCYZHxLhdPd3_97umRG3At8q3kq1jD-fUF_PTj-1_gEnKJCjMNnwzKFWbwO09TlCnLsibcijBWYWwShM9MJkqaGING0IB5zBVpipVkKdBxKRFBiaXeMIkd2AoDIctAYsSVlvzZaASugWVRW0hIRcSXWzJDLJNFKEHHCJq8KhBLR3wcL-AjZihZAhPznPAQ7niImUJg5NlyVIwRPFszVmFoI5iVEcBQkF2muaAkkJNcwhqlIhp-rlyU9pogJNk4Z9qGLUHkVu2CYt1CwvRes1Wb-T7BCHjmDMcip2xiMkj5bXiSwDOCUbg0SZMsEBYeR_Pbh8Uc-uMneOxPp_3x_OlXwupYkBTXWFjiaZ5wMkw5SZbpLYVOBu4H0-tb0uhfje5G8yeKH4aj-Xgwm8HwYQp9mPSn89H14q4_hcliOnmYDVoAM7RBUftO1XbpukMFjFAznqgi5ydqp6LIkghitkZqa4h8TXExCGmk3u4Z2WCJyFYuQ8LuS0iBjZaQCd0ERQF2Y61z1Wm3N5tNa5WZlpCrdlIYUe1eKyBLE4lrjhuIjAxj6PYT3YuCgGfUqiULkeQi5Qq7814Q5Cz8m60QPmSo9F-qHYo0pRn4NwAIE6YUnH24FpmWIklQntnR2pOEiXmEHgdCLsMEA097ofCjYTJSTnlHVbo7Rr3qyAYdYq6F3BnweZ4Zn11jbCKUdhbsoVKz5zqsKaFmjzR1wBtMUKPDFscKXlA1GlP84uD0t8LSsRaoSqDaA2sTYzQlRbj2tAvYEjXwKxFtHdoeKrA912BvkdHuKeIoz5VGSXpKX7eg9QcBI8z-bPWqmp-EmLcQZYUJ5drmi4pq1rBVHbuq05GgLMkRv8r9ZX9f8B_7LCjvolAMBl2aFa1yYa82caoztNzr4pn2bpNnXWFoJNfbFjO0DrzLqLe0OaeCnpvfoNG_uR-NG_AfNO5H8_70ajCaD6aO_rwY3wwaxfwQeDdAVrFm1IitdmDlo_0GF3SRgS2uNezFvORJ6kLdlSjTlAK8G7qfE1U-hxbb7RaIXi9wIsc86FOxp-qF-3K_BJ5ThXJN2_DI2yOVE2elsNultezqDuT8EDilXr-GO_BE7dfw7sb96t15e_HAkqW8rXp-UfF2y_CA5V-IQlB4A_gB3FojZtFDOjC1zUIIJdLDfO4uOzFtazouribYDUQsiV86VQ2bYLnKcVVnN6wXnd1LUbF6nmNT49fk0at-3a0jJo86YL8IshUxy5tF7PIbwpN9d0jFgjiOKir49RF8j5eX_aB-3WBxedmDs_dnx8PWqWby23T9-etQXDvqVfVWy-Q9JwlOYA5Wzes4k5dXW30D5rS__Q09hSmX5ClQtQe8RWByfxUch1tVsH5jvAHc750Xu-DcMsQ0p12WYvpsH4JgKYT98D0PL2r-LQj-B9AC_No=" alt="&quot;FilmWriteController&quot; für Schreibzugriffe an der REST-Schnittstelle">
 </div>
 <div class="title">Figure 4. "FilmWriteController" für Schreibzugriffe an der REST-Schnittstelle</div>
+</div>
+<div class="paragraph">
+<p>Der "FilmWriteController" ist verantwortlich für Schreibzugriffe auf die REST-Schnittstelle. Er verarbeitet die Anfragen und gibt die entsprechende Antwort zurück. Diese Komponente arbeitet eng mit der Geschäftslogik zusammen und aktualisiert die Datenbank entsprechend den Anforderungen der Anfrage.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_die_graphql_schnittstelle"><a class="anchor" href="#_die_graphql_schnittstelle"></a><a class="link" href="#_die_graphql_schnittstelle">1.3. Die GraphQL-Schnittstelle</a></h3>
 <div class="paragraph">
-<p>Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada.</p>
+<p>Die GraphQL-Schnittstelle bietet eine alternative Möglichkeit für den Zugriff auf die Ressourcen der Anwendung. Sie ermöglicht es, komplexe Abfragen auf mehrere Ressourcen in einer Anfrage zu kombinieren.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqFVVtz4jYUfvevOENnCkwJdNunUsosySYb2jRQLrOTZvIg7GNbXVlyJRnG3eW_98hGXEJK_SSdy3e-c5ObcKPyUvMktdC6acMP37_7Ca4g12hQWvi1QJ2ghD95lqHOmJQduFdhasK0EAi_MS2MLlIMmkETFik35KkSzTKgY6wRwajYbpjGPpSqgJBJ0BhxYzVfFRaBW2Ay6ikNmYp4XBIMiQoZoQabIliKakDF1eXj4xI-okTNBEyLleAhPPAQpUFgFNlJTIoRrByMc7hzDOY7BnCnCJdZrigJ5KTXsEZt6A4_-hA7vA4oTRgtZh1tDSp3bm3iWoJg9uDZfTPzQ4IRcFkBpyqnbFICpPw2XAhYIRQG40J0CIFs4dN4cT9ZLmD0-ASfRrPZ6HHx9DPZ2lSRFtdYI_EsF5yAKSfNpC2JOgH8fju7uSeP0fX4Ybx4Iv5wN1483s7ncDeZwQimo9lifLN8GM1gupxNJ_PbLsAcHSlq36XaxlV3qIARWsaFqXN-onYaYiYiSNkaqa0h8jXxYhDSSP1_zwiDCSWTKkOyPZSQiI1jkMp2wBDBQWptbvq93maz6Say6Cqd9EQNYnrDbkBIU41rjhuICh2mMBgJO4yCgEtqVcxCJL3KuMHBYhgEOQs_swThvURj_zI9Cpmnfwv4EgCEghkDjfczNEpQjxtusvyF9CmPcH-HkOtQYHDktzQ4dkFDzK3SpnJ_JfMor8RvgP1B21dWENXJO1aXN8xHOqkDuoM3ducj2z31rsDYPpNJhPKlO_QFCraH-qwKKqUrihfQi8Bp3pzIR712NoNBrRkOSbMNjjwM6jU16sxlhiya73SDAQ2MtFoJOAfwvfnmQ_WdADVsSTvl4D4sJvALTDJuB-7agSb7bAtGzwFHbZvwFZqo_8Eiqc_0egmWbBTpUDeH8C18gRNZH9z-yuT5BbZVRXdBquBVWX3UQ2WP06s6tC_1SYLutp-uVttLXg1DraiTBfgO6lEgKTOlDCHmMroux1Gr6jmJeeQpt_v7Wd9xHF5C2SNQ_1B4EPjqXmDSY3SO9_xSI27rrM_zVVdFfjWExrvGWa_7fiL-w7VLk3hca19mL7_gtl_SCzZ-yE-xj7bgJMaJxrt65XFWl-xOlEcPyWWUI8OtW8lq5jDLafsyzFb07wmCWCn3I2qF7Td-08G_V4-Q6A==" alt="FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle">
+<img src="https://kroki.io/plantuml/svg/eNqFVVuT2jYUfvevOENnCkxYaJqnEsLE2SxZ2u1CuUxmu7MPwj621ciSK8kwJOG_58jGYJYt9ZN0Lt_5zk1uwrXKtprHiYXWdRt-_eX1b3AFmUaD0sLvOeoYJfzN0xR1yqTswK0KEhMkuUD4g2lhdJ6g1_SasEi4IU8Va5YCHSONCEZFdsM09mGrcgiYBI0hN1bzVW4RuAUmw57SkKqQR1uCIVEuQ9RgEwRLUQ2oqLh8ul_CJ5SomYBpvhI8gDseoDQIjCI7iUkwhJWDcQ4jx2C-ZwAjRbjMckVJICe9hjVqQ3d4U4XY43VAacJoMetoa1CZc2sT1y0IZo-e3RczPyYYApcFcKIyyiYhQMpvw4WAFUJuMMpFhxDIFj6PF7eT5QL8-wf47M9m_v3i4S3Z2kSRFtdYIvE0E5yAKSfNpN0SdQL482Z2fUse_ofx3XjxQPxhNF7c38znMJrMwIepP1uMr5d3_gymy9l0Mr_pAszRkaL2XaptVHSHChiiZVyYMucHaqchZiKEhK2R2hogXxMvBgGN1P_3jDCYUDIuMiTbYwmJ2DgCqWwHDBEcJNZmpt_rbTabbizzrtJxT5QgpjfseoQ01bjmuIEw10ECA1_YYeh5XFKrIhYg6VXKDQ4WQ8_LWPCFxQjvJRr7j-lRyCz5V8A3DyAQzBhovJ-hUYJ63HCTVV1In_AQD3cIuA4EejW_pcGxCxpgZpU2hfszWYXyTPwC2F-0fdsCojhVjsXlBXNfx2VAd6iM3blme6DeFRjZRzIJUT51h1WBvN2xPhEXaVGUSkAvAqd5c6Iq6sjZDAalZjgkzc6reRjUa2rUmcsMWTjf6wYDGhhptRJwDlD15qePxXcC1LBb2ikH93ExgXcwSbkduGsHmuyLzRk9Bxy1bcJ3aKL-inlcnun1EizeKNKhbg7hZ_gGJ7I-uP2V8eMT7IqK7oMUwYuyVlGPla2nV3ToUOqTBN3tMF2tdiV5NgylokwW4BWUo0BSZrYyoM7I8MN2HLaKnpOYhxXldv8w63uOw0soB4SE5ZkNmTYWhThWAL67t5gsMTxHfnwqsXdl_ueZq6s8uxpC43XjrOv9ajb-w7VLM1mvelXwSn7B7bCuF2yqcT_Fru3DSYwTTeVaKetZXbI7UdaelMsoNcOdW85i-jDNaA9TTFf0F_K8SCn3S2oF7Rd-2N4P5kGVqg==" alt="FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle">
 </div>
 <div class="title">Figure 5. FilmQueryResolver für Lesezugriffe an der GraphQL-Schnittstelle</div>
 </div>
 <div class="paragraph">
-<p>Donec sollicitudin molestie malesuada. Praesent sapien massa, convallis a
-pellentesque nec, egestas non nisi.</p>
+<p>Der FilmQueryResolver verarbeitet Lesezugriffe auf der GraphQL-Schnittstelle und gibt die entsprechenden Daten zurück. Er nutzt das GraphQL-Query-Format, um die Abfrageparameter zu interpretieren und die passenden Ergebnisse aus der Datenbank zu ermitteln.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqNVltT20YUftevOENmapiC3bRPcV1PBBhwA4aR5WFoJg9r6VjaZrWr7MUeN-G_96yEhAgmxE97Lt-337looQcnqtxqnuUW9k8O4Pff3r6DIyg1GpQW_naoM5TwDy8K1AWT8hAuVJKbJHcC4QPTwmiXY9ALehDn3BBSZZoVQMeVRgSjVnbDNA5hqxwkTILGlBur-dJZBG6ByXSgNBQq5ast0ZDLyRQ12BzB0q0G1KoyzmcLOEeJmgm4cUvBE7jkCUqDwOhm7zE5prD0NB5w5hXMHxTAmSJeZrmiIpBTXMMatSEb_miueOA7BKWJY59ZL1uDKj3sgLRuQTD7iOzvrPyxwBS4rIhzVVI1ORFSfRsuBCwRnMGVE4fEQLlwO40vrhcxhLM7uA2jKJzFd39Srs0VRXGNNRMvSsGJmGrSTNotSSeCq0l0ckGI8Hh6OY3vSD-cTePZZD6Hs-sIQrgJo3h6srgMI7hZRDfX80kfYI5eFI3vR71dVdOhBqZoGRemrvmOxmlImUghZ2uksSbI16SLQUIr9frMiIMJJbOqQsp9bCEJm65AKnsIhgSOcmtLMxwMNptNP5Our3Q2EDWJGYz7ATHdaFxz3EDqdJLDKBR2nAYBlzSqFUuQ4qrgBkfxOAhKlnxmGcJ7icb-awZ0ZZl_EfA1AEgEMwb23kdolKAZ7_nNagyK5zzF1oaE60Rg0MEtDJ47plNTAVurQbaO3dCp15tgaZVuCbq-Dk3XvYPsytlq0yuWxmjgjb0DF-qsvtkfmnx_bnLvH_tnMHGa222fORpgp3t2S7seKXog_oJeeHo1nfXgG_SupnEYHU-m8SSq7A-L2emkV3eYktvueuBzZd5t2mTTze42oLb71YvWH9fEHc1LR-vx5rT6VZKbAL12VAq8Oat-Vai5-9hjRqM6YzymyH3QQRrUa1rGF6G31COcPySNRvR1SKuVgEembts84jS-ps5dF9yOvHkIPfbZOkavG0dtq96h_g9dVp_pMRYs2yiKoe6N4Rf4Ck98Q_DPkcw-foL7qoMPlzQ9bO78vune3-xKu_NPKvBW-63sHzSeds2fuLorWwfqVv0K7bqSux40HZjZygQSjfTe7leLSU4_v2El7GDYftR1dePXyVyZ7iaj6jt80hVL1D_Bl6LADh9Pm053yJaKIEy2w97ZVHWUqo08GsPe273nSzNsduxFfJ9W3Qdei9dDb-bdd-VP4B4K-VFK-0C-mFTd1Hy4r6QEXYkfaUNTlJ-eCfk-2mqgLldbjUVJH3SBfpYmCFZK-b_b-8nBjv9qgv8BFsT3ZA==" alt="FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle">
+<img src="https://kroki.io/plantuml/svg/eNqNVVtT20YUftevOENmapgau2mf4rqeCLDBDRhGtoehmTyspWNpm9Wushd73IT_3rMSEiKYED_tuXzffueidQdOVbHTPM0sHJ4ewe-_vX0Hx1BoNCgt_O1QpyjhH57nqHMmZRcuVJyZOHMC4QPTwmiXYdAJOrDIuCGkSjXLgY5rjQhGre2WaRzATjmImQSNCTdW85WzCNwCk0lfachVwtc7oiGXkwlqsBmCpVsNqHVpnM-WcI4SNRNw41aCx3DJY5QGgdHN3mMyTGDlaTxg4hXMHxTARBEvs1xREcgprmGD2pANf9RXPPB1QWniOGTWy9agCg87Iq07EMw-Int7K38sMAEuS-JMFVRNRoRU35YLASsEZ3DtRJcYKBdup4uL6-UCwtkd3IZRFM4Wd39Srs0URXGDFRPPC8GJmGrSTNodSSeCq3F0ekGI8GR6OV3ckX6YTBez8XwOk-sIQrgJo8X0dHkZRnCzjG6u5-MewBy9KBrfj3q7LqdDDUzQMi5MVfMdjdOQMpFAxjZIY42Rb0gXg5hW6vWZEQcTSqZlhZT72EISNl2DVLYLhgQOM2sLM-j3t9ttL5Wup3TaFxWJ6Y96ATHdaNxw3ELidJzBMBR2lAQBlzSqNYuR4irnBoeLURAULP7MUoT3Eo391_TpyiL7IuBrABALZgwcvI_QKEEzPvCbVRsUz3iCjQ0x17HAoIVbGjx3TCemBDZWjWwc-6FTrzfGwirdELR9LZq2ew_ZlbPlppcstVHDa3sPLtRpdbM_1Pn-XOfeP_bPYOw0t7seczTAVvfsjnY9UvRA_AWd8OxqOuvAN-hcTRdhdDKeLsZRaX9Yzs7GnarDlNx01wOfK_Nu0ySbdna7AZXdK1-03qgibmlec5HDm7PyV0quA_TaUSnwZlL-ylB998RjhsMqYzSiyH3QQhrUG1rGF6G31COcPyQNh_R1SKuVgEemdts84mxxTZ27zrkderMLHfbZOkavG0dty96h_g9dWp3pMRYs3SqKoe6M4Bf4Ck98A_DPkUw_foL7soMPl9Q9rO_8vuneX-9Ks_NPKvBW860cHtWeZs2fuNorWwWqVv0KzbqSuxo0HZjZyRhijfTeHpaLSU4_v0Ep7GjQfNRVdaPXyVyR7Cej6lt80uUr1D_Bl6DAFh9P6k63yFaKIEw2w97bVHWcqK08HsHB24PnSzOod-xFfI9W3Qdei1dDr-fdc8VP4B4K-VFK80C-mFTeVH-4r6QEbYkfaUMTlJ-eCfk-2migLpdbjXlBH3SOfpYmCNZK-f_tw_gITjPONIN5nKHTqLtw6WIGJ06nGS2tDf4H8Sf8Lw==" alt="FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle">
 </div>
 <div class="title">Figure 6. FilmMutationResolver für Schreibzugriffe an der GraphQL-Schnittstelle</div>
 </div>
+<div class="paragraph">
+<p>Der "FilmMutationResolver" dient als Schnittstelle für Schreibzugriffe auf die GraphQL-Schnittstelle. Er empfängt GraphQL-Mutationen, validiert und verarbeitet sie, und leitet sie an den "FilmWriteService" weiter, der die Geschäftslogik für Schreibzugriffe implementiert. Der "FilmMutationResolver" gibt dann eine Antwort an den Client zurück, die den Erfolg oder Misserfolg der Anfrage widerspiegelt.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_der_anwendungskern"><a class="anchor" href="#_der_anwendungskern"></a><a class="link" href="#_der_anwendungskern">1.4. Der Anwendungskern</a></h3>
+<h3 id="_die_geschäftslogik"><a class="anchor" href="#_die_geschäftslogik"></a><a class="link" href="#_die_geschäftslogik">1.4. Die Geschäftslogik</a></h3>
 <div class="paragraph">
-<p>Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada.</p>
+<p>Die Geschäftslogik ist die Ebene, auf der die eigentliche Verarbeitung der Daten stattfindet. Sie ist für die Umsetzung der Geschäftsregeln und die Transformation der Daten in das Datenmodell verantwortlich.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqFVcFyIjcQvc9XvHIOhgqGbHIKoSaLHXvNxrHJgGvL2dqDGPUw2tVIE0kDNZX4z3LLj6UH7B2wKcIJtV4_vdfd0pziwpa1U8s8oHPRxfffvfkRZygdeTIB7ytySzL4QxUFuUIY08O1TXOf5pUm_Cqc9q7KKTqNTjHPledMu3SiAP_NHBG8zcJaOBqithVSYeBIKh-cWlSBoAKEkQPrUFipspppOFQZSQ4hJwQ-1cNmm8W723u8I0NOaEyrhVYpblRKxhMEn9xEfE4Si4amSbhqFMyeFODKMq8IyrIJUrzvsCLneY0fno944uvBOuboiNDIdrBlk9ZlrTW0CG1m_6Dz1qCEMhvi3JbsJmdC9rdWWmNBqDxlle4xA2PxYTK_vrufY3z7gA_jJBnfzh9-YmzILe_SirZMqii1YmL25IQJNUtngt8uk4trzhifT24m8wfWj6vJ_PZyNsPVXYIxpuNkPrm4vxknmN4n07vZZR-YUSOK23esttmmO1xASUEo7beeH7idnpVpiVysiNuaklqxLoGUR-r_e8YcQluz3DhkbFtCFjbJYGzowbPAUR5C6YeDwXq97i9N1bduOdBbEj-I-xEzTR2tFK0hK5fmGI11iGUUKcOtykRKvG8L5Wk0j6OoFOkXsSS8NeTDZz9IbVHwDPwVAakW3uPk7cR8pjSIhaaTZrTaJWNyJWknglS5lDceW-JQl2RdscOYUGm9CtbVjYLH1xpepzyLaFN3pLTBfUFt_ICsRcWlaQ54DvANVzw_Tej51HPG8JKzWpgnt-Jq45tfNr89_O_8QNTnldJ8YaMXPAkJOXvKHY14KkxwViOOebVT4U6XI1tO4Fv2WJsUmTLyvJ7IjpJDNJfJLLvDr11s2PH35plgIMn4QHbHM-iLUzwBiszPQ-5Bap0cbcl6zVWOX1B-_LQletw6eenBnp3FOHlzsmd6iD93S3A0r-3OEK-6yxeotIcP7ldlP94fwuOgnfE4gn2yfhjB-5tZ2OzuGkb_Iw-cJPOJIXtzeAT3day4tJtxpaLkySuoWPA7GkWZtc2j2km7eP_vPy8-OdF_MxM1og==" alt="&quot;FilmReadService&quot; im Anwendungskern">
+<img src="https://kroki.io/plantuml/svg/eNqFVcFy2jAQvfsrdtJDYEqgaU-ljFuShoQ0JdSQ6aSdHoS0xkpkyZVkGE-bP-utP9a1SWJIGMoJrXaf3tt9kvfh2GSFlfPEQ-O4Ca9fHb6FA8gsOtQeznO0c9TwTaYp2pRp3YIzwxPHk1whfGJWOZsnGOwH-zBNpKNKM7csBfobW0RwJvZLZrELhcmBMw0WhXTeylnuEaQHpkXHWEiNkHFBMBTKtUALPkHwdKoDE1eL09EVnKJGyxSM85mSHC4kR-0QGJ1cRlyCAmYlTFkwKBlM7hnAwBAu89KQCJS0b2GB1tEa3jwccY_XAmMJo8F8SduCycqyJnEtQDFfV7a3Kq8FCpC6Ak5MRmoSAiR9S6kUzBByh3GuWoRAufB1OD27vJpCf3QNX_tR1B9Nr99Rrk8M7eICV0gyzZQkYNJkmfYFUSeAzyfR8RlV9I-GF8PpNfGHwXA6OplMYHAZQR_G_Wg6PL666EcwvorGl5OTNsAES1I0vl29javpUAMFeiaVW2m-pnE6YqYEJGyBNFaOckG8GHCy1P9nRhhMGT2vFFJu3UIiNoxBG98CRwR7ifeZ63Y6y-WyPdd529h5R61AXCdsB4Q0triQuASRW55Ar698KIJAahpVzDjSvkmlw940DIKM8Vs2R_ig0fkb1-EmTckDvwIArphzsPdhqG-QezZTuFdaq15STiIFrkWAS8tp464G9kWGxqZriBFmxklvbFEyuHvO4XnJA4m6dI1KHdwkVMe30IqlWh3wEKAbLsk_Zejh1AHl0JKq6jSHdkHdhhcfq99G_hd6IIqjXCq6sMETnAiZmNzX9nrkCu2tURCGtFrrcKNJkRUmwEvSWGhOXLU4KoaiIUUXysuk583u4xRLdPhdPROUiCLcUt1wOU9urSQHSNTvuzQDbqzorcBa5VUOn0B-_7ECulspearBHByEsHe4tyG6Cz_XW7Czrp5OF55Nly5QZrYf3M6zdrhpwt1Ja_bYkXsvfXsG7VdeqHbXBUP7OxlOoP5BKRs-3JH3aCtqbWVXTDNyXorpjN7RIIiNKR_VBm_C-d8_Tz45wT-etjXw" alt="&quot;FilmReadService&quot; von der Geschäftslogik">
 </div>
-<div class="title">Figure 7. "FilmReadService" im Anwendungskern</div>
+<div class="title">Figure 7. "FilmReadService" von der Geschäftslogik</div>
 </div>
 <div class="paragraph">
-<p>Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget
-malesuada.</p>
+<p>FilmReadService ist eine Komponente der Geschäftslogik, die für die Lesezugriffe auf Filmobjekte zuständig ist. Diese Komponente bietet eine Abstraktionsebene für den Zugriff auf die Datenbank und enthält die Logik für die Zusammenstellung von Daten, die für den Client relevant sind. Die Hauptaufgabe von FilmReadService besteht darin, die Daten aus der Datenbank zu laden und in einem für den Client lesbaren Format bereitzustellen. Außerdem implementiert diese Komponente auch verschiedene Funktionen zur Filterung und Sortierung von Filmdaten.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqNVsFy2kgQvesrurwHQwXDJntaQlEhXjtW1rEpIcfl3drDSGrQJKMZ1cwIlgr-s73tj6VHQCQEmHBiul-_ft0z3aVzuFT5UvNZaqF12YY3v77-HS4g12hQWvhYoJ6hhL94lqHOmJQduFFxauK0EAh_Mi2MLlL0zr1zCFNuKFLNNMuA_k41Ihg1tQumsQ9LVUDMJGhMuLGaR4VF4BaYTHpKQ6YSPl0SDZkKmaAGmyJYympATcvDh7sH-IASNRMwLiLBY7jlMUqDwCizs5gUE4gcjQu4dgomGwVwrYiXWa6oCOTk1zBHbegMv21TbPg6oDRxtJh1sjWo3IW1SesSBLNVZPdg5VWBCXBZEqcqp2pSIqT6FlwIiBAKg9NCdIiBsPDohzf3DyGM7p7gcRQEo7vw6S1hbarIi3NcM_EsF5yIqSbNpF2SdCL4dBVc3lDE6L1_64dPpB-u_fDuajKB6_sARjAeBaF_-XA7CmD8EIzvJ1ddgAk6UXR9L_V2Wt4ONTBBy7gw65qf6DoNKRMJpGyOdK0x8jnpYhDTkzp9Z8TBhJKzskLCVi0kYf4UpLIdMCRwkFqbm36vt1gsujNZdJWe9cSaxPSGXY-YxhrnHBeQFDpOYTASdph4Hpd0VVMWI_lVxg0OwqHn5Sz-ymYI7yQa-8X0YpVl9Aa-eQCxYMbA2TtffsHYskjgmXta1ZEwKU-wZoGY65gczxWxXeaodFZjDDBXhlull07B876G_ZCtiCq0JqUy7gqq7AdkZXR5tQSf6DhBPadG1lFRQQ10qK2B9gCnV-ZM29D3hKEjRVUws6aCX_4of3t4X86Z4EnNGnKL4upfmhVTs_omknvGz-tp2-fYOO4LS5ONiddI-qgpx6ZIGAzoZUqrlYDhkE61W261ybJWDPCK-ryUMcQaibPlGtIv2dr9H-_IzbecrWqFrWrlrKoihg3SIndCWzzpw5qjA1WCznatbJ21jLLIItQ_kXG126xVo0VNQQkK3BFUyxkpJZDJdcjzurl7bVUXF0M4e31Wej67lOWO3bj7MG-afoImQJb8INDV4URo9fz7sDc-xJOrEwS1meiX87LNeziuW-Td4e52OIGqDe5L4M0FHIEQYDOBRwmaE3cE1hzBY9p3Z_II6sCQvozcndqaZAf7m9ZagvKfZrENX7NTDfeBuzmI2FmoUO_LS1r2Xjt0a9AG5-mA-kZ280YTV-52zHJawBm6BWA8b6qU-wJpxW34-P9_je8z7zsKk03M" alt="&quot;FilmWriteService&quot; im Anwendungskern">
+<img src="https://kroki.io/plantuml/svg/eNqVVlFz2kYQftev2HEfDFMMTfNUyjChrolJHMwIHI-b6cNxWqFLT3eauxOECf5neesf60qCSAgwDU_c7rfffrt7e3AJ1zpZG7GIHDSum_DrL69-gytIDFpUDt6laBao4C8Rx2hiplQLbjWPLI9SifCeGWlNGqF36V3CLBKWIvXCsBjoa2gQwerQrZjBLqx1CpwpMBgI64yYpw5BOGAq6GgDsQ5EuCYaMqUqQAMuQnCU1YIO88Pb8QO8RYWGSZikcyk43AmOyiIwypxZbIQBzDOaLGCYKZhuFcBQEy9zQlMRKMhvYInG0hle71Js-VqgDXE0mMtkG9BJFtYkrWuQzJWR7aOVlwUGIFROHOmEqomIkOpbCSlhjpBaDFPZIgbCwuNodnv_MIPB-AkeB74_GM-efiesizR5cYkFk4gTKYiYajJMuTVJJ4IPN_71LUUM_hjdjWZPpB-Go9n4ZjqF4b0PA5gM_Nno-uFu4MPkwZ_cT2_aAFPMRNH4XuptmE-HGhigY0LaouYnGqclZTKAiC2RxspRLEkXA05X6vzMiINJrRZ5hYQtW0jCRiEo7VpgSWAvci6x3U5ntVq1Fypta7PoyILEdvptj5gmBpcCVxCkhkfQG0jXDzxPKBpVyDiSX8fCYm_W97yE8X_YAuGNQus-2w7XcUx34KsHwCWzFi7ejNRn5I7NJV5kV6s8EiYSAVYswIXh5Hguid06QW3iCqOPibbCabPOFDwfajgM2YkoQytSSuO-oNJ-RFZMw6sk-EDHKZolNbKKCoUsZOwM9A4IumWZaRc6JAwdKaqE2YIKfvoz_xzgR2rJpAgq1luWJi5gxjqUEs3NF9oaW_GPWYwHxo_F3h2ybR33KVHS3nm19I9GONyWC70e3VHljJbQ79OpMu9GkyyFdoCfqeNrxYEbJM5G1ppuztbsfr9R2aarxaZS4uZoYZuynH6NPk0yyQ0RdKFga0GZqrV7anbOSm6VxnM0P5R7s9_ATa1tdWkBStyTVsk-11oiU0XIc9Hwg1brq6s-XLy6yD0fs5T5C7x1d2FZN_0PGh9Z8J3AlIczoeVydOFguYgn0WcIKhvTzbdpl_d4XDtN2v39t-MMqrLWL4G3AzgBIcB2P08S1PfxBOz0gp4IqG3sCdSRFX4Zub_TFfEZ7BM9fwGqv-tl13z1ntXcR6Z0FLH38MLxDr2k6mADoF2B1tjPB1Tf8GwHaQvzXwOME3qyY8yeB-t5odbZf5YGb8K7f7_V_tF5_wGI-mNs" alt="&quot;FilmWriteService&quot; von der Geschäftslogik">
 </div>
-<div class="title">Figure 8. "FilmWriteService" im Anwendungskern</div>
+<div class="title">Figure 8. "FilmWriteService" von der Geschäftslogik</div>
+</div>
+<div class="paragraph">
+<p>Der "FilmWriteService" ist ein Teil der Geschäftslogik und ist für das Schreiben von Daten in die Datenbank zuständig. Dieser Service nimmt Anfragen vom "FilmWriteController" entgegen und validiert die Daten, bevor sie in die Datenbank geschrieben werden.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_klasse_für_entities"><a class="anchor" href="#_klasse_für_entities"></a><a class="link" href="#_klasse_für_entities">1.5. Klasse für Entities</a></h3>
 <div class="paragraph">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur arcu erat,
-accumsan id imperdiet et, porttitor at sem.</p>
+<p>Die Klasse für Entities definiert das Datenmodell, das in der Anwendung verwendet wird. Sie enthält die Eigenschaften und Methoden, die für die Verarbeitung der Daten notwendig sind.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNq9Vtty4kYQfecruvyCvWVDLk_LOiQyBhubBUrAbjmpVGqQGmlqRzOqmREUye6f5S0_ltYNCWGHtzxQNd3T5_Rlzoxow0DFe82D0MLl4Ap--O7793ADsUaD0sJTgjpACb_yKEIdMSmv4VF5ofHCRCA8My2MTkJstVttWIbcEFIFmkVAy41GBKM2dsc09mCvEvCYBI0-N1bzdWIRuAUm_a7SECmfb_ZEQ65E-qjBhgiWshpQm8x4mK7gASVqJmCerAX3YMI9lAaBUebUY0L0YZ3SpIBRWsGiqABGiniZ5YqaQE77GraoDdnwY5mi4LsGpYnjktm0bA0qTmFXVOseBLMVsvNq51WDPnCZEYcqpm5CIqT-dlwIWCMkBjeJuCYGioXP4-XjbLUEZ_oCnx3XdabLlw8Ua0NFu7jFnIlHseBETD1pJu2eSieCj0N38EgI5248GS9fqH4YjZfT4WIBo5kLDswddzkerCaOC_OVO58thh2ABaZF0fH912w32enQAH20jAuT9_xCx2moMuFDyLZIx-oh31JdDDyS1PkzIw4mlAyyDim2GiEVNt6AVPYaDBV4G1obm163u9vtOoFMOkoHXZGTmG6_0yKmucYtxx34ifZCuHWE7futVsy8LyygFvcxKh3BXy0ATzBj4OKXobTc7i9S5eRL2gu5j4UFHteewBpgoEQSyQyQL0tAbp0C5ppHTO9ruCNPCT9ynrLMJC7VRxJexnCwSvTBcYp8UlzWkldmia08p-CUcqmIPcMerBJ6cLwyJ410Q-7pV59Yw3mYXcN_SreK_VO6prOka_pLum-VFtaJF3YwP-OaHlKJwB3tOdrCT9B-Hk_vJ8M2fIX2vbsaPDurxYNzN2xn6Yu4MmsJK5I1SD-hFixIOUez2R-fhu7Eech47xy3NDPWPLAkLWBNzjQX3N7mDfT7tCyUTOu0HYBCqJdXcKxActCwfSXFHrjfg_SJkkEDcoggShTngjS9pjLogUyiNeq3opi2vdrIXo3ZZt32qhm8GkWfJW7OpdNszaw9F0VP6Ab1mukerJUSyORbkaSoJOpBKqq3QrhZy3OzClWEMQnw50Zg4wLUIaj_xCSw9dxNgR_N-YtNGH0COeoK862SzsILabY7RUr9HwRkDtmOIw8vRz04vZS5RsqSM513Ov3qcc48725u-nDx7qLeTA-qR5JIy8Q0hez4c6YkJq5KhDVnIbnCmd7jzm90A32Uv1e7VFN2KzGK6d2IMJWWabU2SqV_Bi69K3j65-_GX6XWv2FFF9Q=" alt="Entity">
+<img src="https://kroki.io/plantuml/svg/eNq9Vl1z4jYUfedX3MkLyU4C_Xgqm9J6aUhIs8CA2Z200-kI-9rWrCx5JBmGdvef7Vv_WK9sjI1JylsfmNG9uufcDx3JdGGksp3mcWLhcnQF333z7Q9wA5lGg9LCY446Rgm_8TRFnTIpr-FBBYkJklwg_Mq0MDpPsNPtdMFPuCGkijVLgZaRRgSjIrtlGgewUzkETILGkBur-Tq3CNwCk2FfaUhVyKMd0ZArlyFqsAmCpawGVFQY99MV3KNEzQTM87XgATzxAKVBYJTZeUyCIawdjQOMXQXLfQUwVsTLLFfUBHLa17BBbciG76sUe75rUJo4Lpl1ZWtQmYNdUa07EMzWyN6LndcNhsBlQZyojLpJiJD623IhYI2QG4xycU0MFAsfJ_7DbOWDN32Gj95i4U3957cUaxNFu7jBkomnmeBETD1pJu2OSieC93eL0QMhvHeTp4n_TPXDeOJP75ZLGM8W4MHcW_iT0erJW8B8tZjPlnc9gCW6ouj4_mu2UXE6NMAQLePClD0_03EaqkyEkLAN0rEGyDdUF4OAJHX-zIiDCSXjokOKrUdIhU0ikMpeg6ECbxNrMzPo97fbbS-WeU_puC9KEtMf9jrENNe44biFMNdBAreesMOw08lY8InF1OIuQ6VT-LsDEAhmDFz8fCctt7sLp5xySXsJD3FvQcB1ILABGCmRp7IAlMsKUFqngLnmKdO7Bu7IU8GPnKcsM4m-ek_CKxgOVoU-OE6Rj4rLRvLarLC15xTsKH1F7AX2YFXQg-OFOWmkG_IL_ZoTazkPs2v5T-lWWXhK13ZWdG1_Rfel1kLERdrD8owbenASgTHtedrCj9D1Rv5kNu2-rZirrT1hC_gBtWCxw41nsz8_3C2evPsufIbuO29RmUXhZWBFuoe1OV0uuL0tixwOablXK61dyQB7MV5ewbHKyEEDDZUUO-DhANwzJOMW5BCRsDyzIdPGohCoz4VrejtlPACZp2vUr0UxbQfVtF6L2RR9D-ppvBhFHyFuzqXTbM2sPRdFD2aEes2ox7VSApl8LZL0k6cDcBJ6LUSyFM-OVqWYkdx-agW25N6EoP4L89g2c7flfDTnTzZn9MHjqGvMl1pEyyCh2W4VafZ_kJI5ZDuOPLwTzWB3BUuNVCUXiu_1hvVTXHje3NwM4eLNRbOZAdRPIpFWiWkKxfGXTHlGXLUIG8695PZOd6N7v9NdDFH-Ue9STcX9xDSjVyJFJy3T6URKuU__ZXAFj_98bf0x6vwLbukUMQ==" alt="Entity">
 </div>
 <div class="title">Figure 9. Entity</div>
+</div>
+<div class="paragraph">
+<p>Die Entity repräsentiert eine Tabelle oder Sicht in der Datenbank und bildet das Datenmodell für die Anwendung ab. Sie besteht aus Attributen, die die Eigenschaften der Entität beschreiben, sowie Beziehungen zu anderen Entitäten. Die Entitäten werden von den Repository-Klassen abgerufen und an die Anwendung zurückgegeben. Änderungen an den Entitäten werden ebenfalls durch die Repository-Klassen vorgenommen und in der Datenbank gespeichert.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_er_diagramm"><a class="anchor" href="#_er_diagramm"></a><a class="link" href="#_er_diagramm">1.6. ER-Diagramm</a></h3>
 <div class="paragraph">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p>Das ER-Diagramm gibt einen Überblick über die Datenbankstruktur der Anwendung. Es zeigt die Beziehungen zwischen den einzelnen Entitäten und gibt Auskunft über die Kardinalität der Beziehungen.</p>
 </div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/plantuml/svg/eNqNVMlu2zAQvesrBrlkgWN3OdU1DDhunDhJHcMLAvdSUNJIJEKRwpC06yb9s976Yx0qi9OiaHuyOcubN_NmtA9DW29JldLDwfAQ3rx6_Q6OoSZ0aDxcBKQSDXxSVYVUCWNacG4z6TIZNMKlIO0oSEz2k31YSOU405YkKuC_BSGCs4XfCMIubG2ATBggzJXzpNLgEZQHYfKOJahsrootw7ApmBwJvETwXNWBLZrH2WQJZ2iQhIZpSLXK4EplaByC4MrR4iTmkEaYmDCKDOaPDGBkGVd4ZbkJVOwnWCM5fsPbpxKPeC2wxBgHwkfaBLaOaYfMdQta-F1m-4-d7xrMQZkGWNqau5EMyP1tlNaQIgSHRdAtRuBYuBkvzq-XCxhMVnAzmM0Gk8XqPcd6admLa3xAUlWtFQNzTySM3zJ1Bvh4Ohuec8bgZHw1XqyYP4zGi8npfA6j6xkMYDqYLcbD5dVgBtPlbHo9P20DzDGSYvn-NtuiUYcHmKMXSruHnlcsp2NmOgcp1siyZqjWzEtAxiv1b80YQ2hryqZDjt2NkImNCzDWt8AxwZ70vnbdTmez2bRLE9qWyo5-AHGdfjthpCnhWuEG8kCZhN5A-34e7VLlTYfgauuT5pUpyjRGJ669bnNqqrFCqFiYSxIo0RQBHe9_FLlCzjGJu1WmFlFerQz6LYtpiYVJEj4TxSLsnYRM7sFdAnCkcujCcjn-AL1e2fTOi9Dvs-v4OPofd6fLu-GxRIo2BkHNaR6_-PjmHGXKLphQpQ8RgvzOzRBalLs3H6xyL6NJpML7lxZemgIpFdSF1FqNwrCV7yFU3fiDDXOXmmdQaSusRYm7KkhfMZSRhqrQeVHVDbFbHwSfnkL6xfVtN5x5Jpnuhkf2nyNKeZqfXwaNLhvvkXtGehoWl4mzh_v7dtvewa5UkhTWxls9yA7h4sf3375kyU-IV6YH" alt="ER-Diagramm">
+<img src="https://kroki.io/plantuml/svg/eNqNVMluGkEQvc9XlHzxIjxkOYUgpAkxNraDEQyyyCVqZmqmW-5l1AuE2Pmz3PJjqR5sk0RRkhN0La_e61c9hzA0zdaKmns4Gh7Dqxcv38ApNBYdag-XAW2NGj4KpdAqpnUHLkzBXcGDRLhiVjobOCaHySHkXDjqNLVlCuhvZRHBmcpvmMUebE2AgmmwWArnrVgFjyA8MF12jQVlSlFtCYZCQZdowXMET1MdmKo9nE8WcI4aLZMwDSspCrgWBWqHwGhyjDiOJawiTGwYRQbzRwYwMoTLvDAkAgXlLazROjrD66cRj3gdMJYwjpiPtC2YJrYdE9ctSOb3nekfle8FliB0C8xNQ2o4AZK-jZASVgjBYRVkhxCoFm7H-cXNIodssoTbbDbLJvnyLdV6biiLa9whCdVIQcCkyTLtt0SdAD6czYYX1JG9G1-P8yXxh9E4n5zN5zC6mUEG02yWj4eL62wG08VsejM_SwHmGEmRfX-726p1hy6wRM-EdDvNS7LTETNZAmdrJFsLFGvixaCglfq3Z4TBpNF1q5Bq91dIxMYVaOM74Ihgn3vfuF63u9ls0lqH1Ni6K3cgrjtIE0KaWlwL3EAZbMGhn0k_KGOci7JVCK4xPmlPhbCFxJjEtZcpta4kKgRFxlxZhhx1FdDR_keTFVKPTtyd0A2L9kqh0W_JTGPJmCShZyLIhIORkOoA7hOAE1FCDxaL8Xvo9-tWOy3CYECp09OYf9ydHu2GxxptjHEWGl8y6zxKSfvVo9X_7GOGuoWue6CDWu1q4yhm_b6EACWrn8-05EH14g_GrGYKn3PcKGxYvQ-coP2CoY5oQqHzTDUxyu58YPSeBNpfUl_3iucFp6kbuof_1F0R708_F42u2uyJe0Z60k1jokp4eEhTcw_7UUlSGRMf4FFxDJffv_32eUp-ABCzmR8=" alt="ER-Diagramm">
 </div>
 <div class="title">Figure 10. ER-Diagramm</div>
+</div>
+<div class="paragraph">
+<p>Ein ER-Diagramm ist ein visuelles Modell, das die Beziehungen zwischen Entitäten in einer Datenbank darstellt. Es besteht aus Entitäten, Attributen und Beziehungen, die die Struktur der Datenbank beschreiben. Die Entitäten werden durch Rechtecke dargestellt, während Attribute durch Ovale und Beziehungen durch Linien dargestellt werden. ER-Diagramme werden verwendet, um Datenbanken zu entwerfen und zu dokumentieren, sowie um Datenintegrität und -konsistenz sicherzustellen.</p>
 </div>
 </div>
 </div>
@@ -189,7 +178,7 @@ Styleguides empfehlenswert:</p>
 <table>
 <tr>
 <td class="hdlist1">
-<em>Microsoft</em>
+Microsoft
 </td>
 <td class="hdlist2">
 <p><a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines" class="bare">https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines</a></p>
@@ -197,7 +186,7 @@ Styleguides empfehlenswert:</p>
 </tr>
 <tr>
 <td class="hdlist1">
-<em>Angular</em>
+Angular
 </td>
 <td class="hdlist2">
 <p><a href="https://angular.io/docs/ts/latest/guide/style-guide.html" class="bare">https://angular.io/docs/ts/latest/guide/style-guide.html</a></p>
@@ -205,7 +194,7 @@ Styleguides empfehlenswert:</p>
 </tr>
 <tr>
 <td class="hdlist1">
-<em>Google</em>
+Google
 </td>
 <td class="hdlist2">
 <p><a href="https://google.github.io/styleguide/tsguide.html" class="bare">https://google.github.io/styleguide/tsguide.html</a></p>
@@ -213,7 +202,7 @@ Styleguides empfehlenswert:</p>
 </tr>
 <tr>
 <td class="hdlist1">
-<em>React</em>
+React
 </td>
 <td class="hdlist2">
 <p><a href="https://github.com/airbnb/javascript/tree/master/react" class="bare">https://github.com/airbnb/javascript/tree/master/react</a></p>
@@ -226,7 +215,7 @@ Styleguides empfehlenswert:</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-27 10:00:15 +0100
+Last updated 2023-05-10 11:14:34 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

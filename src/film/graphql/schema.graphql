@@ -3,7 +3,7 @@ schema {
   mutation: Mutation
 }
 
-"Funktionen, um Filmedaten zu lesen"
+"Funktionen, um Filmdaten zu lesen"
 type Query {
   filme(hauptdarsteller: String): [Film!]
 
@@ -50,8 +50,8 @@ enum FilmArt {
 "Daten zum Hauptdarsteller eines neuen Filmes"
 input HauptdarstellerInput {
   rolle: String!
-  vorname: String
-  nachname: String
+  vorname: String!
+  nachname: String!
   alter: Int
 }
 

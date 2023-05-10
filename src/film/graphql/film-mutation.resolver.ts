@@ -92,7 +92,7 @@ export class FilmMutationResolver {
             rating: filmDTO.rating,
             erscheinungsjahr: filmDTO.erscheinungsjahr,
             schlagwoerter: filmDTO.schlagwoerter,
-            hauptdarsteller, //TODO
+            hauptdarsteller,
             erzeugt: undefined,
             aktualisiert: undefined,
         };
@@ -112,7 +112,7 @@ export class FilmMutationResolver {
             rating: filmDTO.rating,
             erscheinungsjahr: filmDTO.erscheinungsjahr,
             schlagwoerter: filmDTO.schlagwoerter,
-            hauptdarsteller: undefined, //TODO
+            hauptdarsteller: undefined,
             erzeugt: undefined,
             aktualisiert: undefined,
         };

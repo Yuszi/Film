@@ -68,7 +68,7 @@ export interface FilmeModel {
         filme: FilmModel[];
     };
 }
-//TODO Json statt "hauptdarstellerVorname/Nachname/Alter"
+
 /**
  * Klasse für `FilmGetController`, um Queries in _OpenAPI_ bzw. Swagger zu
  * formulieren.

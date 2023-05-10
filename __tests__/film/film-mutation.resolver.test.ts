@@ -132,7 +132,7 @@ describe('GraphQL Mutations', () => {
 
         expect(status).toBe(HttpStatus.OK);
         expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.create).toBeNull();
+        expect(data.data?.create).toBeNull();
 
         const { errors } = data;
 
@@ -200,7 +200,7 @@ describe('GraphQL Mutations', () => {
 
         expect(message).toBe('Forbidden resource');
         expect(extensions).toBeDefined();
-        expect(extensions!.code).toBe('FORBIDDEN');
+        expect(extensions?.code).toBe('FORBIDDEN');
     });
 
     // -------------------------------------------------------------------------
@@ -253,7 +253,6 @@ describe('GraphQL Mutations', () => {
         expect(update).toBe(1);
     });
 
-    // -------------------------------------------------------------------------
     test('Film mit ungueltigen Werten aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);

@@ -88,7 +88,7 @@ export class FilmReadService {
     }
 
     /**
-     * Bücher asynchron suchen.
+     * Filme asynchron suchen.
      * @param suchkriterien JSON-Objekt mit Suchkriterien
      * @returns Ein JSON-Array mit den gefundenen Büchern. Ggf. ist das Array leer.
      */

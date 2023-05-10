@@ -1,25 +1,4 @@
-# Copyright (C) 2022 - present Juergen Zimmermann, Hochschule Karlsruhe
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Aufruf:   docker compose up postgres pgadmin fakesmtp film
-#           docker compose down
-
-# Netzwerk "film_default" für die Container durch den Verzeichnisnamen
----
-# https://docs.docker.com/compose/compose-file
-# https://docs.docker.com/compose/compose-file/compose-file-v3
 services:
 
   # ------------------------------------------------------------------------------------
@@ -86,7 +65,7 @@ services:
   # ------------------------------------------------------------------------------------
   # http://localhost:8888 mit Emailadresse "pgadmin@acme.com" und Passwort "p"
   pgadmin:
-    image: dpage/pgadmin4:7.0
+    image: dpage/pgadmin4:7.1
     ports:
       - published: 8888
         target: 80
@@ -253,7 +232,7 @@ services:
   # f i l m
   # ------------------------------------------------------------------------------------
   film:
-    image: yusufuzun/film
+    image: swe/film:2023.1.0
     ports:
       - published: 3000
         target: 3000
