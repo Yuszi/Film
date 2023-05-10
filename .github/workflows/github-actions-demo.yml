@@ -8,57 +8,22 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
-    container:
-      image: node:20.0.0-bullseye
-      ports:
-        - 3000:3000
-        - 5000:5000
-      options: --user root:root
-
-    env:
-      DB_HOST: unknown.amazonaws.com
-      DB_USER: nobody
-      DB_PASS: ChangeMe
-      DB_POPULATE: true
-      LOG_DIR: ./log
-      LOG_LEVEL_CONSOLE: debug
-      MAIL_HOST: skip
-      USER_PASSWORD_ENCODED: $argon2i$v=19$m=4096,t=3,p=1$aaxA2v/9rRSPGkwYN+NQog$27Huii1XtD3iEd62fog+04G26LRPZMHoYCI6AGKTL8M
-
-    timeout-minutes: 60
-
     steps:
-      - name: Init
-        run: |
-          if [ "$(uname)" != "Linux" ]; then
-              echo "Linux is required"
-              exit 1
-          fi
-
-          echo "Jenkins-Job ${{ env.JOB_NAME }} #${{ env.BUILD_ID }} mit Workspace ${{ env.WORKSPACE }}"
-
-          rm -rf src
-          rm -rf __tests__
-
-          git clone https://github.com/Yuszi/Film
-
-      - name: Install
-        run: |
-          if ! command -v python3 &> /dev/null; then
-              apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3-minimal
-          fi
-
-          curl --silent --fail --show-error --location https://deb.nodesource.com/setup_20.x | bash -
-          apt-get install --no-install-recommends --yes --show-progress nodejs
-
-          npm i -g npm
-
-          apt-get update --yes
-          apt-get upgrade --yes
-
-          if [ ! -f "${{ env.WORKSPACE }}/package.json" ]; then
-              echo "package.json ist *NICHT* vorhanden"
-              exit 1
-          fi
+    - uses: actions/checkout@v2
+      
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+      
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Run lint checks
+      run: npm run lint
+      
+    - name: Run tests
+      run: npm test
