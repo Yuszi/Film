@@ -16,32 +16,31 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const neuerFilm: FilmDTO = {
-    filmart: 'ACTION',
-    erscheinungjahr: '2022-02-28',
+    name: 'Good Doctor',
+    sprache: 'en-EN',
+    genre: 'ACTION',
+    rating: 8,
+    erscheinungsjahr: '2022-02-28',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    name: {
-        name: 'Hauptdarstellerpost',
-        untername: 'unternamepos',
+    hauptdarsteller: {
+        rolle: 'Hauptrolle',
+        vorname: 'Freddy',
+        nachname: 'Highmore',
+        alter: 31,
     },
-    abbildungen: [
-        {
-            beschriftung: 'Abb. 1',
-            contentType: 'img/png',
-        },
-    ],
 };
 const neuerFilmInvalid: Record<string, unknown> = {
     name: 'falsche-NAME',
+    sprache: 'Ensil',
+    genre: 'ROMANCE',
     rating: -1,
-    art: 'UNSICHTBAR',
-    preis: -1,
-    rabatt: 2,
-    lieferbar: true,
-    datum: '12345-123-123',
-    homepage: 'anyHomepage',
-    names: {
-        name: '?!',
-        untername: 'Unternameinvalid',
+    erscheinungsjahr: '2023-01-01',
+    schlagwoerter: ['Schlag', 'Wort'],
+    hauptdarsteller: {
+        rolle: 'Rolle',
+        vorname: 'Max',
+        namespace: 'Peterschmidt',
+        alter: -1,
     },
 };
 
@@ -105,17 +104,14 @@ describe('POST /rest', () => {
         expect(data).toBe('');
     });
 
-    test('NeuerSS Film mit ungueltigen Daten', async () => {
+    test('Neuer Film mit ungueltigen Daten', async () => {
         // given
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
+            expect.stringMatching(/^hauptdarsteller.alter /u),
+            expect.stringMatching(/^sprache /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
-            expect.stringMatching(/^name.name /u),
         ];
 
         // when
@@ -151,7 +147,7 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Neues Film, aber mit falschem Token', async () => {
+    test('Neuer Film, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         headers.Authorization = `Bearer ${token}`;
@@ -169,6 +165,4 @@ describe('POST /rest', () => {
         expect(status).toBe(HttpStatus.FORBIDDEN);
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
-
-    test.todo('Abgelaufener Token');
 });

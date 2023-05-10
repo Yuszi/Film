@@ -7,55 +7,47 @@ import {
     shutdownServer,
     startServer,
 } from '../testserver.js';
-import { type FilmDtoOhneRef } from '../../src/film/rest/filmDTO.entity.js';
+import { type FilmDTOBase } from '../../src/film/rest/filmDTOBase.entity.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginRest } from '../login.js';
 
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaenderterFilm: FilmDtoOhneRef = {
-    rating: 5,
-    name: 'HANGOVER',
+const geaenderterFilm: FilmDTOBase = {
+    name: 'The Godfather',
+    sprache: 'de-DE',
     genre: 'ACTION',
-    lieferbar: true,
+    rating: 5,
     erscheinungsjahr: '2022-03-03',
-    homepage: 'https://geaendert.put.rest',
     schlagwoerter: ['KOMOEDIE'],
 };
-const idVorhanden = '30';
+const idVorhanden = '1010';
 
-const geaenderterFilmIdNichtVorhanden: FilmDtoOhneRef = {
-    rating: 10,
+const geaenderterFilmIdNichtVorhanden: FilmDTOBase = {
     name: 'SPIDER MAN',
+    sprache: 'en-EN',
     genre: 'ACTION',
-    lieferbar: true,
+    rating: 10,
     erscheinungsjahr: '2020-02-07',
-    homepage: 'https://geaendert.put.rest',
     schlagwoerter: ['HERO'],
 };
 const idNichtVorhanden = '999999';
 
 const geaenderterFilmInvalid: Record<string, unknown> = {
+    name: 'Invalid Movie',
+    sprache: 'en-EN',
     rating: -1,
-    art: 'UNSICHTBAR',
-    preis: -1,
-    rabatt: 2,
-    lieferbar: true,
-    datum: '12345-123-123',
-    hauptdarsteller: '?!',
-    homepage: 'anyHomepage',
+    genre: 'UNSICHTBAR',
+    erscheinungdatum: '12345-123-123',
 };
 
-const veralteterFilm: FilmDtoOhneRef = {
-    name: '978-0-007-09732-6',
+const veralteterFilm: FilmDTOBase = {
+    name: 'Castaway',
+    sprache: 'en-EN',
+    genre: 'DRAMA',
     rating: 1,
-    art: 'DRUCKAUSGABE',
-    preis: 44.4,
-    rabatt: 0.044,
-    lieferbar: true,
-    datum: '2022-02-04',
-    homepage: 'https://acme.de',
+    erscheinungsjahr: '2022-02-04',
     schlagwoerter: ['JAVASCRIPT'],
 };
 
@@ -86,7 +78,7 @@ describe('PUT /rest/:id', () => {
         await shutdownServer();
     });
 
-    test('Vorhandenes Film aendern', async () => {
+    test('Vorhandenen Film aendern', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
@@ -107,7 +99,7 @@ describe('PUT /rest/:id', () => {
         expect(data).toBe('');
     });
 
-    test('Nicht-vorhandener Film aendern', async () => {
+    test('Nicht-vorhandenen Film aendern', async () => {
         // given
         const url = `/rest/${idNichtVorhanden}`;
         const token = await loginRest(client);
@@ -124,26 +116,21 @@ describe('PUT /rest/:id', () => {
         // then
         const { status, data } = response;
 
-        expect(status).toBe(HttpStatus.PRECONDITION_FAILED);
+        expect(status).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBe(
-            `Es gibt kein Film mit der ID "${idNichtVorhanden}".`,
+            `Es gibt keinen Film mit der ID "${idNichtVorhanden}".`,
         );
     });
 
-    test('Vorhandenes Film aendern, aber mit ungueltigen Daten', async () => {
+    test('Vorhandenen Film aendern, aber mit ungueltigen Daten', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
+            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^art /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
         ];
 
         // when
@@ -166,28 +153,7 @@ describe('PUT /rest/:id', () => {
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
     });
 
-    test('Vorhandenes Film aendern, aber ohne Versionsnummer', async () => {
-        // given
-        const url = `/rest/${idVorhanden}`;
-        const token = await loginRest(client);
-        headers.Authorization = `Bearer ${token}`;
-        delete headers['If-Match'];
-
-        // when
-        const response: AxiosResponse<string> = await client.put(
-            url,
-            geaenderterFilm,
-            { headers },
-        );
-
-        // then
-        const { status, data } = response;
-
-        expect(status).toBe(HttpStatus.PRECONDITION_REQUIRED);
-        expect(data).toBe('Header "If-Match" fehlt');
-    });
-
-    test('Vorhandenes Film aendern, aber mit alter Versionsnummer', async () => {
+    test('Vorhandenen Film aendern, aber mit alter Versionsnummer', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = await loginRest(client);
@@ -208,7 +174,7 @@ describe('PUT /rest/:id', () => {
         expect(data).toEqual(expect.stringContaining('Die Versionsnummer'));
     });
 
-    test('Vorhandenes Film aendern, aber ohne Token', async () => {
+    test('Vorhandenen Film aendern, aber ohne Token', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         delete headers.Authorization;
@@ -228,7 +194,7 @@ describe('PUT /rest/:id', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 
-    test('Vorhandenes Film aendern, aber mit falschem Token', async () => {
+    test('Vorhandenen Film aendern, aber mit falschem Token', async () => {
         // given
         const url = `/rest/${idVorhanden}`;
         const token = 'FALSCH';

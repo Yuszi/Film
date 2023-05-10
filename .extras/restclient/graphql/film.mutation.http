@@ -145,28 +145,18 @@ mutation {
     input: {
       id: 999999,
       version: 0,
-      name: "Not-Found The Movie",
+      name: "WogWogWog",
       sprache: "en-EN",
-      rating: 6,
-      genre: DRAMA,
-      erscheinungsjahr: "2022-01-31",
-      schlagwoerter: ["Client", "GraphQL"],
+      genre: ACTION,
+      rating: 10,
+      erscheinungsjahr: "2009-03-05",
+      schlagwoerter: ["HALO"],
       hauptdarsteller: {
-        rolle: "FourOFour",
-        vorname: "Melon",
-        nachname: "Eask",
-        alter: 52
-      }
+            rolle: "Chief",
+            vorname: "Mas",
+            nachname: "Ter",
+            alter: 48
+        }
     }
   )
-}
-
-### Vorhandenen Film loeschen
-POST {{graphQlUrl}}
-Content-Type: application/json
-Authorization: Bearer {{login.response.body.$.data.login.token}}
-X-REQUEST-TYPE: GraphQL
-
-mutation {
-  delete(id: "1004")
 }

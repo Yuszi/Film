@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+
 import { afterAll, beforeAll, describe } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -13,7 +15,7 @@ import { HttpStatus } from '@nestjs/common';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const idVorhanden = '1';
+const idVorhanden = '1011';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -29,7 +31,9 @@ describe('GET /rest/:id', () => {
         client = axios.create({
             baseURL,
             httpsAgent,
-            validateStatus: (status) => status < 500, // eslint-disable-line @typescript-eslint/no-magic-numbers
+            validateStatus: (status) =>
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+                status < HttpStatus.INTERNAL_SERVER_ERROR,
         });
     });
 

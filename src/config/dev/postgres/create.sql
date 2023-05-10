@@ -8,7 +8,7 @@ CREATE TYPE filmart AS ENUM ('ACTION', 'DRAMA', 'ROMANCE');
 CREATE TABLE IF NOT EXISTS film (
     id                  integer GENERATED ALWAYS AS IDENTITY(START WITH 1000) PRIMARY KEY USING INDEX TABLESPACE filmspace,
     version             integer NOT NULL DEFAULT 0,
-    name                varchar(17) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
+    name                varchar(128) NOT NULL UNIQUE USING INDEX TABLESPACE filmspace,
     sprache             char(5),
     genre               filmart,
     rating              integer NOT NULL DEFAULT 0,

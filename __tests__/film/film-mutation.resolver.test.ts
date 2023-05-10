@@ -1,3 +1,5 @@
+/* eslint-disable max-lines, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-extra-non-null-assertion */
+
 import {
     type GraphQLQuery,
     type GraphQLResponseBody,
@@ -14,11 +16,6 @@ import {
 import { FilmReadService } from '../../src/film/service/film-read.service.js';
 import { HttpStatus } from '@nestjs/common';
 import { loginGraphQL } from '../login.js';
-
-// -----------------------------------------------------------------------------
-// T e s t d a t e n
-// -----------------------------------------------------------------------------
-const idLoeschen = '60';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -44,7 +41,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Neuer Film', async () => {
+    test('Neuer Film anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -53,23 +50,18 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "978-0-321-19368-1",
-                            rating: 1,
-                            art: KINDLE,
-                            preis: 99.99,
-                            rabatt: 0.123,
-                            lieferbar: true,
-                            datum: "2022-02-28",
-                            homepage: "https://create.mutation",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+                            name: "Inception",
+                            sprache: "en-EN",
+                            genre: ACTION,
+                            rating: 9,
+                            erscheinungsjahr: "2010-07-29",
+                            schlagwoerter: ["REALITY", "DREAM"],
                             hauptdarsteller: {
-                                hauptdarsteller: "Hauptdarstellercreatemutation",
-                                nebendarsteller: "nebendarstellercreatemutation"
-                            },
-                            abbildungen: [{
-                                beschriftung: "Abb. 1",
-                                contentType: "img/png"
-                            }]
+                                rolle: "Cobb",
+                                vorname: "Leonardo",
+                                nachname: "DiCaprio",
+                                alter: 48
+                            }
                         }
                     )
                 }
@@ -98,7 +90,6 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
@@ -108,16 +99,16 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "falsche-NAME",
-                            rating: -1,
-                            art: KINDLE,
-                            preis: -1,
-                            rabatt: 2,
-                            lieferbar: false,
-                            datum: "12345-123-123",
-                            homepage: "anyHomepage",
+                            name: "falsche-NAME"
+                            sprache: "es-ES"
+                            genre: ACTION
+                            rating: -50
+                            erscheinungsjahr: "yyyy-mm-dd"                   
                             hauptdarsteller: {
-                                hauptdarsteller: "?!"
+                                rolle: "?!"
+                                vorname: "Fal"
+                                nachname: "sch"
+                                alter: -20
                             }
                         }
                     )
@@ -125,13 +116,8 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
+            expect.stringMatching(/^hauptdarsteller.alter /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^preis /u),
-            expect.stringMatching(/^rabatt /u),
-            expect.stringMatching(/^datum /u),
-            expect.stringMatching(/^homepage /u),
-            expect.stringMatching(/^hauptdarsteller.hauptdarsteller /u),
         ];
 
         // when
@@ -174,18 +160,17 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "978-3-663-08746-5",
-                            rating: 1,
-                            art: KINDLE,
-                            preis: 11.1,
-                            rabatt: 0.011,
-                            lieferbar: true,
-                            datum: "2021-01-31",
-                            homepage: "http://acme.com",
-                            schlagwoerter: ["JAVASCRIPT"]
+                            name: "TestFilm"
+                            sprache: "en-EN"
+                            genre: DRAMA
+                            rating: 9
+                            erscheinungsjahr: "2019-07-29"
+                            schlagwoerter: ["TEST"]
                             hauptdarsteller: {
-                                hauptdarsteller: "Hauptdarstellercreatemutation",
-                                nebendarsteller: "nebendarstellercreatemutation"
+                                rolle: "Rolle"
+                                vorname: "Max"
+                                nachname: "Mustermann"
+                                alter: 42
                             }
                         }
                     )
@@ -228,17 +213,20 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: "40",
-                            version: 0,
-                            name: "978-0-007-09732-6",
-                            rating: 5,
-                            art: KINDLE,
-                            preis: 444.44,
-                            rabatt: 0.099,
-                            lieferbar: false,
-                            datum: "2021-04-04",
-                            homepage: "https://update.mutation"
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
+                            id: 1010
+                            version: 1
+                            name: "TestFilm"
+                            sprache: "es-ES"
+                            genre: DRAMA
+                            rating: 9
+                            erscheinungsjahr: "2019-07-29"
+                            schlagwoerter: ["TEST", "FILM"]
+                            hauptdarsteller: {
+                                rolle: "Rolle"
+                                vorname: "Max"
+                                nachname: "Mustermann"
+                                alter: 43
+                            }
                         }
                     )
                 }
@@ -269,27 +257,26 @@ describe('GraphQL Mutations', () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
-        const id = '40';
+        const id = '1002';
         const body: GraphQLQuery = {
             query: `
                 mutation {
                     update(
                         input: {
-                            id: "${id}",
-                            version: 0,
-                            rating: -1,
-                            art: DRAMA,
-                            erscheinungsjahr: "12345-123-123",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+                            id: ${id}
+                            version: 0
+                            name: "TestFilm"
+                            sprache: "eESp"
+                            genre: DRAMA
+                            rating: -9
                         }
                     )
                 }
             `,
         };
         const expectedMsg = [
+            expect.stringMatching(/^sprache /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^erscheinungsjahr /u),
-            expect.stringMatching(/^homepage /u),
         ];
 
         // when
@@ -323,7 +310,7 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    test('Nicht-vorhandenes Film aktualisieren', async () => {
+    test('Nicht-vorhandenen Film aktualisieren', async () => {
         // given
         const token = await loginGraphQL(client);
         const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
@@ -333,17 +320,20 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: "${id}",
+                            id: ${id},
                             version: 0,
-                            name: "978-0-007-09732-6",
-                            rating: 5,
-                            art: DRUCKAUSGABE,
-                            preis: 99.99,
-                            rabatt: 0.099,
-                            lieferbar: false,
-                            datum: "2021-01-02",
-                            homepage: "https://acme.com",
-                            schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+                            name: "WogWogWog",
+                            sprache: "en-EN",
+                            genre: ACTION,
+                            rating: 10,
+                            erscheinungsjahr: "2009-03-05",
+                            schlagwoerter: ["HALO"],
+                            hauptdarsteller: {
+                                    rolle: "Chief",
+                                    vorname: "Mas",
+                                    nachname: "Ter",
+                                    alter: 48
+                                }
                         }
                     )
                 }
@@ -372,45 +362,12 @@ describe('GraphQL Mutations', () => {
         const { message, path, extensions } = error!;
 
         expect(message).toBe(
-            `Es gibt kein Film mit der ID ${id.toLowerCase()}`,
+            `Es gibt keinen Film mit der ID ${id.toLowerCase()}`,
         );
         expect(path).toBeDefined();
         expect(path!![0]).toBe('update');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
-    });
-
-    // -------------------------------------------------------------------------
-    test('Film loeschen', async () => {
-        // given
-        const token = await loginGraphQL(client);
-        const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
-        const body: GraphQLQuery = {
-            query: `
-                mutation {
-                    delete(id: "${idLoeschen}")
-                }
-            `,
-        };
-
-        // when
-        const response: AxiosResponse<GraphQLResponseBody> = await client.post(
-            graphqlPath,
-            body,
-            { headers: authorization },
-        );
-
-        // then
-        const { status, headers, data } = response;
-
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.errors).toBeUndefined();
-
-        const deleteMutation = data.data!.delete;
-
-        // Der Wert der Mutation ist true (falls geloescht wurde) oder false
-        expect(deleteMutation).toBe(true);
     });
 });
 /* eslint-enable max-lines, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-extra-non-null-assertion */

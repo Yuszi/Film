@@ -12,7 +12,7 @@ If-None-Match: "0"
 GET {{restUrl}}/?name=Matrix The Ones
 
 ### Suche mit gültigem Rating
-GET {{restUrl}}?rating=9
+GET {{restUrl}}?rating=5
 
 ### Suche mit gültiger Filmart
 GET {{restUrl}}?genre=DRAMA

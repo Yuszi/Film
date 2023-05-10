@@ -17,7 +17,6 @@ import {
 import {
     Body,
     Controller,
-    Delete,
     Headers,
     HttpStatus,
     Param,
@@ -115,7 +114,7 @@ export class FilmWriteController {
         description: 'Falsche Version im Header "If-Match"',
     })
     @ApiResponse({
-        status: HttpStatus.PRECONDITION_FAILED,
+        status: HttpStatus.PRECONDITION_REQUIRED,
         description: 'Header "If-Match" fehlt',
     })
     async update(
@@ -135,7 +134,7 @@ export class FilmWriteController {
             const msg = 'Header "If-Match" fehlt';
             this.#logger.debug('#handleUpdateError: msg=%s', msg);
             return res
-                .status(HttpStatus.PRECONDITION_FAILED)
+                .status(HttpStatus.PRECONDITION_REQUIRED)
                 .set('Content-Type', 'text/plain')
                 .send(msg);
         }
@@ -148,39 +147,6 @@ export class FilmWriteController {
 
         this.#logger.debug('update: version=%d', result);
         return res.set('ETag', `"${result}"`).sendStatus(HttpStatus.NO_CONTENT);
-    }
-
-    /**
-     * Asynchrones Löschen eines Films anhand seiner ID.
-     * @param id Pfad-Parameter für die ID.
-     * @param res Leeres Response-Objekt von Express.
-     * @returns Leeres Promise-Objekt
-     */
-    @Delete()
-    @RolesAllowed('admin')
-    @ApiOperation({ summary: 'Einen Film mit der ID löschen.' })
-    @ApiHeader({
-        name: 'Authorization',
-        description: 'Header für JWT',
-        required: true,
-    })
-    @ApiNoContentResponse({
-        description: 'Der Film wurde gelöscht oder war nicht vorhanden.',
-    })
-    async delete(
-        @Param('id') id: number,
-        @Res() res: Response,
-    ): Promise<Response<undefined>> {
-        this.#logger.debug('delete: id=%s', id);
-
-        try {
-            await this.#service.delete(id);
-        } catch (err) {
-            this.#logger.error('delete: error=%o', err);
-            return res.sendStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return res.sendStatus(HttpStatus.NO_CONTENT);
     }
 
     #filmDtoToFilm(filmDTO: FilmDTO): Film {

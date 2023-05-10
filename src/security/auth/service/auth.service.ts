@@ -1,3 +1,9 @@
+/**
+ * Das Modul besteht aus der Klasse {@linkcode AuthService} für die
+ * Authentifizierung.
+ * @packageDocumentation
+ */
+
 import { type User, UserService } from './user.service.js';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -6,9 +12,12 @@ import { jwtConfig } from '../../../config/jwt.js';
 import { v4 as uuidv4 } from 'uuid';
 import { verify } from 'argon2';
 
+/** Typdefinition für die Validierung der Authentifizierungsdaten. */
 export interface ValidateParams {
+    /** Benutzername. */
     username: string | undefined;
-    password: string | undefined;
+    /** Eingegebenes Passwort. */
+    pass: string | undefined;
 }
 
 export interface LoginResult {
@@ -17,6 +26,11 @@ export interface LoginResult {
     roles?: readonly string[];
 }
 
+/**
+ * Die Klasse `AuthService` implementiert die Funktionen für die
+ * Authentifizierung wie z.B. Einloggen und Validierung von JSON Web Tokens.
+ * Eine Injectable-Klasse ist ein _Singleton_, **kein** Request-Singleton.
+ */
 @Injectable()
 export class AuthService {
     readonly #userService: UserService;
@@ -30,19 +44,24 @@ export class AuthService {
         this.#jwtService = jwtService;
     }
 
-    async validate({ username, password: pass }: ValidateParams) {
+    /**
+     * Aufruf durch Passport beim Einloggen, wobei Benutzername und Passwort
+     * übergeben werden.
+     *
+     * @param username Benutzername.
+     * @param pass Passwort.
+     * @return Das User-Objekt ohne Passwort oder undefined.
+     */
+    async validate({ username, pass }: ValidateParams) {
         this.#logger.debug('validate: username=%s', username);
         if (username === undefined || pass === undefined) {
-            this.#logger.debug('validate: Username oder Passwort fehlen.');
+            this.#logger.debug('validate: username oder password fehlen.');
             return;
         }
         const user = await this.#userService.findOne(username);
-        this.#logger.debug('validate: user.id=%s', user?.userId);
+        this.#logger.debug('validate: user.id=%d', user?.userId);
         if (user === undefined) {
-            this.#logger.debug(
-                'validate: Kein User zu "%s" gefunden.',
-                username,
-            );
+            this.#logger.debug('validate: Kein User zu %s gefunden.', username);
             return;
         }
 
@@ -59,7 +78,16 @@ export class AuthService {
         return result;
     }
 
-    /*eslint-disable-next-line @typescript-eslint/require-await */
+    /**
+     * Das eigentliche Einloggen eines validierten Users, bei dem das Passwort
+     * in `AuthService.validate` überprüft wurde.
+     * @param user Das validierte User-Objekt vom Typ "any", damit es von
+     * einem Controller über die Property "user" des Request-Objekts benutzt
+     * werden kann.
+     * @return Objekt mit einem JWT als künftiger "Access Token", dem
+     * Zeitstempel für das Ablaufdatum (`expiresIn`) und den Rollen als Array
+     */
+    // eslint-disable-next-line @typescript-eslint/require-await
     async login(user: unknown) {
         const userObj = user as User;
 

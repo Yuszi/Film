@@ -21,13 +21,7 @@ export type GraphQLResponseBody = Pick<GraphQLResponse, 'data' | 'errors'>;
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const idVorhanden = '1';
-
-const nameVorhanden = 'Alpha';
-
-const teilNameVorhanden = 'a';
-
-const teilNameNichtVorhanden = 'abc';
+const idVorhanden = '1010';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -60,9 +54,11 @@ describe('GraphQL Queries', () => {
                     film(id: "${idVorhanden}") {
                         version
                         name
-                        art
-                        name {
-                            name
+                        genre
+                        hauptdarsteller {
+                            vorname
+                            nachname
+                            rolle
                         }
                     }
                 }
@@ -93,14 +89,12 @@ describe('GraphQL Queries', () => {
 
     test('Film zu nicht-vorhandener ID', async () => {
         // given
-        const id = '999999';
+        const id = '1111';
         const body: GraphQLRequest = {
             query: `
                 {
                     film(id: "${id}") {
-                        name {
-                            name
-                        }
+                        name
                     }
                 }
             `,
@@ -132,134 +126,4 @@ describe('GraphQL Queries', () => {
         expect(extensions).toBeDefined();
         expect(extensions?.code).toBe('BAD_USER_INPUT');
     });
-
-    test('Film zu vorhandenem Name', async () => {
-        // given
-        const body: GraphQLRequest = {
-            query: `
-                {
-                    filme(name: "${nameVorhanden}") {
-                        art
-                        name {
-                            name
-                        }
-                    }
-                }
-            `,
-        };
-
-        // when
-        const response: AxiosResponse<GraphQLResponseBody> = await client.post(
-            graphqlPath,
-            body,
-        );
-
-        // then
-        const { status, headers, data } = response;
-
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.errors).toBeUndefined();
-
-        expect(data.data).toBeDefined();
-
-        const { filme } = data.data!;
-
-        expect(filme).not.toHaveLength(0);
-
-        const filmeArray: FilmDTO[] = filme;
-
-        expect(filmeArray).toHaveLength(1);
-
-        const [film] = filmeArray;
-
-        expect(film?.name).toBe(nameVorhanden);
-    });
-
-    test('Film zu vorhandenem Teil-Name', async () => {
-        // given
-        const body: GraphQLRequest = {
-            query: `
-                {
-                    filme(name: "${teilNameVorhanden}") {
-                        art
-                        name {
-                            name
-                        }
-                    }
-                }
-            `,
-        };
-
-        // when
-        const response: AxiosResponse<GraphQLResponseBody> = await client.post(
-            graphqlPath,
-            body,
-        );
-
-        // then
-        const { status, headers, data } = response;
-
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.errors).toBeUndefined();
-        expect(data.data).toBeDefined();
-
-        const { filme } = data.data!;
-
-        expect(filme).not.toHaveLength(0);
-
-        const filmeArray: FilmDTO[] = filme;
-        filmeArray
-            .map((film) => film.name)
-            .forEach((name) =>
-                expect(name.toLowerCase()).toEqual(
-                    expect.stringContaining(teilNameVorhanden),
-                ),
-            );
-    });
-
-    test('Film zu nicht vorhandenem Name', async () => {
-        // given
-        const body: GraphQLRequest = {
-            query: `
-                {
-                    filme(name: "${teilNameNichtVorhanden}") {
-                        art
-                        name {
-                            name
-                        }
-                    }
-                }
-            `,
-        };
-
-        // when
-        const response: AxiosResponse<GraphQLResponseBody> = await client.post(
-            graphqlPath,
-            body,
-        );
-
-        // then
-        const { status, headers, data } = response;
-
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.data!.filme).toBeNull();
-
-        const { errors } = data;
-
-        expect(errors).toHaveLength(1);
-
-        const [error] = errors!;
-        const { message, path, extensions } = error!;
-
-        expect(message).toBe('Es wurden keine Filme gefunden.');
-        expect(path).toBeDefined();
-        expect(path?.[0]).toBe('filme');
-        expect(extensions).toBeDefined();
-        expect(extensions?.code).toBe('BAD_USER_INPUT');
-    });
-    /* eslint-enable @typescript-eslint/no-unsafe-assignment */
-    /* eslint-enable @typescript-eslint/no-non-null-assertion */
 });
