@@ -1,18 +1,64 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Film Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  Explore-GitHub-Actions:
+  build:
     runs-on: ubuntu-latest
+
+    container:
+      image: node:20.0.0-bullseye
+      ports:
+        - 3000:3000
+        - 5000:5000
+      options: --user root:root
+
+    env:
+      DB_HOST: unknown.amazonaws.com
+      DB_USER: nobody
+      DB_PASS: ChangeMe
+      DB_POPULATE: true
+      LOG_DIR: ./log
+      LOG_LEVEL_CONSOLE: debug
+      MAIL_HOST: skip
+      USER_PASSWORD_ENCODED: $argon2i$v=19$m=4096,t=3,p=1$aaxA2v/9rRSPGkwYN+NQog$27Huii1XtD3iEd62fog+04G26LRPZMHoYCI6AGKTL8M
+
+    timeout-minutes: 60
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Init
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          if [ "$(uname)" != "Linux" ]; then
+              echo "Linux is required"
+              exit 1
+          fi
+
+          echo "Jenkins-Job ${{ env.JOB_NAME }} #${{ env.BUILD_ID }} mit Workspace ${{ env.WORKSPACE }}"
+
+          rm -rf src
+          rm -rf __tests__
+
+          git clone https://github.com/Yuszi/Film
+
+      - name: Install
+        run: |
+          if ! command -v python3 &> /dev/null; then
+              apt-get install --no-install-recommends --yes --show-progress gcc g++ make python3-minimal
+          fi
+
+          curl --silent --fail --show-error --location https://deb.nodesource.com/setup_20.x | bash -
+          apt-get install --no-install-recommends --yes --show-progress nodejs
+
+          npm i -g npm
+
+          apt-get update --yes
+          apt-get upgrade --yes
+
+          if [ ! -f "${{ env.WORKSPACE }}/package.json" ]; then
+              echo "package.json ist *NICHT* vorhanden"
+              exit 1
+          fi
