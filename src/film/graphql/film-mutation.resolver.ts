@@ -8,7 +8,6 @@ import { Film } from '../entity/film.entity.js';
 import { FilmDTO } from '../rest/filmDTO.entity.js';
 import { FilmWriteService } from '../service/film-write.service.js';
 import { type Hauptdarsteller } from '../entity/hauptdarsteller.entity.js';
-import { type IdInput } from './film-query.resolver.js';
 import { JwtAuthGraphQlGuard } from '../../security/auth/jwt/jwt-auth-graphql.guard.js';
 import { ResponseTimeInterceptor } from '../../logger/response-time.interceptor.js';
 import { RolesAllowed } from '../../security/auth/roles/roles-allowed.decorator.js';
@@ -73,16 +72,6 @@ export class FilmMutationResolver {
         return result;
     }
 
-    @Mutation()
-    @RolesAllowed('admin')
-    async delete(@Args() id: IdInput) {
-        const idStr = id.id;
-        this.#logger.debug('delete: id=%s', idStr);
-        const result = await this.#service.delete(idStr);
-        this.#logger.debug('deleteFilm: result=%s', result);
-        return result;
-    }
-
     #filmDtoToFilm(filmDTO: FilmDTO): Film {
         const hauptdarstellerDTO = filmDTO.hauptdarsteller;
         const hauptdarsteller: Hauptdarsteller = {
@@ -143,7 +132,7 @@ export class FilmMutationResolver {
     #errorMsgUpdateFilm(err: UpdateError) {
         switch (err.type) {
             case 'FilmNotExists': {
-                return `Es gibt kein Film mit der ID ${err.id}`;
+                return `Es gibt keinen Film mit der ID ${err.id}`;
             }
             case 'VersionInvalid': {
                 return `"${err.version}" ist keine gueltige Versionsnummer`;
