@@ -116,7 +116,7 @@
     "rxjs": "7.8.1",
     "sonic-boom": "3.3.0",
     "sqlite3": "5.1.6",
-    "typeorm": "0.3.15",
+    "typeorm": "0.3.16",
     "typeorm-naming-strategies": "4.1.0",
     "uuid": "9.0.0",
     "xss": "1.0.14"
@@ -136,7 +136,7 @@
     "@types/figlet": "1.5.6",
     "@types/fs-extra": "11.0.1",
     "@types/jest": "29.5.1",
-    "@types/node": "20.1.1",
+    "@types/node": "20.1.2",
     "@types/nodemailer": "6.4.7",
     "@types/nodemailer-direct-transport": "1.0.32",
     "@types/nodemailer-smtp-transport": "2.7.5",
