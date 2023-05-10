@@ -66,23 +66,18 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "978-0-321-19368-1",
-      rating: 1,
-      art: KINDLE,
-      preis: 99.99,
-      rabatt: 0.123,
-      lieferbar: true,
-      datum: "2022-01-31",
-      homepage: "https://create.mutation",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
-      hauptdarsteller: {
-        hauptdarsteller: "Hauptdarstellercreatemutation",
-        nebendarsteller: "nebendarstellercreatemutation"
-      },
-      abbildungen: [{
-        beschriftung: "Abb. 1",
-        contentType: "img/png"
-      }]
+        name: "Journey to the center of the Earth",
+        sprache: "en-EN",
+        genre: ACTION,
+        rating: 10,
+        erscheinungsjahr: "2009-03-05",
+        schlagwoerter: ["ADVENTURE", "FANTASIC"],
+        hauptdarsteller: {
+            rolle: "Trevor Anderson",
+            vorname: "Brendan",
+            nachname: "Fraser",
+            alter: 54
+        }
     }
   )
 }
@@ -96,19 +91,18 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   create(
     input: {
-      name: "falsche-name",
-      rating: 999,
-      art: DRUCKAUSGABE,
-      preis: -1,
-      rabatt: 0,
-      lieferbar: true,
-      datum: "12345-123-123",
-      homepage: "anyHomepage",
-      schlagwoerter: ["JAVASCRIPT"],
-      hauptdarsteller: {
-        hauptdarsteller: "?!"
-        nebendarsteller: "mutationinvalid"
-      }
+        name: "Invalid the Movie",
+        sprache: "en-EN",
+        genre: ACTION,
+        rating: -9,
+        erscheinungsjahr: "2010-07-29",
+        schlagwoerter: ["IN", "VALID"],
+        hauptdarsteller: {
+            rolle: "Colin",
+            vorname: "John",
+            nachname: "Mannmuster",
+            alter: 39
+        }
     }
   )
 }
@@ -122,17 +116,20 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      id: "40",
-      version: 0,
-      name: "978-0-007-09732-6",
-      rating: 5,
-      art: KINDLE,
-      preis: 444.44,
-      rabatt: 0.099,
-      lieferbar: false,
-      datum: "2022-04-04",
-      homepage: "https://update.mutation",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"]
+      id: "1000",
+      version: 1,
+      name: "Die Reise zum Mittelpunkt der Erde",
+      sprache: "en-EN",
+      genre: ACTION,
+      rating: 10,
+      erscheinungsjahr: "2009-03-05",
+      schlagwoerter: ["ADVENTURE", "FANTASIC", "SCIFI"],
+      hauptdarsteller: {
+            rolle: "Trevor Anderson",
+            vorname: "Brendan",
+            nachname: "Fraser",
+            alter: 55
+        }
     }
   )
 }
@@ -146,16 +143,20 @@ X-REQUEST-TYPE: GraphQL
 mutation {
   update(
     input: {
-      id: 40,
-      version: 0,
-      name: "falsche-NAME",
-      rating: -1,
-      art: KINDLE,
-      preis: -1,
-      rabatt: 2,
-      lieferbar: false,
-      datum: "12345-123-123",
-      homepage: "anyHomepage"
+      id: 1000,
+      version: 1,
+      name: "Die Reise zum Mittelpunkt der Erde",
+      sprache: "en-EN",
+      genre: ACTION,
+      rating: 10,
+      erscheinungsjahr: "2009-03-05",
+      schlagwoerter: ["ADVENTURE", "FANTASIC", "SCIFI"],
+      hauptdarsteller: {
+            rolle: "Trevor Anderson",
+            vorname: "Brendan",
+            nachname: "Fraser",
+            alter: 55
+        }
     }
   )
 }
@@ -171,25 +172,18 @@ mutation {
     input: {
       id: "999999",
       version: 0,
-      name: "978-0-007-09732-6",
-      rating: 5,
-      art: DRUCKAUSGABE,
-      preis: 99.99,
-      rabatt: 0.099,
-      lieferbar: false,
-      datum: "2022-02-01",
-      schlagwoerter: ["JAVASCRIPT", "TYPESCRIPT"],
-      homepage: "https://nicht.vorhanden.de/"
+      name: "WogWogWog",
+      sprache: "en-EN",
+      genre: ACTION,
+      rating: 10,
+      erscheinungsjahr: "2009-03-05",
+      schlagwoerter: ["HALO"],
+      hauptdarsteller: {
+            rolle: "Chief",
+            vorname: "Mas",
+            nachname: "Ter",
+            alter: 48
+        }
     }
   )
-}
-
-### Vorhandenes Film loeschen
-POST {{graphQlUrl}}
-Content-Type: application/json
-Authorization: Bearer {{login.response.body.$.data.login.token}}
-X-REQUEST-TYPE: GraphQL
-
-mutation {
-  delete(id: "60")
 }

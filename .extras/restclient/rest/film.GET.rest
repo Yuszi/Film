@@ -2,7 +2,7 @@
 GET {{restUrl}}
 
 ### Suche nach dem Film anhand der ID
-GET {{restUrl}}/1001
+GET {{restUrl}}/1010
 
 ### Suche nach dem Film anhand der ID und Versionsnummer
 GET {{restUrl}}/1000
@@ -12,7 +12,7 @@ If-None-Match: "0"
 GET {{restUrl}}/?name=Inception
 
 ### Suche mit gültigem Rating
-GET {{restUrl}}?rating=9
+GET {{restUrl}}?rating=5
 
 ### Suche mit gültiger Filmart
 GET {{restUrl}}?art=ACTION
