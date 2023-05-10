@@ -127,3 +127,5 @@ describe('GraphQL Queries', () => {
         expect(extensions?.code).toBe('BAD_USER_INPUT');
     });
 });
+/* eslint-enable @typescript-eslint/no-unsafe-assignment */
+/* eslint-enable @typescript-eslint/no-non-null-assertion */

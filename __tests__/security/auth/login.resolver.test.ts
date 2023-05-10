@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion */
 import {
     type GraphQLQuery,
     type GraphQLResponseBody,
@@ -119,8 +120,8 @@ describe('Login', () => {
         expect(errors).toBeDefined();
         expect(errors).toHaveLength(1);
 
-        const error = errors?.[0];
-        const { path, extensions } = error;
+        const error = errors![0]!;
+        const { message, path, extensions } = error;
 
         expect(message).toBe('Falscher Benutzername oder Passwort');
         expect(path).toBeDefined();
@@ -129,3 +130,4 @@ describe('Login', () => {
         expect(extensions?.code).toBe('BAD_USER_INPUT');
     });
 });
+/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion */

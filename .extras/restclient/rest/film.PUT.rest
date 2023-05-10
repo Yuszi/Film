@@ -13,10 +13,10 @@ Content-Type: application/x-www-form-urlencoded
 username=admin&password=passwort
 
 ### Einen vorhandenen Film aktualisieren
-PUT {{restUrl}}/1002
+PUT {{restUrl}}/1000
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
-If-Match: "0"
+If-Match: "1"
 
 < ./json/film-put.json 
 

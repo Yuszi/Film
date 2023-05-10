@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 import {
@@ -166,3 +168,5 @@ describe('POST /rest', () => {
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
 });
+
+/* eslint-enable @typescript-eslint/no-unsafe-assignment */
