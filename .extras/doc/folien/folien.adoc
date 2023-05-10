@@ -21,7 +21,7 @@
 
 = Beispiel mit Nest, REST, GraphQL, TypeORM, JWT und Jest
 
-Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
+SWE Gruppe 3
 
 == Gliederung
 
@@ -68,7 +68,6 @@ Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
 
 * AsciiDoctor mit PlantUML
 * reveal.js
-* _TODO: Jekyll_
 
 == Nest und REST
 
