@@ -83,6 +83,7 @@ groupadd --gid 10000 app
 useradd --uid 10000 --gid app --create-home --shell /bin/bash app
 chown -R app:app ./
 EOF
+# TODO npm r -D node-gyp
 
 USER app
 EXPOSE 3000
