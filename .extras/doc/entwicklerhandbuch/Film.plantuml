@@ -37,7 +37,7 @@ package typeorm {
 }
 
 package film.entity {
-  class "type FilmArt = 'ACTION';
+  class "type Filmart = 'ACTION'"
   hide FilmArt circle
 
   class "type Verlag = 'FOO_VERLAG' | 'BAR_VERLAG'" as Verlag
