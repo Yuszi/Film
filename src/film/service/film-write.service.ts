@@ -11,12 +11,12 @@ import {
     type VersionInvalid,
     type VersionOutdated,
 } from './errors.js';
-import { Repository } from 'typeorm';
 import { Film } from '../entity/film.entity.js';
 import { FilmReadService } from './film-read.service.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import RE2 from 're2';
+import { Repository } from 'typeorm';
 import { getLogger } from '../../logger/logger.js';
 
 /** Typdefinitionen zum Aktualisieren eines Films mit `update`. */
