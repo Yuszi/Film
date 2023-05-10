@@ -31,7 +31,7 @@ export class Film {
     @VersionColumn()
     readonly version: number | undefined;
 
-    @Column('varchar', { unique: true, length: 32 })
+    @Column('varchar', { unique: true, length: 128 })
     @ApiProperty({ example: 'Good Doctor', type: String })
     readonly name!: string;
 
