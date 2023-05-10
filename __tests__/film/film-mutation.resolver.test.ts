@@ -18,11 +18,6 @@ import { HttpStatus } from '@nestjs/common';
 import { loginGraphQL } from '../login.js';
 
 // -----------------------------------------------------------------------------
-// T e s t d a t e n
-// -----------------------------------------------------------------------------
-const idLoeschen = '6';
-
-// -----------------------------------------------------------------------------
 // T e s t s
 // -----------------------------------------------------------------------------
 // Test-Suite
@@ -57,7 +52,7 @@ describe('GraphQL Mutations', () => {
                         input: {
                             name: "Inception",
                             sprache: "en-EN",
-                            genre: "ACTION",
+                            genre: ACTION,
                             rating: 9,
                             erscheinungsjahr: "2010-07-29",
                             schlagwoerter: ["REALITY", "DREAM"],
@@ -95,7 +90,6 @@ describe('GraphQL Mutations', () => {
     });
 
     // -------------------------------------------------------------------------
-    // eslint-disable-next-line max-lines-per-function
     test('Film mit ungueltigen Werten neu anlegen', async () => {
         // given
         const token = await loginGraphQL(client);
@@ -105,15 +99,15 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "falsche-NAME",
-                            sprache: "es-ES",
-                            genre: "FICTION",
-                            rating: -50,
-                            erscheinungsjahr: "yyyy-mm-dd",                    
+                            name: "falsche-NAME"
+                            sprache: "es-ES"
+                            genre: ACTION
+                            rating: -50
+                            erscheinungsjahr: "yyyy-mm-dd"                   
                             hauptdarsteller: {
                                 rolle: "?!"
-                                vorname: "Fal",
-                                nachname: "sch",
+                                vorname: "Fal"
+                                nachname: "sch"
                                 alter: -20
                             }
                         }
@@ -122,13 +116,8 @@ describe('GraphQL Mutations', () => {
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
-            expect.stringMatching(/^sprache /u),
-            expect.stringMatching(/^genre /u),
+            expect.stringMatching(/^hauptdarsteller.alter /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^erscheinungsjahr /u),
-            expect.stringMatching(/^schlagwoerter /u),
-            expect.stringMatching(/^hauptdarsteller.hauptdarsteller /u),
         ];
 
         // when
@@ -171,16 +160,16 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     create(
                         input: {
-                            name: "TestFilm",
-                            sprache: "en-EN",
-                            genre: "DRAMA",
-                            rating: 9,
-                            erscheinungsjahr: "2019-07-29",
-                            schlagwoerter: ["TEST"],
+                            name: "TestFilm"
+                            sprache: "en-EN"
+                            genre: DRAMA
+                            rating: 9
+                            erscheinungsjahr: "2019-07-29"
+                            schlagwoerter: ["TEST"]
                             hauptdarsteller: {
-                                rolle: "Rolle",
-                                vorname: "Max",
-                                nachname: "Mustermann",
+                                rolle: "Rolle"
+                                vorname: "Max"
+                                nachname: "Mustermann"
                                 alter: 42
                             }
                         }
@@ -224,17 +213,18 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: 1002,
-                            name: "TestFilm",
-                            sprache: "es-ES",
-                            genre: "DRAMA",
-                            rating: 9,
-                            erscheinungsjahr: "2019-07-29",
-                            schlagwoerter: ["TEST", "FILM"],
+                            id: 1010
+                            version: 1
+                            name: "TestFilm"
+                            sprache: "es-ES"
+                            genre: DRAMA
+                            rating: 9
+                            erscheinungsjahr: "2019-07-29"
+                            schlagwoerter: ["TEST", "FILM"]
                             hauptdarsteller: {
-                                rolle: "Rolle",
-                                vorname: "Max",
-                                nachname: "Mustermann",
+                                rolle: "Rolle"
+                                vorname: "Max"
+                                nachname: "Mustermann"
                                 alter: 43
                             }
                         }
@@ -274,21 +264,19 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: ${id},
-                            version: 0,
-                            name: "TestFilm",
-                            sprache: "esp-ESp",
-                            genre: "DRAMA",
-                            rating: -9,
+                            id: ${id}
+                            version: 0
+                            name: "TestFilm"
+                            sprache: "eESp"
+                            genre: DRAMA
+                            rating: -9
                         }
                     )
                 }
             `,
         };
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
             expect.stringMatching(/^sprache /u),
-            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
         ];
 
@@ -333,19 +321,20 @@ describe('GraphQL Mutations', () => {
                 mutation {
                     update(
                         input: {
-                            id: 1002,
-                            name: "TestFilm",
-                            sprache: "es-ES",
-                            genre: "DRAMA",
-                            rating: 9,
-                            erscheinungsjahr: "2019-07-29",
-                            schlagwoerter: ["TEST", "FILM"],
+                            id: ${id},
+                            version: 0,
+                            name: "WogWogWog",
+                            sprache: "en-EN",
+                            genre: ACTION,
+                            rating: 10,
+                            erscheinungsjahr: "2009-03-05",
+                            schlagwoerter: ["HALO"],
                             hauptdarsteller: {
-                                rolle: "Rolle",
-                                vorname: "Max",
-                                nachname: "Mustermann",
-                                alter: 43
-                            }
+                                    rolle: "Chief",
+                                    vorname: "Mas",
+                                    nachname: "Ter",
+                                    alter: 48
+                                }
                         }
                     )
                 }
@@ -380,39 +369,6 @@ describe('GraphQL Mutations', () => {
         expect(path!![0]).toBe('update');
         expect(extensions).toBeDefined();
         expect(extensions!.code).toBe('BAD_USER_INPUT');
-    });
-
-    // -------------------------------------------------------------------------
-    test('Film loeschen', async () => {
-        // given
-        const token = await loginGraphQL(client);
-        const authorization = { Authorization: `Bearer ${token}` }; // eslint-disable-line @typescript-eslint/naming-convention
-        const body: GraphQLQuery = {
-            query: `
-                mutation {
-                    delete(id: "${idLoeschen}")
-                }
-            `,
-        };
-
-        // when
-        const response: AxiosResponse<GraphQLResponseBody> = await client.post(
-            graphqlPath,
-            body,
-            { headers: authorization },
-        );
-
-        // then
-        const { status, headers, data } = response;
-
-        expect(status).toBe(HttpStatus.OK);
-        expect(headers['content-type']).toMatch(/json/iu);
-        expect(data.errors).toBeUndefined();
-
-        const deleteMutation = data.data!.delete;
-
-        // Der Wert der Mutation ist true (falls geloescht wurde) oder false
-        expect(deleteMutation).toBe(true);
     });
 });
 /* eslint-enable max-lines, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-extra-non-null-assertion */

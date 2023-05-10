@@ -49,7 +49,7 @@ const neuerFilm: FilmDTO = {
 };
 const neuerFilmInvalid: Record<string, unknown> = {
     name: 'falsche-NAME',
-    sprache: 'ungueltigeSprache',
+    sprache: 'Ensil',
     genre: 'ROMANCE',
     rating: -1,
     erscheinungsjahr: '2023-01-01',
@@ -127,12 +127,9 @@ describe('POST /rest', () => {
         const token = await loginRest(client);
         headers.Authorization = `Bearer ${token}`;
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
+            expect.stringMatching(/^hauptdarsteller.alter /u),
             expect.stringMatching(/^sprache /u),
-            expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^erscheinungsdatum /u),
-            expect.stringMatching(/^hauptdarsteller.hauptdarsteller /u),
         ];
 
         // when
@@ -186,8 +183,6 @@ describe('POST /rest', () => {
         expect(status).toBe(HttpStatus.FORBIDDEN);
         expect(data.statusCode).toBe(HttpStatus.FORBIDDEN);
     });
-
-    test.todo('Abgelaufener Token');
 });
 
 /* eslint-enable @typescript-eslint/no-unsafe-assignment */

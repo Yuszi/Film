@@ -25,11 +25,9 @@ import { NestFactory } from '@nestjs/core';
 import { dbType } from '../src/config/dbtype.js';
 import dockerCompose from 'docker-compose';
 import { env } from '../src/config/env.js';
-import isPortReachable from 'is-port-reachable';
 import { nodeConfig } from '../src/config/node.js';
 import path from 'path';
 import { paths } from '../src/config/paths.js';
-import { typeOrmModuleOptions } from '../src/config/db.js';
 
 export const loginPath = `${paths.auth}/${paths.login}`;
 
@@ -37,8 +35,6 @@ export const { host, port } = nodeConfig;
 
 const { httpsOptions } = nodeConfig;
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const dbPort: number = (typeOrmModuleOptions as any).port;
 // Verzeichnis mit docker-compose.yaml ausgehend vom Wurzelverzeichnis
 const dockerComposeDir = path.join('extras', dbType);
 
@@ -68,10 +64,6 @@ switch (dbType) {
 const startDbServer = async () => {
     // 'better-sqlite3' erfordert Python zum Uebersetzen, wenn das Docker-Image gebaut wird
     if (dbType === 'sqlite') {
-        return;
-    }
-    const isDBReachable = await isPortReachable(dbPort, { host: 'localhost' });
-    if (isDBReachable) {
         return;
     }
 

@@ -15,7 +15,7 @@ import { HttpStatus } from '@nestjs/common';
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const idVorhanden = '1';
+const idVorhanden = '1011';
 
 // -----------------------------------------------------------------------------
 // T e s t s
@@ -32,6 +32,7 @@ describe('GET /rest/:id', () => {
             baseURL,
             httpsAgent,
             validateStatus: (status) =>
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
                 status < HttpStatus.INTERNAL_SERVER_ERROR,
         });
     });

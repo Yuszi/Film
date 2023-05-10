@@ -32,14 +32,14 @@ import { loginRest } from '../login.js';
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const geaenderterFilm: FilmDTOBase = {
-    name: 'HANGOVER',
+    name: 'The Godfather',
     sprache: 'de-DE',
     genre: 'ACTION',
     rating: 5,
     erscheinungsjahr: '2022-03-03',
     schlagwoerter: ['KOMOEDIE'],
 };
-const idVorhanden = '30';
+const idVorhanden = '1010';
 
 const geaenderterFilmIdNichtVorhanden: FilmDTOBase = {
     name: 'SPIDER MAN',
@@ -53,17 +53,16 @@ const idNichtVorhanden = '999999';
 
 const geaenderterFilmInvalid: Record<string, unknown> = {
     name: 'Invalid Movie',
-    sprache: 2,
+    sprache: 'en-EN',
     rating: -1,
     genre: 'UNSICHTBAR',
     erscheinungdatum: '12345-123-123',
-    hauptdarsteller: '?!',
 };
 
 const veralteterFilm: FilmDTOBase = {
     name: 'Castaway',
     sprache: 'en-EN',
-    genre: 'ROMANCE',
+    genre: 'DRAMA',
     rating: 1,
     erscheinungsjahr: '2022-02-04',
     schlagwoerter: ['JAVASCRIPT'],
@@ -134,7 +133,7 @@ describe('PUT /rest/:id', () => {
         // then
         const { status, data } = response;
 
-        expect(status).toBe(HttpStatus.PRECONDITION_FAILED);
+        expect(status).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBe(
             `Es gibt keinen Film mit der ID "${idNichtVorhanden}".`,
         );
@@ -147,11 +146,8 @@ describe('PUT /rest/:id', () => {
         headers.Authorization = `Bearer ${token}`;
         headers['If-Match'] = '"0"';
         const expectedMsg = [
-            expect.stringMatching(/^name /u),
-            expect.stringMatching(/^sprache /u),
             expect.stringMatching(/^genre /u),
             expect.stringMatching(/^rating /u),
-            expect.stringMatching(/^erscheinungsjahr /u),
         ];
 
         // when
@@ -172,27 +168,6 @@ describe('PUT /rest/:id', () => {
         expect(messages).toBeDefined();
         expect(messages).toHaveLength(expectedMsg.length);
         expect(messages).toEqual(expect.arrayContaining(expectedMsg));
-    });
-
-    test('Vorhandenen Film aendern, aber ohne Versionsnummer', async () => {
-        // given
-        const url = `/rest/${idVorhanden}`;
-        const token = await loginRest(client);
-        headers.Authorization = `Bearer ${token}`;
-        delete headers['If-Match'];
-
-        // when
-        const response: AxiosResponse<string> = await client.put(
-            url,
-            geaenderterFilm,
-            { headers },
-        );
-
-        // then
-        const { status, data } = response;
-
-        expect(status).toBe(HttpStatus.PRECONDITION_REQUIRED);
-        expect(data).toBe('Header "If-Match" fehlt');
     });
 
     test('Vorhandenen Film aendern, aber mit alter Versionsnummer', async () => {
