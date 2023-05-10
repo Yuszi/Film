@@ -1,6 +1,6 @@
 // Preview durch <Strg><Shift>v
 
-= Entwickler*innenhandfilm
+= Entwicklerhandbuch
 SWE Gruppe
 :doctype: book
 :toc: left
