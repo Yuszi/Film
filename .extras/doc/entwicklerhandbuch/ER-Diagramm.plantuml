@@ -27,26 +27,29 @@ entity "Film" {
   *id : UUID <<generated>>
   --
   *version: integer
-  *hauptdarsteller : text
-  *rating: number
-  *Filmart: text
-  *verlag: text
-  datum: date
   *name: text
-  homepage: text
+  *sprache: text
+  *genre: text
+  *rating: number
+  *erscheinungsjahr: date
+  *schlagwoerter: text
+  *hauptdarsteller: Hauptdarsteller
+  datum: date
   *erzeugt: timestamp
   *aktualisiert: timestamp
 }
 
-entity "Schlagwort" {
+entity "Hauptdarsteller" {
   *id : UUID <<generated>>
   --
-  *film_id : UUID <<FK>>
-  *schlagwort : text
+  *rolle: text
+  *vorname: text
+  *nachname: text
+  *alter: integer
+  *film: Film
 }
 
 Film ||..o{ Schlagwort
 
-footer (c) Jürgen Zimmermann
-
+footer (c) Yusuf Uzun
 @enduml
