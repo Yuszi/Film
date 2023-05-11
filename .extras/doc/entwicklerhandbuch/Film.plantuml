@@ -37,40 +37,36 @@ package typeorm {
 }
 
 package film.entity {
-  class "type Filmart = 'ACTION'"
+  class "type FilmArt = 'ACTION' | 'DRAMA' | 'ROMANCE'" as FilmArt
   hide FilmArt circle
 
-  class "type Verlag = 'FOO_VERLAG' | 'BAR_VERLAG'" as Verlag
-  hide Verlag circle
 
   class Film <<entity>> <<@Entity>> {
-    @Column() @PrimaryColumn() readonly id: string
-    @Column() readonly hauptdarsteller: string
-    @Column() readonly rating: number
-    @Column() readonly art: FilmArt
-    @Column() readonly verlag: Verlag
-    @Column() readonly preis: number
-    @Column() readonly rabatt: number
-    @Column() readonly lieferbar: boolean
-    @Column() readonly datum: Date
+    @Column() @PrimaryColumn() readonly id: number
     @Column() readonly name: string
-    @Column() readonly homepage?: string
+    @Column() readonly hauptdarsteller: string
+    @Column() readonly sprache: string
+    @Column() readonly genre: FilmArt
+    @Column() readonly rating: number
+    @Column() readonly erscheinungsjahr: Date
+    @Column() readonly schlagwoerter: string
     @CreateDateColumn() readonly erzeugt: Date
     @UpdateDateColumn() readonly aktualisiert: Date
   }
 
-  class Schlagwort <<entity>> <<@Entity>> {
-    @Column() @PrimaryColumn() readonly id: string
-    @Column() readonly schlagwort: string
-    @ManyToOne() readonly film: Film
+  class Hauptdarsteller <<entity>> <<@Entity>> {
+    @Column() @PrimaryColumn() readonly id: number
+    @Column() readonly rolle: string
+    @Column() readonly vorname: string
+    @Column() readonly nachname: string
+    @Column() readonly alter: number
+    @OneToMany() readonly film: Film
   }
 
   Film ..> Entity
-  Film *--> "*" Schlagwort : @OneToMany() schlagwoerter
+  Film *--> "*" Hauptdarsteller : @OneToMany() Hauptdarsteller
   Film .up.> FilmArt
-  Film .up.> Verlag
 
-  FilmArt .[hidden].> Verlag
 }
 
 hide empty members
