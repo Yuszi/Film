@@ -49,7 +49,7 @@ entity "Hauptdarsteller" {
   *film: Film
 }
 
-Film ||..o{ Schlagwort
+Film ||..o{ Hauptdarsteller
 
 footer (c) Yusuf Uzun
 @enduml
